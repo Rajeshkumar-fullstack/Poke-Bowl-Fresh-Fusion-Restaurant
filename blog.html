@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fresh Journal & Culinary Blog | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Explore culinary guides, nutrition insights, sustainable ocean sourcing stories, and authentic Hawaiian poke traditions from our executive chefs and nutrition experts.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false } // Prevent Tailwind from resetting Bootstrap
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Reading Progress Bar for Active Article Modal -->
+  <div id="readingProgressBar" class="reading-progress-bar"></div>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link active" aria-current="page" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <!-- Controls & CTA -->
+      <div class="poke-nav-controls">
+        <!-- Direction Switcher -->
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <!-- Dark/Light Theme Switcher -->
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <!-- Build Bowl CTA -->
+        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <!-- Hamburger for Mobile -->
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Backdrop & Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="false" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold active text-emerald-600"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Blog Hero & Search Section
+       ======================================================================== -->
+  <header class="blog-hero hero-bg-blog text-center">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative">
+      <div class="reveal">
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill badge-green mb-3">
+          <i class="bi bi-newspaper"></i>
+          <span class="fw-bold fs-7">Culinary Journal & Fresh Stories</span>
+        </div>
+
+        <h1 class="hero-title mb-3">The Fresh Fusion Journal</h1>
+        <p class="section-description mx-auto mb-4" style="max-width: 640px;">
+          Deep dive into artisan poke recipes, sustainable ocean harvesting, superfood nutritional science, and culinary heritage from our kitchen artisans.
+        </p>
+      </div>
+
+      <div class="blog-filter-sticky-sentinel" id="blogStickySentinel">
+        <div class="blog-filter-sticky-bar" id="blogStickyBar">
+          <div class="container">
+            <!-- Live Search Bar -->
+            <div class="blog-search-container mb-4">
+              <i class="bi bi-search blog-search-icon"></i>
+              <input 
+                type="search" 
+                id="blogSearchInput" 
+                class="blog-search-input" 
+                placeholder="Search articles by title, ingredient, tag, or author..." 
+                aria-label="Search blog articles">
+            </div>
+
+            <!-- Interactive Category Filter Pills -->
+            <div class="blog-filter-pills" role="tablist" aria-label="Blog category filters">
+              <button type="button" class="blog-filter-btn active" data-filter="all">
+                <i class="bi bi-grid-fill"></i> All Stories
+              </button>
+              <button type="button" class="blog-filter-btn" data-filter="Culinary Guide">
+                <i class="bi bi-award-fill"></i> Culinary Guides
+              </button>
+              <button type="button" class="blog-filter-btn" data-filter="Nutrition & Health">
+                <i class="bi bi-heart-pulse-fill"></i> Health & Nutrition
+              </button>
+              <button type="button" class="blog-filter-btn" data-filter="Sustainability">
+                <i class="bi bi-water"></i> Sustainability
+              </button>
+              <button type="button" class="blog-filter-btn" data-filter="Plant Power">
+                <i class="bi bi-flower1"></i> Plant Power
+              </button>
+              <button type="button" class="blog-filter-btn" data-filter="Secret Recipes">
+                <i class="bi bi-cup-hot-fill"></i> Secret Recipes
+              </button>
+              <button type="button" class="blog-filter-btn" data-filter="Fitness & Lifestyle">
+                <i class="bi bi-lightning-charge-fill"></i> Fitness & Macros
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Featured Post Section (Responsive Picture Showcase)
+       ======================================================================== -->
+  <section class="section-py pt-4" id="featuredStorySection">
+    <div class="container">
+      
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h2 class="h4 fw-bold mb-0 text-primary-gradient d-flex align-items-center gap-2">
+          <i class="bi bi-star-fill text-amber-500"></i>
+          <span>Featured Master Story</span>
+        </h2>
+        <span class="badge-poke badge-green">Editor's Pick</span>
+      </div>
+
+      <!-- Featured Grand Card -->
+      <article class="featured-blog-card blog-card-item reveal" data-category="Culinary Guide">
+        <div class="featured-img-wrap">
+          <picture>
+            <source media="(max-width: 576px)" srcset="assets/images/blog/blog-anatomy-perfect-poke-sm.jpg">
+            <source media="(max-width: 992px)" srcset="assets/images/blog/blog-anatomy-perfect-poke-md.jpg">
+            <img 
+              src="assets/images/blog/blog-anatomy-perfect-poke.jpg" 
+              srcset="assets/images/blog/blog-anatomy-perfect-poke-sm.jpg 480w, assets/images/blog/blog-anatomy-perfect-poke-md.jpg 800w, assets/images/blog/blog-anatomy-perfect-poke.jpg 1600w"
+              sizes="(max-width: 992px) 100vw, 50vw"
+              alt="The Anatomy of a Perfect Poke Bowl on dark slate" 
+              width="800" 
+              height="500" 
+              loading="eager"
+              decoding="async"
+              class="w-100 h-100 object-cover">
+          </picture>
+          <span class="badge-poke badge-coral blog-card-badge">Culinary Guide</span>
+        </div>
+
+        <div class="featured-content">
+          <div class="blog-meta-row">
+            <span class="blog-meta-item"><i class="bi bi-calendar3"></i> October 8, 2026</span>
+            <span>&bull;</span>
+            <span class="blog-meta-item"><i class="bi bi-clock"></i> 6 min read</span>
+          </div>
+
+          <h3 class="blog-card-title fs-2 mb-3">
+            <a href="#" data-article-id="perfect-poke-guide" class="text-reset">The Anatomy of a Perfect Poke Bowl: Balancing Flavors, Umami & Crunch</a>
+          </h3>
+
+          <p class="blog-card-excerpt mb-4">
+            A master guide from Executive Chef Kai on how temperature contrast, sashimi cube geometry, cold-pressed sesame marinades, and fresh crunchy textures unite to create unforgettable Hawaiian poke harmony.&lrm;
+          </p>
+
+          <div class="blog-author-bar">
+            <div class="blog-author-info">
+              <img src="assets/images/team/chef-kai.jpg" alt="Chef Kai Nakamura" class="blog-author-avatar" width="34" height="34" loading="lazy">
+              <div>
+                <div class="blog-author-name">Chef Kai Nakamura</div>
+                <div class="blog-author-role">Executive Chef & Co-Founder</div>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary-poke py-2 px-3 fs-7" data-article-id="perfect-poke-guide">
+              <span>Read Full Story</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Blog Article Grid Showcase (Responsive Images in Cards)
+       ======================================================================== -->
+  <section class="section-py bg-tertiary">
+    <div class="container">
+      
+      <div class="section-title-wrap mb-5">
+        <span class="section-tagline">Curated Knowledge & Sourcing</span>
+        <h2 class="section-heading">Explore All Articles</h2>
+        <p class="section-description">Handcrafted perspectives on healthy living, zero-waste fisheries, and kitchen secrets.</p>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="row g-4" id="blogGridContainer">
+        
+        <!-- Post 1: Omega-3 Health -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Nutrition & Health">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-omega3-salmon-health-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-omega3-salmon-health-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-omega3-salmon-health.jpg" 
+                  srcset="assets/images/blog/blog-omega3-salmon-health-sm.jpg 480w, assets/images/blog/blog-omega3-salmon-health-md.jpg 800w, assets/images/blog/blog-omega3-salmon-health.jpg 1600w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Fresh sashimi salmon and avocado flatlay for Omega-3 nutrition" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-green blog-card-badge">Nutrition & Health</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Oct 5, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="omega3-health-boost" class="text-reset">Omega-3 Superpowers: Why Sashimi-Grade Salmon & Tuna Boost Longevity</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Unpack the cellular advantages of unheated EPA and DHA fatty acids in raw sashimi and how pairing them with healthy avocado fats boosts nutrient bioavailability.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/nutritionist-maya.jpg" alt="Dr. Maya Lin" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Dr. Maya Lin</div>
+                    <div class="blog-author-role">Lead Nutritionist</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="omega3-health-boost">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 2: Sustainability -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Sustainability">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-sustainable-fisheries-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-sustainable-fisheries-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-sustainable-fisheries.jpg" 
+                  srcset="assets/images/blog/blog-sustainable-fisheries-sm.jpg 480w, assets/images/blog/blog-sustainable-fisheries-md.jpg 800w, assets/images/blog/blog-sustainable-fisheries.jpg 1600w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Clear turquoise ocean waters and sustainable fishing boat" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-blue blog-card-badge">Sustainability</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Sep 28, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 4 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="sustainable-fisheries" class="text-reset">From Ocean to Bowl: Our 100% Sustainable Fishery and Farm Partnerships</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Trace our pole-and-line caught Ahi tuna and local organic farming alliances that preserve ocean biodiversity and ensure zero-waste kitchen practices.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/manager-david.jpg" alt="David Vance" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">David Vance</div>
+                    <div class="blog-author-role">Operations & Sourcing</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="sustainable-fisheries">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 3: Plant Power -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Plant Power">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-plant-based-tofu-guide-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-plant-based-tofu-guide-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-plant-based-tofu-guide.jpg" 
+                  srcset="assets/images/blog/blog-plant-based-tofu-guide-sm.jpg 480w, assets/images/blog/blog-plant-based-tofu-guide-md.jpg 800w, assets/images/blog/blog-plant-based-tofu-guide.jpg 1600w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Plant-based vegan poke bowl with grilled organic tofu" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-green blog-card-badge">Plant Power</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Sep 22, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="plant-based-tofu-guide" class="text-reset">Beyond Fish: The Rise of Plant-Based Poke & House-Marinated Tofu</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Discover the 4-hour press and slow-braise technique that turns organic non-GMO tofu into a savory, caramelized umami powerhouse with crisp superfood veggies.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/prep-leila.jpg" alt="Leila Alvarez" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Leila Alvarez</div>
+                    <div class="blog-author-role">Recipe Specialist</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="plant-based-tofu-guide">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 4: Secret Recipes -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Secret Recipes">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-artisan-sauces-guide-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-artisan-sauces-guide-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-artisan-sauces-guide.jpg" 
+                  srcset="assets/images/blog/blog-artisan-sauces-guide-sm.jpg 480w, assets/images/blog/blog-artisan-sauces-guide-md.jpg 800w, assets/images/blog/blog-artisan-sauces-guide.jpg 1600w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Artisan ceramic ramekins filled with Japanese sesame shoyu, yuzu ponzu, and sriracha sauce" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-amber blog-card-badge">Secret Recipes</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Sep 15, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 4 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="artisan-sauces-guide" class="text-reset">The Secret Behind Authentic Shoyu & Citrus Yuzu Ponzu Sauces</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Why naturally brewed tamari, authentic Japanese yuzu juice, and slow-infused ginger oil form the backbone of true Hawaiian-Asian fusion dressings.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/chef-kai.jpg" alt="Chef Kai Nakamura" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Chef Kai Nakamura</div>
+                    <div class="blog-author-role">Executive Chef</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="artisan-sauces-guide">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 5: Fitness & Macros -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Fitness & Lifestyle">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-fitness-macro-prep-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-fitness-macro-prep-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-fitness-macro-prep.jpg" 
+                  srcset="assets/images/blog/blog-fitness-macro-prep-sm.jpg 480w, assets/images/blog/blog-fitness-macro-prep-md.jpg 800w, assets/images/blog/blog-fitness-macro-prep.jpg 1600w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="High-protein meal prep poke bowl with grilled chicken, edamame and quinoa" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-coral blog-card-badge">Fitness & Lifestyle</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Sep 10, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="fitness-macro-prep" class="text-reset">Poke for Athletes: Building High-Protein Macro Bowls for Recovery</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                A dietitian's formula for hitting 45g+ clean protein with optimal complex carb ratios to speed post-workout muscle glycogen synthesis without heavy saturated fat.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/nutritionist-maya.jpg" alt="Dr. Maya Lin" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Dr. Maya Lin</div>
+                    <div class="blog-author-role">Lead Nutritionist</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="fitness-macro-prep">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 6: Heritage & Culture -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Culinary Guide">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-hawaiian-poke-history-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-hawaiian-poke-history-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-hawaiian-poke-history.jpg" 
+                  srcset="assets/images/blog/blog-hawaiian-poke-history-sm.jpg 480w, assets/images/blog/blog-hawaiian-poke-history-md.jpg 800w, assets/images/blog/blog-hawaiian-poke-history.jpg 1600w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Authentic traditional wooden Hawaiian bowl on coastal beach sunset" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-blue blog-card-badge">Heritage & Culture</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Sep 1, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 7 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="hawaiian-poke-history" class="text-reset">A Brief History of Hawaiian Poke: From Native Fishermen to Modern Fusion</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Travel back to ancient Polynesia and see how salt, limu seaweed, and kukui nuts evolved through immigrant plantation eras into the global culinary phenomenon of today.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/manager-david.jpg" alt="David Vance" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">David Vance</div>
+                    <div class="blog-author-role">Heritage & Sourcing</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="hawaiian-poke-history">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 7: Culinary Guide (Knife Skills) -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Culinary Guide">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-knife-skills-sashimi-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-knife-skills-sashimi-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-knife-skills-sashimi.jpg" 
+                  srcset="assets/images/blog/blog-knife-skills-sashimi-sm.jpg 480w, assets/images/blog/blog-knife-skills-sashimi-md.jpg 800w, assets/images/blog/blog-knife-skills-sashimi.jpg 1200w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Japanese yanagiba knife slicing fresh sashimi cubes" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-coral blog-card-badge">Culinary Guide</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Aug 26, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="knife-skills-sashimi" class="text-reset">Japanese Yanagiba Knife Mastery: How Precision Cuts Transform Sashimi Texture</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Discover why a single-bevel pull stroke preserves delicate fish muscle fibers and unlocks a melt-in-your-mouth poke experience.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/chef-kai.jpg" alt="Chef Kai Nakamura" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Chef Kai Nakamura</div>
+                    <div class="blog-author-role">Executive Chef</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="knife-skills-sashimi">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 8: Nutrition & Health (Gut Health & Seaweed) -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Nutrition & Health">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-gut-health-seaweed-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-gut-health-seaweed-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-gut-health-seaweed.jpg" 
+                  srcset="assets/images/blog/blog-gut-health-seaweed-sm.jpg 480w, assets/images/blog/blog-gut-health-seaweed-md.jpg 800w, assets/images/blog/blog-gut-health-seaweed.jpg 1200w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Vibrant superfood bowl with wakame seaweed, pickled ginger, and fresh greens" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-green blog-card-badge">Nutrition &amp; Health</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Aug 19, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 6 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="gut-health-seaweed" class="text-reset">Seaweed, Pickled Ginger &amp; Ferments: The Microbiome Benefits of Poke Toppings</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                How marine prebiotic polysaccharides in wakame and natural enzymes in pickled ginger support digestion, immunity, and thyroid vitality.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/nutritionist-maya.jpg" alt="Dr. Maya Lin" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Dr. Maya Lin</div>
+                    <div class="blog-author-role">Lead Nutritionist</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="gut-health-seaweed">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 9: Sustainability (Compostable Packaging) -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Sustainability">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-compostable-packaging-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-compostable-packaging-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-compostable-packaging.jpg" 
+                  srcset="assets/images/blog/blog-compostable-packaging-sm.jpg 480w, assets/images/blog/blog-compostable-packaging-md.jpg 800w, assets/images/blog/blog-compostable-packaging.jpg 1200w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Organic farm produce and sustainable zero-waste food harvest" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-blue blog-card-badge">Sustainability</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Aug 12, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 4 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="compostable-packaging" class="text-reset">Plastic-Free Oceans: Inside Our 100% Plant-Fiber Compostable Bowl Initiative</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                See how replacing single-use plastics with unbleached sugarcane bagasse and bamboo fibers diverts over 18 tons of ocean-bound waste each year.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/manager-david.jpg" alt="David Vance" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">David Vance</div>
+                    <div class="blog-author-role">Operations &amp; Sourcing</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="compostable-packaging">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 10: Plant Power (Avocado & Edamame Pairing) -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Plant Power">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-avocado-superfood-pairing-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-avocado-superfood-pairing-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-avocado-superfood-pairing.jpg" 
+                  srcset="assets/images/blog/blog-avocado-superfood-pairing-sm.jpg 480w, assets/images/blog/blog-avocado-superfood-pairing-md.jpg 800w, assets/images/blog/blog-avocado-superfood-pairing.jpg 1200w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Fresh green vegetables, avocado, and edamame plant-based bowl" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-green blog-card-badge">Plant Power</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Aug 05, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="avocado-superfood-pairing" class="text-reset">Hass Avocado &amp; Edamame: Complete Plant Proteins for Vibrant Vegan Bowls</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Why pairing steamed young soybeans with ancient quinoa, hemp hearts, and creamy Hass avocado delivers all nine essential amino acids.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/prep-leila.jpg" alt="Leila Alvarez" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Leila Alvarez</div>
+                    <div class="blog-author-role">Recipe Specialist</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="avocado-superfood-pairing">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 11: Secret Recipes (Spicy Sriracha Aioli) -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Secret Recipes">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-spicy-sriracha-aioli-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-spicy-sriracha-aioli-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-spicy-sriracha-aioli.jpg" 
+                  srcset="assets/images/blog/blog-spicy-sriracha-aioli-sm.jpg 480w, assets/images/blog/blog-spicy-sriracha-aioli-md.jpg 800w, assets/images/blog/blog-spicy-sriracha-aioli.jpg 1200w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Artisan spicy sriracha chili aioli and citrus sauce preparation" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-amber blog-card-badge">Secret Recipes</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Jul 28, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 4 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="spicy-sriracha-aioli" class="text-reset">Crafting Our Signature Roasted Chili Sriracha Aioli &amp; Wasabi Citrus Drizzle</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Go behind the line as we emulsify sun-ripened red jalapeño mash, roasted garlic, and cold-pressed avocado oil into our most requested sauces.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/chef-kai.jpg" alt="Chef Kai Nakamura" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Chef Kai Nakamura</div>
+                    <div class="blog-author-role">Executive Chef</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="spicy-sriracha-aioli">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Post 12: Fitness & Lifestyle (Pre/Post Workout Timing) -->
+        <div class="col-md-6 col-lg-4 blog-card-item reveal" data-category="Fitness & Lifestyle">
+          <article class="blog-card">
+            <div class="blog-card-img-wrap">
+              <picture>
+                <source media="(max-width: 576px)" srcset="assets/images/blog/blog-hydration-electrolytes-sm.jpg">
+                <source media="(max-width: 992px)" srcset="assets/images/blog/blog-hydration-electrolytes-md.jpg">
+                <img 
+                  src="assets/images/blog/blog-hydration-electrolytes.jpg" 
+                  srcset="assets/images/blog/blog-hydration-electrolytes-sm.jpg 480w, assets/images/blog/blog-hydration-electrolytes-md.jpg 800w, assets/images/blog/blog-hydration-electrolytes.jpg 1200w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt="Balanced athletic macro bowl with salmon, brown rice, and colorful vegetables" 
+                  width="480" 
+                  height="300" 
+                  loading="lazy" 
+                  decoding="async">
+              </picture>
+              <span class="badge-poke badge-coral blog-card-badge">Fitness &amp; Lifestyle</span>
+            </div>
+
+            <div class="blog-card-body">
+              <div class="blog-meta-row">
+                <span class="blog-meta-item"><i class="bi bi-calendar3"></i> Jul 19, 2026</span>
+                <span>&bull;</span>
+                <span class="blog-meta-item"><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+
+              <h3 class="blog-card-title">
+                <a href="#" data-article-id="hydration-electrolytes" class="text-reset">Pre- vs. Post-Workout Poke: Timing Complex Carbs and Lean Marine Proteins</a>
+              </h3>
+
+              <p class="blog-card-excerpt">
+                Learn how to customize your base and protein selections depending on whether you are fueling for endurance training or post-session muscle repair.
+              </p>
+
+              <div class="blog-author-bar">
+                <div class="blog-author-info">
+                  <img src="assets/images/team/nutritionist-maya.jpg" alt="Dr. Maya Lin" class="blog-author-avatar" width="34" height="34" loading="lazy">
+                  <div>
+                    <div class="blog-author-name">Dr. Maya Lin</div>
+                    <div class="blog-author-role">Lead Nutritionist</div>
+                  </div>
+                </div>
+
+                <a href="#" class="text-emerald-500 fw-bold fs-7 d-flex align-items-center gap-1" data-article-id="hydration-electrolytes">
+                  <span>Read</span>
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+
+      <!-- No Results State -->
+      <div id="noBlogResults" class="text-center py-5 d-none">
+        <i class="bi bi-journal-x fs-1 text-muted mb-3 d-block"></i>
+        <h4 class="fw-bold">No matching articles found</h4>
+        <p class="text-secondary mb-4">Try searching with different keywords or switch back to "All Stories".</p>
+        <button type="button" class="btn-secondary-poke" onclick="document.getElementById('blogSearchInput').value=''; document.querySelector('.blog-filter-btn[data-filter=\'all\']').click();">
+          <i class="bi bi-arrow-clockwise"></i> Reset Search
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Newsletter Section
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="blog-newsletter-card reveal">
+        <div class="max-w-xl mx-auto">
+          <div class="feature-icon-circle mx-auto mb-3">
+            <i class="bi bi-envelope-open-heart"></i>
+          </div>
+          <h2 class="section-heading mb-2">Subscribe to Fresh Dispatch</h2>
+          <p class="section-description mb-4">
+            Receive monthly chef secrets, seasonal seafood availability alerts, nutrition tips, and special 15% VIP dine-in invitations directly in your inbox.
+          </p>
+
+          <form id="blogNewsletterForm" class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-center align-items-stretch align-items-sm-center blog-newsletter-form mx-auto">
+            <input 
+              type="email" 
+              class="form-poke-control blog-newsletter-input" 
+              placeholder="Enter your email address" 
+              required 
+              aria-label="Email address for blog newsletter">
+            <button type="submit" class="btn-primary-poke btn-newsletter-subscribe text-nowrap">
+              <span>Subscribe Free</span>
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </form>
+
+          <div id="newsletterSuccessAlert" class="alert alert-success d-inline-flex align-items-center gap-2 mt-3 d-none mb-0 py-2 px-3 border-0 shadow-sm" role="alert">
+            <i class="bi bi-check-circle-fill fs-5"></i>
+            <span>Mahalo! You're now subscribed to the Fresh Fusion Journal.</span>
+          </div>
+
+          <p class="text-muted fs-8 mt-3 mb-0">We respect your inbox. Unsubscribe with one click anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Article Reader Interactive Modal
+       ======================================================================== -->
+  <div class="modal fade" id="blogArticleModal" tabindex="-1" aria-labelledby="modalArticleTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+      <div class="modal-content blog-modal-content">
+        
+        <!-- Modal Header with Close Button -->
+        <div class="modal-header border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <span id="modalArticleBadge" class="badge-poke badge-green">Category</span>
+            <span id="modalArticleReadTime" class="fs-8 text-muted"><i class="bi bi-clock me-1"></i> 5 min read</span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close article"></button>
+        </div>
+
+        <!-- Modal Body Content -->
+        <div class="modal-body p-0">
+          
+          <!-- Article Responsive Hero Picture -->
+          <div class="blog-modal-hero">
+            <picture>
+              <source id="modalArticleSourceSm" media="(max-width: 576px)" srcset="assets/images/blog/blog-anatomy-perfect-poke-sm.jpg">
+              <source id="modalArticleSourceMd" media="(max-width: 992px)" srcset="assets/images/blog/blog-anatomy-perfect-poke-md.jpg">
+              <img 
+                id="modalArticleImg" 
+                src="assets/images/blog/blog-anatomy-perfect-poke.jpg" 
+                alt="Article hero image" 
+                class="w-100 object-cover" 
+                style="max-height: 380px;">
+            </picture>
+          </div>
+
+          <div class="p-4 p-md-5">
+            <!-- Article Title -->
+            <h1 id="modalArticleTitle" class="fw-bold mb-3" style="font-size: clamp(1.5rem, 3vw, 2.2rem);">Article Title</h1>
+            
+            <!-- Author & Metadata Row -->
+            <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom flex-wrap gap-2">
+              <div class="d-flex align-items-center gap-3">
+                <img id="modalArticleAuthorAvatar" src="assets/images/team/chef-kai.jpg" alt="Author avatar" class="blog-author-avatar" width="44" height="44">
+                <div>
+                  <div id="modalArticleAuthorName" class="fw-bold text-primary">Chef Kai Nakamura</div>
+                  <div id="modalArticleAuthorRole" class="fs-8 text-muted">Executive Chef</div>
+                </div>
+              </div>
+              <div id="modalArticleDate" class="text-muted fs-8">
+                <i class="bi bi-calendar3 me-1"></i> October 8, 2026
+              </div>
+            </div>
+
+            <!-- Dynamic Article Content -->
+            <div id="modalArticleBody" class="blog-article-body">
+              <!-- Content injected via blog.js -->
+            </div>
+
+            <!-- Share & Action Footer -->
+            <div class="mt-5 pt-4 border-top d-flex align-items-center justify-content-between flex-wrap gap-3">
+              <div class="d-flex align-items-center gap-2">
+                <span class="fs-7 fw-bold text-muted">Share Article:</span>
+                <a href="#" class="btn-icon-round" style="width: 36px; height: 36px;" title="Share on Twitter / X" onclick="event.preventDefault(); alert('Link copied to clipboard!');"><i class="bi bi-twitter-x fs-7"></i></a>
+                <a href="#" class="btn-icon-round" style="width: 36px; height: 36px;" title="Share on Facebook" onclick="event.preventDefault(); alert('Link copied to clipboard!');"><i class="bi bi-facebook fs-7"></i></a>
+                <a href="#" class="btn-icon-round" style="width: 36px; height: 36px;" title="Copy Link" onclick="event.preventDefault(); navigator.clipboard?.writeText(window.location.href); alert('Article link copied to clipboard!');"><i class="bi bi-link-45deg fs-6"></i></a>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" class="btn-secondary-poke py-2 px-3 fs-7" data-bs-dismiss="modal">Close</button>
+                <a href="home-2.html#bowl-builder" class="btn-primary-poke py-2 px-3 fs-7">Order This Bowl</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Global Footer
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <!-- Brand & Mission Info -->
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <!-- Menu Categories -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <!-- Opening Hours & Sample Location -->
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Floating Button -->
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/blog.js"></script>
+</body>
+</html>

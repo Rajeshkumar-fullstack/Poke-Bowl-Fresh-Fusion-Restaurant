@@ -1,0 +1,487 @@
+/* ==========================================================================
+   Poke Bowl & Fresh Fusion - Themes (Light & Dark Mode)
+   ========================================================================== */
+
+:root,
+[data-theme="light"],
+[data-bs-theme="light"] {
+  /* Core Restaurant Brand Palette */
+  --brand-forest: #234E3D;
+  --brand-orange: #F4A261;
+  --brand-cream: #FFF8ED;
+  --brand-brown: #3A3028;
+
+  /* Brand Palettes */
+  --color-primary: #234E3D;
+  --color-primary-dark: #193B2D;
+  --color-primary-light: #DFECE6;
+  --color-secondary: #E76F51;
+  --color-secondary-dark: #C85538;
+  --color-secondary-light: #FCE8E2;
+  --color-accent: #F4A261;
+  --color-accent-light: #FDEBD9;
+  
+  /* Light Theme (Warm Cream & Organic Surfaces — Never Flat White) */
+  --bg-primary: #FFF8ED;
+  --bg-secondary: #F8EFE0;
+  --bg-tertiary: #F1E5D2;
+  --bg-card: #FFFCF6;
+  --bg-card-gradient: linear-gradient(165deg, #FFFEFA 0%, #FFF7E8 100%);
+  --bg-glass: rgba(255, 252, 246, 0.90);
+  --bg-glass-strong: rgba(255, 252, 246, 0.97);
+  --bg-input: #FFFCF6;
+  --bg-badge: #E4F0EA;
+  
+  --text-primary: #3A3028;
+  --text-heading: #234E3D;
+  --text-secondary: #524439;
+  --text-muted: #736253;
+  --text-inverse: #FFF8ED;
+  
+  --border-color: rgba(35, 78, 61, 0.14);
+  --border-focus: #234E3D;
+  --border-subtle: rgba(58, 48, 40, 0.08);
+  
+  --shadow-sm: 0 2px 6px -1px rgba(58, 48, 40, 0.06), 0 1px 3px 0 rgba(35, 78, 61, 0.04);
+  --shadow-md: 0 8px 20px -4px rgba(35, 78, 61, 0.10), 0 4px 10px -2px rgba(58, 48, 40, 0.05);
+  --shadow-lg: 0 16px 32px -8px rgba(35, 78, 61, 0.14), 0 8px 16px -4px rgba(244, 162, 97, 0.10);
+  --shadow-xl: 0 22px 42px -10px rgba(35, 78, 61, 0.18), 0 10px 20px -6px rgba(58, 48, 40, 0.08);
+  --shadow-glow: 0 0 26px rgba(244, 162, 97, 0.35);
+
+  --navbar-bg: rgba(255, 248, 237, 0.94);
+  --navbar-scrolled: rgba(255, 250, 242, 0.98);
+  --navbar-border: rgba(35, 78, 61, 0.14);
+  --navbar-shadow: 0 4px 16px -4px rgba(58, 48, 40, 0.08);
+
+  --footer-bg: #EDE1CE;
+  --footer-text: #3A3028;
+  --footer-muted: #5C4D40;
+  --footer-heading: #234E3D;
+  --footer-border: rgba(35, 78, 61, 0.18);
+  --footer-social-bg: rgba(35, 78, 61, 0.12);
+  --footer-social-color: #234E3D;
+
+  --badge-green-bg: #DFECE6;
+  --badge-green-text: #1B4332;
+  --badge-coral-bg: #FCE6DE;
+  --badge-coral-text: #9C3B23;
+  --badge-amber-bg: #FDEBD9;
+  --badge-amber-text: #8F4B14;
+  --badge-blue-bg: #E0F2FE;
+  --badge-blue-text: #075985;
+
+  --hero-overlay-gradient: linear-gradient(135deg, rgba(255, 248, 237, 0.80) 0%, rgba(248, 239, 224, 0.72) 50%, rgba(228, 240, 234, 0.65) 100%);
+
+  /* Bootstrap Variable Harmonization */
+  --bs-body-color: #3A3028;
+  --bs-body-bg: #FFF8ED;
+  --bs-secondary-color: #6E5D4F;
+}
+
+/* ==========================================================================
+   Dark Theme Declarations
+   ========================================================================== */
+[data-theme="dark"],
+[data-bs-theme="dark"] {
+  --brand-forest: #234E3D;
+  --brand-orange: #F4A261;
+  --brand-cream: #FFF8ED;
+  --brand-brown: #3A3028;
+
+  --color-primary: #34D399;
+  --color-primary-dark: #10B981;
+  --color-primary-light: #16382B;
+  --color-secondary: #FB7185;
+  --color-secondary-dark: #F43F5E;
+  --color-secondary-light: #881337;
+  --color-accent: #F4A261;
+  --color-accent-light: #4D3018;
+
+  --bg-primary: #0B1612;
+  --bg-secondary: #12221C;
+  --bg-tertiary: #172B23;
+  --bg-card: #162921;
+  --bg-card-gradient: linear-gradient(165deg, #192F26 0%, #13231C 100%);
+  --bg-glass: rgba(18, 34, 28, 0.88);
+  --bg-glass-strong: rgba(18, 34, 28, 0.96);
+  --bg-input: #12221C;
+  --bg-badge: #163529;
+
+  --text-primary: #FFF8ED;
+  --text-heading: #FFF8ED;
+  --text-secondary: #E2D9C8;
+  --text-muted: #A3B5AC;
+  --text-inverse: #0F172A;
+
+  --border-color: #274237;
+  --border-focus: #34D399;
+  --border-subtle: #1D332A;
+
+  --shadow-sm: 0 2px 6px 0 rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 6px 18px -2px rgba(0, 0, 0, 0.55), 0 2px 6px -1px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 14px 32px -6px rgba(0, 0, 0, 0.68), 0 4px 14px -2px rgba(244, 162, 97, 0.12);
+  --shadow-xl: 0 22px 44px -8px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 26px rgba(244, 162, 97, 0.28);
+
+  --navbar-bg: rgba(11, 22, 18, 0.92);
+  --navbar-scrolled: rgba(9, 18, 15, 0.98);
+  --navbar-border: rgba(52, 211, 153, 0.16);
+  --navbar-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.45);
+
+  --footer-bg: #070E0B;
+  --footer-text: #FFF8ED;
+  --footer-muted: #A3B5AC;
+  --footer-heading: #FFF8ED;
+  --footer-border: rgba(255, 248, 237, 0.09);
+  --footer-social-bg: rgba(255, 248, 237, 0.08);
+  --footer-social-color: #FFF8ED;
+
+  --badge-green-bg: #143D2E;
+  --badge-green-text: #A7F3D0;
+  --badge-coral-bg: #691B2C;
+  --badge-coral-text: #FECDD3;
+  --badge-amber-bg: #543214;
+  --badge-amber-text: #FDE68A;
+  --badge-blue-bg: #0C4A6E;
+  --badge-blue-text: #BAE6FD;
+
+  --hero-overlay-gradient: linear-gradient(135deg, rgba(11, 22, 18, 0.78) 0%, rgba(18, 34, 28, 0.72) 50%, rgba(23, 43, 35, 0.66) 100%);
+
+  /* Bootstrap Variable Harmonization in Dark Mode */
+  --bs-body-color: #FFF8ED !important;
+  --bs-body-bg: #0B1612 !important;
+  --bs-heading-color: #FFF8ED !important;
+  --bs-secondary-color: #A3B5AC !important;
+  --bs-emphasis-color: #FFFFFF !important;
+  --bs-border-color: #274237 !important;
+  --bs-card-bg: #162921 !important;
+  --bs-card-color: #FFF8ED !important;
+}
+
+/* Base Body Application with Subtle Organic Radial Gradients */
+body {
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(35, 78, 61, 0.045) 0%, transparent 38%),
+    radial-gradient(circle at 88% 42%, rgba(244, 162, 97, 0.075) 0%, transparent 42%),
+    radial-gradient(circle at 20% 82%, rgba(35, 78, 61, 0.04) 0%, transparent 40%);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(52, 211, 153, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 45%, rgba(244, 162, 97, 0.04) 0%, transparent 40%);
+}
+
+/* ==========================================================================
+   Comprehensive Dark Mode Text & Contrast Overrides
+   Ensures ZERO hidden / black text in Dark Mode across all components
+   ========================================================================== */
+
+/* 1. Global Headings & Titles in Dark Mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .modal-title,
+[data-theme="dark"] .font-heading,
+[data-theme="dark"] .section-heading,
+[data-theme="dark"] .card-poke-title,
+[data-theme="dark"] .hero-title,
+[data-theme="dark"] .text-dark,
+[data-theme="dark"] .text-black,
+[data-theme="dark"] strong,
+[data-theme="dark"] b {
+  color: #F8FAFC !important;
+}
+
+/* 2. Body Text, Spans, Paragraphs in Dark Mode */
+[data-theme="dark"] p,
+[data-theme="dark"] span:not(.badge),
+[data-theme="dark"] li,
+[data-theme="dark"] td,
+[data-theme="dark"] th,
+[data-theme="dark"] div:not(.badge) {
+  color: inherit;
+}
+
+[data-theme="dark"] body {
+  color: #F8FAFC !important;
+}
+
+/* 3. Muted & Secondary Text in Dark Mode (High-contrast light slate) */
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .section-description,
+[data-theme="dark"] .hero-subtitle,
+[data-theme="dark"] .card-poke-desc,
+[data-theme="dark"] small.text-muted,
+[data-theme="dark"] p.text-muted,
+[data-theme="dark"] span.text-muted {
+  color: #94A3B8 !important;
+}
+
+/* 4. Form Labels, Inputs, Placeholders, Options in Dark Mode */
+[data-theme="dark"] .form-label,
+[data-theme="dark"] label,
+[data-theme="dark"] .form-check-label {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .form-poke-control {
+  background-color: #121F1B !important;
+  color: #F8FAFC !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .form-poke-control::placeholder {
+  color: #64748B !important;
+  opacity: 1;
+}
+
+[data-theme="dark"] .form-poke-control:focus {
+  background-color: #15241F !important;
+  color: #FFFFFF !important;
+  border-color: #34D399 !important;
+}
+
+[data-theme="dark"] .form-poke-control option {
+  background-color: #121F1B !important;
+  color: #F8FAFC !important;
+}
+
+/* 5. Cards & Containers in Dark Mode */
+[data-theme="dark"] .card-poke,
+[data-theme="dark"] .feature-box,
+[data-theme="dark"] .ingredient-select-card,
+[data-theme="dark"] .builder-summary-card,
+[data-theme="dark"] .timeline-item .card-poke,
+[data-theme="dark"] .modal-content {
+  background-color: #182722 !important;
+  border-color: #273E36 !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%) !important;
+}
+
+[data-theme="dark"] .card-poke .fw-bold,
+[data-theme="dark"] .card-poke span.fw-bold {
+  color: #F8FAFC !important;
+}
+
+/* 6. Brand Logo Vector Text in Dark Mode */
+[data-theme="dark"] .poke-nav-brand,
+[data-theme="dark"] .poke-nav-brand svg,
+[data-theme="dark"] .poke-nav-brand svg text[fill="currentColor"] {
+  color: #F8FAFC !important;
+  fill: #F8FAFC !important;
+}
+
+/* 7. Nutrition Tables & Matrices in Dark Mode */
+[data-theme="dark"] .nutrition-table {
+  background-color: #182722 !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .nutrition-table th {
+  background-color: #121F1B !important;
+  color: #F8FAFC !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .nutrition-table td {
+  color: #CBD5E1 !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .nutrition-table td strong {
+  color: #F8FAFC !important;
+}
+
+/* 8. Accordions in Dark Mode */
+[data-theme="dark"] .accordion-item {
+  background-color: #182722 !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .accordion-item:hover {
+  border-color: #34D399 !important;
+}
+
+[data-theme="dark"] .accordion-button {
+  background-color: #182722 !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2334D399'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+  filter: none !important;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+  background-color: #132D24 !important;
+  color: #34D399 !important;
+  border-bottom: 1px solid #273E36 !important;
+}
+
+[data-theme="dark"] .accordion-body {
+  background-color: #14211D !important;
+  color: #CBD5E1 !important;
+}
+
+/* 9. Buttons in Dark Mode */
+[data-theme="dark"] .btn-secondary-poke {
+  background-color: #182722 !important;
+  color: #F8FAFC !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .btn-secondary-poke:hover {
+  background-color: #132D24 !important;
+  color: #34D399 !important;
+  border-color: #34D399 !important;
+}
+
+[data-theme="dark"] .btn-icon-round {
+  background-color: #182722 !important;
+  color: #F8FAFC !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .btn-direction-toggle {
+  background-color: #182722 !important;
+  color: #F8FAFC !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .btn-filter {
+  background-color: #182722 !important;
+  color: #CBD5E1 !important;
+  border-color: #273E36 !important;
+}
+
+[data-theme="dark"] .btn-filter:hover {
+  background-color: #132D24 !important;
+  color: #34D399 !important;
+  border-color: #34D399 !important;
+}
+
+[data-theme="dark"] .btn-filter.active {
+  background-color: #34D399 !important;
+  color: #0A1210 !important;
+  border-color: #34D399 !important;
+  font-weight: 700 !important;
+}
+
+/* 10. Floating Badges & Glass Surfaces in Dark Mode */
+[data-theme="dark"] .hero-badge-float {
+  background-color: rgba(24, 39, 34, 0.95) !important;
+  border-color: #273E36 !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .hero-badge-float p,
+[data-theme="dark"] .hero-badge-float span {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .map-placeholder-box,
+[data-theme="dark"] .map-frame-wrapper {
+  background-color: #14211D !important;
+  border-color: #273E36 !important;
+  color: #F8FAFC !important;
+}
+
+/* 11. Mobile Drawer in Dark Mode */
+[data-theme="dark"] .mobile-nav-drawer {
+  background-color: #121F1B !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .mobile-nav-drawer .nav-link {
+  color: #F8FAFC !important;
+}
+
+/* 12. Text Utility Color Harmonization */
+.text-primary,
+[data-theme="light"] .text-primary {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-primary {
+  color: #F8FAFC !important;
+}
+
+.text-secondary,
+[data-theme="light"] .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .text-emerald-600 {
+  color: #34D399 !important;
+}
+
+[data-theme="dark"] .text-amber-600 {
+  color: #FBBF24 !important;
+}
+
+/* 13. Outline Buttons in Dark Mode */
+[data-theme="dark"] .btn-outline-secondary {
+  color: #CBD5E1 !important;
+  border-color: #334E43 !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background-color: #132D24 !important;
+  color: #34D399 !important;
+  border-color: #34D399 !important;
+}
+
+[data-theme="dark"] .btn-outline-success {
+  color: #34D399 !important;
+  border-color: #34D399 !important;
+}
+
+[data-theme="dark"] .btn-outline-success:hover {
+  background-color: #34D399 !important;
+  color: #0A1210 !important;
+}
+
+/* 14. Footer Text Contrast & Theme Adaptation */
+.poke-footer .text-muted {
+  color: var(--footer-muted) !important;
+}
+
+.poke-footer h6,
+.poke-footer h6.text-white {
+  color: var(--footer-heading) !important;
+}
+
+/* Theme Icon transitions */
+.theme-icon-sun,
+.theme-icon-moon {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+[data-theme="light"] .theme-icon-moon {
+  display: inline-block;
+}
+[data-theme="light"] .theme-icon-sun {
+  display: none;
+}
+[data-theme="dark"] .theme-icon-moon {
+  display: none;
+}
+[data-theme="dark"] .theme-icon-sun {
+  display: inline-block;
+}

@@ -1,0 +1,682 @@
+/* ==========================================================================
+   Poke Bowl & Fresh Fusion - Premium Cinematic Animations & Transitions
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Keyframe Definitions
+   -------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1.5deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-1.5deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(35, 78, 61, 0.22);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(244, 162, 97, 0.45);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes buttonPulse {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes drawUnderline {
+  from {
+    background-size: 0% 0.35em;
+  }
+  to {
+    background-size: 100% 0.35em;
+  }
+}
+
+/* Hero Background Ambient Drift (Large screens only; preserves background-size: cover without distortion) */
+@keyframes heroAmbientShift {
+  0% {
+    background-position: 50% 25%;
+  }
+  50% {
+    background-position: 50% 35%;
+  }
+  100% {
+    background-position: 50% 25%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Cinematic Text Reveal (Word & Letter Level)
+   -------------------------------------------------------------------------- */
+.split-text-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+.split-text-inner {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  will-change: transform, opacity;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+.split-text-word.is-revealed .split-text-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Text Highlights with Animated Brush / Underline */
+.animated-highlight {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(120deg, rgba(244, 162, 97, 0.28) 0%, rgba(244, 162, 97, 0.6) 100%);
+  background-repeat: no-repeat;
+  background-size: 0% 0.35em;
+  background-position: 0 92%;
+  transition: background-size 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+
+.is-visible .animated-highlight,
+.is-revealed .animated-highlight {
+  background-size: 100% 0.35em;
+}
+
+/* --------------------------------------------------------------------------
+   4. Hero Entrance Sequences
+   -------------------------------------------------------------------------- */
+.hero-section,
+.blog-hero,
+.page-hero {
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 992px) {
+  .hero-section,
+  .blog-hero,
+  .page-hero {
+    animation: heroAmbientShift 24s ease-in-out infinite alternate;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .hero-section,
+  .blog-hero,
+  .page-hero {
+    animation: none !important;
+  }
+}
+
+.hero-badge-entrance {
+  animation: fadeInScale 0.75s 0.1s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-title-entrance {
+  animation: fadeInUp 0.85s 0.2s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-desc-entrance {
+  animation: fadeInUp 0.85s 0.35s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-cta-entrance {
+  animation: fadeInUp 0.85s 0.5s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-metrics-entrance {
+  animation: fadeInUp 0.85s 0.65s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-img-entrance {
+  animation: fadeInScale 1.1s 0.3s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   5. Floating & Ambient Elements
+   -------------------------------------------------------------------------- */
+.animate-float {
+  animation: floatSlow 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 24s linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   6. Cinematic Image Reveal, Hero Image Floating & Interactive Sheen
+   -------------------------------------------------------------------------- */
+@keyframes heroFloatBreathe {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.4deg);
+  }
+}
+
+@keyframes heroImageSlowPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes heroSheenGlider {
+  0%, 65% {
+    transform: translateX(-160%) skewX(-22deg);
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(220%) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+.cinematic-reveal {
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.cinematic-reveal img {
+  transform: scale(1.12);
+  filter: blur(2px);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s ease;
+  will-change: transform, filter;
+}
+
+.cinematic-reveal.is-visible img {
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* Hero Section Image (Home 1 & Home 2) Attractive Floating & Hover Action */
+.hero-image-container {
+  animation: heroFloatBreathe 5.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.hero-image-container::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -40%;
+  width: 55%;
+  height: 160%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 248, 237, 0.38) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-160%) skewX(-22deg);
+  pointer-events: none;
+  z-index: 3;
+  animation: heroSheenGlider 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-image-container.cinematic-reveal.is-visible img {
+  animation: heroImageSlowPulse 8s ease-in-out infinite;
+}
+
+.hero-image-container:hover,
+.hero-image-container.is-tilting {
+  animation-play-state: paused;
+}
+
+.hero-image-container:hover::before {
+  animation: none;
+  transform: translateX(240%) skewX(-22deg);
+  opacity: 0.95;
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+.hero-image-container:hover img,
+.hero-image-container.cinematic-reveal.is-visible:hover img {
+  animation: none;
+  transform: scale(1.08) rotate(0.8deg) !important;
+  filter: saturate(1.08) contrast(1.03) !important;
+}
+
+/* Curtain wipe block */
+.curtain-mask {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-primary, #234E3D);
+  z-index: 3;
+  transform-origin: right center;
+  transform: scaleX(0);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+  pointer-events: none;
+}
+
+.curtain-mask.play {
+  transform: scaleX(0);
+}
+
+/* --------------------------------------------------------------------------
+   7. Scroll Reveal Core States
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.reveal-left {
+  transform: translateX(-32px);
+}
+
+.reveal.reveal-right {
+  transform: translateX(32px);
+}
+
+.reveal.reveal-scale {
+  transform: scale(0.92);
+}
+
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* Section Title Staggered Text Reveal */
+.section-title-wrap.reveal .section-tagline,
+.section-title-wrap.reveal .section-heading,
+.section-title-wrap.reveal .section-description {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-title-wrap.reveal.is-visible .section-tagline {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 40ms;
+}
+
+.section-title-wrap.reveal.is-visible .section-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 130ms;
+}
+
+.section-title-wrap.reveal.is-visible .section-description {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 220ms;
+}
+
+/* Stagger Delay Modifiers */
+.reveal-delay-100 { transition-delay: 100ms; }
+.reveal-delay-200 { transition-delay: 200ms; }
+.reveal-delay-300 { transition-delay: 300ms; }
+.reveal-delay-400 { transition-delay: 400ms; }
+.reveal-delay-500 { transition-delay: 500ms; }
+
+/* Grid Stagger Sequence */
+.stagger-grid > *:nth-child(1) { transition-delay: 60ms; }
+.stagger-grid > *:nth-child(2) { transition-delay: 140ms; }
+.stagger-grid > *:nth-child(3) { transition-delay: 220ms; }
+.stagger-grid > *:nth-child(4) { transition-delay: 300ms; }
+.stagger-grid > *:nth-child(5) { transition-delay: 380ms; }
+.stagger-grid > *:nth-child(6) { transition-delay: 460ms; }
+
+/* --------------------------------------------------------------------------
+   8. Card Hover Zoom & Smooth Depth Lift
+   -------------------------------------------------------------------------- */
+.img-zoom-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-zoom-wrapper img,
+.card-poke > img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-zoom-card:hover .img-zoom-wrapper img,
+.img-zoom-wrapper:hover img,
+.card-poke:hover > img {
+  transform: scale(1.06) translateY(-2px);
+}
+
+.card-poke {
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.38s ease, border-color 0.38s ease;
+}
+
+.card-poke:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
+}
+
+/* --------------------------------------------------------------------------
+   9. Button Sheen & Shimmer Transitions
+   -------------------------------------------------------------------------- */
+.btn-shimmer,
+.btn-primary-poke,
+.btn-coral-poke {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.btn-shimmer::before,
+.btn-primary-poke::before,
+.btn-coral-poke::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 65%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-shimmer:hover::before,
+.btn-primary-poke:hover::before,
+.btn-coral-poke:hover::before {
+  animation: shimmerSweep 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-press:hover,
+.btn-primary-poke:hover,
+.btn-coral-poke:hover,
+.btn-secondary-poke:hover {
+  transform: translateY(-2px);
+}
+
+.btn-press:active,
+.btn-clicked {
+  animation: buttonPulse 0.35s ease forwards !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Animated Metric Counters
+   -------------------------------------------------------------------------- */
+.counter-number {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   11. Poke Glider - Interactive Carousel & Gliding Card Animations
+   -------------------------------------------------------------------------- */
+.poke-glider-container {
+  position: relative;
+  width: 100%;
+}
+
+.poke-glider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 6px 20px;
+}
+
+.poke-glider-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.poke-glider-track.is-dragging {
+  cursor: grabbing;
+  transition: none !important;
+}
+
+.poke-glider-slide {
+  flex: 0 0 calc((100% - (var(--glider-cols, 3) - 1) * 1.5rem) / var(--glider-cols, 3));
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.poke-glider-slide > .card-poke {
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+/* Glider Controls Bar */
+.poke-glider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.poke-glider-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.poke-glider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background-color: var(--border-color);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.poke-glider-dot.active {
+  width: 28px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(35, 78, 61, 0.4);
+}
+
+.poke-glider-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.poke-glider-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.poke-glider-btn:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(35, 78, 61, 0.35);
+}
+
+.poke-glider-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.poke-glider-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   12. Accessibility: Respect Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .split-text-inner,
+  .cinematic-reveal img {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+
+  .animate-float,
+  .animate-float-reverse,
+  .animate-pulse-glow,
+  .animate-spin-slow,
+  .hero-section,
+  .blog-hero,
+  .page-hero {
+    animation: none !important;
+  }
+}

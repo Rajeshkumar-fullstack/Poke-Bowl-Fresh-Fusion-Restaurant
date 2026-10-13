@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Poke Bowl Builder | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Craft your personalized poke bowl step by step with our interactive builder. Choose your fresh base, wild-caught protein, crisp toppings, and artisan sauce with instant nutrition estimates.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle active" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item active" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <!-- Controls & CTA -->
+      <div class="poke-nav-controls">
+        <!-- Direction Switcher -->
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <!-- Dark/Light Theme Switcher -->
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <!-- CTA -->
+        <a href="#bowl-builder" class="btn-coral-poke d-none d-md-inline-flex">
+          <i class="bi bi-sliders"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <!-- Hamburger for Mobile -->
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Backdrop & Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start active" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="true" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse show" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block active">
+                <i class="bi bi-dot text-emerald-500"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="#bowl-builder" class="btn-coral-poke w-100 justify-content-center">
+        <i class="bi bi-sliders"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Split-Screen Hero Section (Niche Builder Focus)
+       ======================================================================== -->
+  <header class="hero-section hero-bg-home2 py-5">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center g-5 min-vh-75">
+        
+        <div class="col-lg-6 reveal">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill badge-coral mb-3">
+            <i class="bi bi-magic"></i>
+            <span class="fw-bold fs-7">Interactive Bowl Studio</span>
+          </div>
+
+          <h1 class="hero-title">
+            Build Your Perfect Bowl. <br>
+            <span class="text-rose-500">Exactly How You</span> <br>
+            Crave It.
+          </h1>
+
+          <p class="hero-subtitle">
+            Take total control of your plate. Select your artisanal base, choose sustainably caught proteins, pile on crisp organic toppings, and finish with scratch-made dressings with live calorie and macro estimates.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 hero-cta-group mb-4">
+            <a href="#bowl-builder" class="btn-coral-poke">
+              <i class="bi bi-sliders"></i>
+              <span>Build Your Poke Bowl</span>
+            </a>
+            <a href="menu.html" class="btn-secondary-poke">
+              <i class="bi bi-grid-fill"></i>
+              <span>View Chef Signatures</span>
+            </a>
+          </div>
+
+          <div class="hero-social-proof d-flex align-items-center gap-3 pt-2">
+            <div class="hero-avatar-group d-flex flex-shrink-0">
+              <img src="assets/images/testimonials/customer-sarah.jpg" alt="Fan" class="hero-avatar rounded-circle border border-2 border-white object-cover" width="40" height="40">
+              <img src="assets/images/testimonials/customer-marcus.jpg" alt="Fan" class="hero-avatar rounded-circle border border-2 border-white object-cover" width="40" height="40">
+              <img src="assets/images/testimonials/customer-elena.jpg" alt="Fan" class="hero-avatar rounded-circle border border-2 border-white object-cover" width="40" height="40">
+            </div>
+            <p class="hero-social-proof-text mb-0 fs-8 text-muted">
+              Over <strong><span class="counter-number" data-target="50000">50,000</span>+ unique bowl combinations</strong> crafted by our hungry community.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal reveal-delay-200">
+          <div class="hero-image-container hover-zoom-card">
+            <!-- Unique hero image for Home 2 -->
+            <img src="assets/images/home/hero-home2.jpg" alt="Array of fresh poke bowl ingredients in colorful bowls" loading="eager" width="700" height="520">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       4-Step Philosophy Process Bar
+       ======================================================================== -->
+  <section class="py-4 bg-secondary/40 border-top border-bottom border-border-subtle">
+    <div class="container">
+      <div class="row g-3 text-center">
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="builder-step-number bg-emerald-500">1</span>
+            <span class="fw-bold fs-7">Pick Your Base</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="builder-step-number bg-rose-500">2</span>
+            <span class="fw-bold fs-7">Select Protein</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="builder-step-number bg-amber-500">3</span>
+            <span class="fw-bold fs-7">Add Crisp Toppings</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="builder-step-number bg-sky-500">4</span>
+            <span class="fw-bold fs-7">Drizzle Sauce</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Interactive Bowl Builder
+       ======================================================================== -->
+  <section class="section-py" id="bowl-builder">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Craft Your Bowl</span>
+        <h2 class="section-heading">The Interactive Bowl Studio</h2>
+        <p class="section-description">
+          Select items from each category below. Watch your estimated nutrition and flavor profile update in real time on the summary card.
+        </p>
+      </div>
+
+      <div class="row g-4" id="pokeBowlBuilder">
+        
+        <!-- Selection Stations Column -->
+        <div class="col-lg-8">
+          
+          <!-- STEP 1: BASE -->
+          <div class="mb-5 reveal">
+            <div class="builder-step-header">
+              <span class="builder-step-number">1</span>
+              <div>
+                <h4 class="fw-bold mb-0">Choose Your Base</h4>
+                <small class="text-muted">Select 1 foundational base for your bowl</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <!-- Base 1 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card selected" data-type="base" data-name="White Sushi Rice" data-calories="180" data-protein="4" data-carbs="39" data-fats="0.5" data-fiber="1" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/base-sushi-rice.jpg" alt="Sushi Rice" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Sushi Rice</h6>
+                  <span class="badge badge-poke badge-green fs-8">180 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Classic Fluffy</small>
+                </div>
+              </div>
+
+              <!-- Base 2 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card" data-type="base" data-name="Organic Brown Rice" data-calories="160" data-protein="4.5" data-carbs="34" data-fats="1.5" data-fiber="3.5" data-price="0.50">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/base-brown-rice.jpg" alt="Organic Brown Rice" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Brown Rice</h6>
+                  <span class="badge badge-poke badge-amber fs-8">160 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">High Fiber (+$0.50)</small>
+                </div>
+              </div>
+
+              <!-- Base 3 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card" data-type="base" data-name="Mixed Super Grains" data-calories="150" data-protein="6" data-carbs="29" data-fats="2" data-fiber="5" data-price="1.00">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/base-mixed-grains.jpg" alt="Super Grains" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Mixed Grains</h6>
+                  <span class="badge badge-poke badge-blue fs-8">150 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Quinoa & Wild (+$1.00)</small>
+                </div>
+              </div>
+
+              <!-- Base 4 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card" data-type="base" data-name="Crisp Mixed Greens" data-calories="45" data-protein="2" data-carbs="7" data-fats="0.5" data-fiber="4" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/base-mixed-greens.jpg" alt="Fresh Mixed Greens" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Mixed Greens</h6>
+                  <span class="badge badge-poke badge-green fs-8">45 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Keto Friendly</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: PROTEIN -->
+          <div class="mb-5 reveal">
+            <div class="builder-step-header">
+              <span class="builder-step-number bg-rose-500">2</span>
+              <div>
+                <h4 class="fw-bold mb-0">Select Premium Protein</h4>
+                <small class="text-muted">Choose 1 fresh wild-caught or plant-based protein</small>
+              </div>
+            </div>
+
+            <div class="row g-3 protein-grid-row">
+              <!-- Protein 1 -->
+              <div class="col-6 col-md-4 col-xl">
+                <div class="ingredient-select-card selected" data-type="protein" data-name="Fresh Atlantic Salmon" data-calories="210" data-protein="25" data-carbs="0" data-fats="12" data-fiber="0" data-price="5.00">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/protein-salmon.jpg" alt="Atlantic Salmon" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Atlantic Salmon</h6>
+                  <span class="badge badge-poke badge-coral fs-8">25g Prot</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Sashimi-Grade</small>
+                </div>
+              </div>
+
+              <!-- Protein 2 -->
+              <div class="col-6 col-md-4 col-xl">
+                <div class="ingredient-select-card" data-type="protein" data-name="Wild Hawaiian Ahi Tuna" data-calories="180" data-protein="28" data-carbs="0" data-fats="2" data-fiber="0" data-price="5.50">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/protein-tuna.jpg" alt="Hawaiian Ahi Tuna" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Ahi Tuna</h6>
+                  <span class="badge badge-poke badge-coral fs-8">28g Prot</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Wild Line-Caught</small>
+                </div>
+              </div>
+
+              <!-- Protein 3 -->
+              <div class="col-6 col-md-4 col-xl">
+                <div class="ingredient-select-card" data-type="protein" data-name="Citrus Herb Chicken" data-calories="160" data-protein="27" data-carbs="2" data-fats="4" data-fiber="0" data-price="4.00">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/protein-chicken.jpg" alt="Grilled Chicken" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Grilled Chicken</h6>
+                  <span class="badge badge-poke badge-blue fs-8">27g Prot</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Marinated Breast</small>
+                </div>
+              </div>
+
+              <!-- Protein 4 -->
+              <div class="col-6 col-md-4 col-xl">
+                <div class="ingredient-select-card" data-type="protein" data-name="Poached Tiger Shrimp" data-calories="120" data-protein="24" data-carbs="1" data-fats="1.5" data-fiber="0" data-price="4.75">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/protein-shrimp.jpg" alt="Poached Shrimp" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Tiger Shrimp</h6>
+                  <span class="badge badge-poke badge-green fs-8">24g Prot</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Gently Poached</small>
+                </div>
+              </div>
+
+              <!-- Protein 5 -->
+              <div class="col-6 col-md-4 col-xl">
+                <div class="ingredient-select-card" data-type="protein" data-name="Organic Sesame Tofu" data-calories="130" data-protein="14" data-carbs="4" data-fats="7" data-fiber="3" data-price="3.50">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/protein-tofu.jpg" alt="Organic Tofu" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Sesame Tofu</h6>
+                  <span class="badge badge-poke badge-green fs-8">14g Prot</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">100% Plant-Based</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: TOPPINGS -->
+          <div class="mb-5 reveal">
+            <div class="builder-step-header">
+              <span class="builder-step-number bg-amber-500">3</span>
+              <div>
+                <h4 class="fw-bold mb-0">Select Toppings & Mix-Ins</h4>
+                <small class="text-muted">Click to toggle multiple fresh ingredients</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <!-- Topping 1 -->
+              <div class="col-6 col-md-4">
+                <div class="ingredient-select-card selected" data-type="topping" data-name="Fresh Avocado" data-calories="80" data-protein="1" data-carbs="4" data-fats="7.5" data-fiber="3" data-price="1.25">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/topping-avocado.jpg" alt="Avocado" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Hass Avocado</h6>
+                  <span class="badge badge-poke badge-amber fs-8">+80 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Rich Good Fats (+$1.25)</small>
+                </div>
+              </div>
+
+              <!-- Topping 2 -->
+              <div class="col-6 col-md-4">
+                <div class="ingredient-select-card" data-type="topping" data-name="Sweet Golden Mango" data-calories="50" data-protein="0.5" data-carbs="13" data-fats="0" data-fiber="1.5" data-price="0.75">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/topping-mango.jpg" alt="Mango" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Golden Mango</h6>
+                  <span class="badge badge-poke badge-amber fs-8">+50 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Tropical Sweet (+$0.75)</small>
+                </div>
+              </div>
+
+              <!-- Topping 3 -->
+              <div class="col-6 col-md-4">
+                <div class="ingredient-select-card" data-type="topping" data-name="Japanese Cucumber" data-calories="15" data-protein="0.5" data-carbs="3" data-fats="0" data-fiber="1" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/topping-cucumber.jpg" alt="Cucumber" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Crisp Cucumber</h6>
+                  <span class="badge badge-poke badge-green fs-8">+15 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Refreshing Crunch</small>
+                </div>
+              </div>
+
+              <!-- Topping 4 -->
+              <div class="col-6 col-md-4">
+                <div class="ingredient-select-card selected" data-type="topping" data-name="Steamed Edamame" data-calories="60" data-protein="5" data-carbs="5" data-fats="2.5" data-fiber="3" data-price="0.50">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/topping-edamame.jpg" alt="Edamame" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Green Edamame</h6>
+                  <span class="badge badge-poke badge-green fs-8">+60 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Protein & Fiber (+$0.50)</small>
+                </div>
+              </div>
+
+              <!-- Topping 5 -->
+              <div class="col-6 col-md-4">
+                <div class="ingredient-select-card" data-type="topping" data-name="Wakame Seaweed" data-calories="35" data-protein="1" data-carbs="6" data-fats="1" data-fiber="2" data-price="0.75">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/topping-seaweed.jpg" alt="Seaweed" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Wakame Seaweed</h6>
+                  <span class="badge badge-poke badge-blue fs-8">+35 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Mineral Rich (+$0.75)</small>
+                </div>
+              </div>
+
+              <!-- Topping 6 -->
+              <div class="col-6 col-md-4">
+                <div class="ingredient-select-card selected" data-type="topping" data-name="Roasted Sesame Seeds" data-calories="30" data-protein="1" data-carbs="1" data-fats="2.5" data-fiber="1" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/topping-sesame.jpg" alt="Sesame" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Toasted Sesame</h6>
+                  <span class="badge badge-poke badge-amber fs-8">+30 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Nutty Finish</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: SAUCE -->
+          <div class="mb-4 reveal">
+            <div class="builder-step-header">
+              <span class="builder-step-number bg-sky-500">4</span>
+              <div>
+                <h4 class="fw-bold mb-0">Choose Scratch Sauce</h4>
+                <small class="text-muted">Select 1 artisanal glaze or dressing</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <!-- Sauce 1 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card selected" data-type="sauce" data-name="Classic Sesame Shoyu" data-calories="45" data-protein="1" data-carbs="4" data-fats="3" data-fiber="0" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/sauce-sesame-shoyu.jpg" alt="Sesame Shoyu" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Sesame Shoyu</h6>
+                  <span class="badge badge-poke badge-green fs-8">45 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Hawaiian Umami</small>
+                </div>
+              </div>
+
+              <!-- Sauce 2 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card" data-type="sauce" data-name="Spicy Sriracha Mayo" data-calories="90" data-protein="0.5" data-carbs="2" data-fats="9" data-fiber="0" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/sauce-spicy-mayo.jpg" alt="Spicy Mayo" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Spicy Mayo</h6>
+                  <span class="badge badge-poke badge-coral fs-8">90 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Creamy Heat</small>
+                </div>
+              </div>
+
+              <!-- Sauce 3 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card" data-type="sauce" data-name="Sweet Ponzu Lime" data-calories="35" data-protein="0.5" data-carbs="7" data-fats="0" data-fiber="0" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/sauce-ponzu-lime.jpg" alt="Sweet Ponzu" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Ponzu Lime</h6>
+                  <span class="badge badge-poke badge-amber fs-8">35 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Zesty Citrus</small>
+                </div>
+              </div>
+
+              <!-- Sauce 4 -->
+              <div class="col-6 col-md-3">
+                <div class="ingredient-select-card" data-type="sauce" data-name="Wasabi Aioli" data-calories="85" data-protein="0.5" data-carbs="2" data-fats="8.5" data-fiber="0" data-price="0">
+                  <span class="selected-check"><i class="bi bi-check"></i></span>
+                  <img src="assets/images/ingredients/sauce-wasabi-aioli.jpg" alt="Wasabi Aioli" class="ingredient-thumb">
+                  <h6 class="fw-bold fs-7 mb-1">Wasabi Aioli</h6>
+                  <span class="badge badge-poke badge-blue fs-8">85 kcal</span>
+                  <small class="text-muted mt-auto pt-1 fs-8">Bold Pungent Kick</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Live Summary Sticky Panel Column (Responsive One-Product Cart) -->
+        <div class="col-lg-4" id="builderSummaryPanel">
+          <div class="builder-summary-card">
+            
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+              <div>
+                <span class="badge badge-poke badge-coral mb-1"><i class="bi bi-cart3 me-1"></i> One-Product Bowl Cart</span>
+                <h5 class="fw-bold mb-0">Your Custom Bowl</h5>
+              </div>
+              <button id="builderResetBtn" class="btn btn-sm btn-outline-secondary rounded-pill px-2.5 py-1" type="button" title="Reset all selections">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+              </button>
+            </div>
+
+            <!-- Selected Ingredients List -->
+            <div class="mb-3">
+              <small class="text-muted d-block fw-semibold mb-1">SELECTED BASE</small>
+              <p id="builderSelectedBase" class="fw-bold mb-2 text-emerald-500">White Sushi Rice</p>
+
+              <small class="text-muted d-block fw-semibold mb-1">SELECTED PROTEIN</small>
+              <p id="builderSelectedProtein" class="fw-bold mb-2 text-rose-500">Fresh Atlantic Salmon</p>
+
+              <small class="text-muted d-block fw-semibold mb-1">SELECTED TOPPINGS</small>
+              <div id="builderSelectedToppings" class="d-flex flex-wrap mb-2"></div>
+
+              <small class="text-muted d-block fw-semibold mb-1">SELECTED SAUCE</small>
+              <p id="builderSelectedSauce" class="fw-bold mb-0 text-amber-500">Classic Sesame Shoyu</p>
+            </div>
+
+            <hr class="my-3 border-border-color">
+
+            <!-- Estimated Macros -->
+            <h6 class="fw-bold mb-2 d-flex justify-content-between">
+              <span>Estimated Nutrition (Per Bowl):</span>
+              <span id="builderTotalCalories" class="text-emerald-500 fw-bolder">565 kcal</span>
+            </h6>
+
+            <div class="mb-2">
+              <div class="d-flex justify-content-between fs-8 fw-semibold">
+                <span>Protein</span>
+                <span id="builderTotalProtein">36g</span>
+              </div>
+              <div class="macro-meter">
+                <div id="meterProtein" class="macro-meter-fill bg-emerald-500" style="width: 60%;"></div>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <div class="d-flex justify-content-between fs-8 fw-semibold">
+                <span>Carbohydrates</span>
+                <span id="builderTotalCarbs">49g</span>
+              </div>
+              <div class="macro-meter">
+                <div id="meterCarbs" class="macro-meter-fill bg-amber-500" style="width: 50%;"></div>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <div class="d-flex justify-content-between fs-8 fw-semibold">
+                <span>Healthy Fats</span>
+                <span id="builderTotalFats">25g</span>
+              </div>
+              <div class="macro-meter">
+                <div id="meterFats" class="macro-meter-fill bg-rose-500" style="width: 62%;"></div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between fs-8 fw-semibold text-muted mb-3">
+              <span>Dietary Fiber:</span>
+              <span id="builderTotalFiber">7g</span>
+            </div>
+
+            <!-- Quantity Selector & Price -->
+            <div class="bg-secondary/60 p-3 rounded-3 mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom border-secondary/40">
+                <span class="fs-8 fw-semibold text-muted">Bowl Quantity</span>
+                <div class="d-flex align-items-center gap-2">
+                  <button id="builderQtyMinus" type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" aria-label="Decrease quantity">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                  <span id="builderQtyVal" class="fw-bold fs-7 px-1">1</span>
+                  <button id="builderQtyPlus" type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" aria-label="Increase quantity">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="text-center">
+                <span class="fs-8 text-muted d-block">Estimated Total Price</span>
+                <h3 id="builderTotalPrice" class="fw-bolder text-emerald-600 mb-0 font-heading">$15.25</h3>
+              </div>
+            </div>
+
+            <p class="fs-8 text-muted fst-italic mb-3">
+              *All nutrition and prices are estimates for demonstration. Real values depend on portion sizes and dressings.
+            </p>
+
+            <div class="d-flex flex-column gap-2">
+              <button id="builderAddToCartBtn" type="button" class="btn-coral-poke w-100 justify-content-center py-2.5" data-bs-toggle="modal" data-bs-target="#customBowlCartModal">
+                <i class="bi bi-cart-plus-fill"></i>
+                <span>Add Bowl to Cart</span>
+              </button>
+              <button id="builderEnquiryBtn" type="button" class="btn-primary-poke w-100 justify-content-center py-2.5">
+                <i class="bi bi-bag-check-fill"></i>
+                <span>Order Now</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Responsive Mobile Sticky Cart Bar (<992px) -->
+      <div id="mobileBuilderCartBar" class="mobile-builder-cart-bar d-lg-none">
+        <div class="d-flex align-items-center justify-content-between gap-2">
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-1.5 mb-0.5">
+              <span class="badge badge-poke badge-green fs-9 py-0.5 px-2">1 Custom Bowl</span>
+              <span id="mobileCartQtyBadge" class="badge badge-poke badge-coral fs-9 py-0.5 px-1.5">Qty: 1</span>
+            </div>
+            <div class="d-flex align-items-baseline gap-2">
+              <span id="mobileCartPrice" class="fw-bolder text-emerald-600 fs-6 font-heading">$15.25</span>
+              <span id="mobileCartCals" class="text-muted fs-8">565 kcal</span>
+            </div>
+          </div>
+          <div class="d-flex gap-2 flex-shrink-0">
+            <a href="#builderSummaryPanel" class="btn btn-sm btn-outline-secondary rounded-pill px-2.5 py-1.5 fs-8 d-flex align-items-center gap-1">
+              <i class="bi bi-sliders"></i>
+              <span>Details</span>
+            </a>
+            <button id="mobileAddToCartBtn" type="button" class="btn btn-sm btn-coral-poke rounded-pill px-3 py-1.5 fs-8 d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#customBowlCartModal">
+              <i class="bi bi-cart-plus-fill"></i>
+              <span>Add Cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Chef's Fusion Recommendations (Interactive Glider Carousel)
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Chef's Curated Formulas</span>
+        <h2 class="section-heading">Can’t Decide? Try These Protein Combos</h2>
+        <p class="section-description">
+          Our culinary team has perfected these balanced ingredient formulas over years of tasting. <em class="d-block fs-8 text-muted mt-1">(Swipe, drag, or use arrows to explore recommended creations)</em>
+        </p>
+      </div>
+
+      <!-- Glider Carousel Container -->
+      <div class="poke-glider-container reveal" id="combosGlider" data-autoplay="true" data-interval="4500">
+        <div class="poke-glider-wrapper">
+          <div class="poke-glider-track">
+            
+            <!-- Combo 1 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke h-100 p-4 text-center d-flex flex-column justify-content-between">
+                <div>
+                  <span class="badge badge-poke badge-green mx-auto mb-2">Crowd Favorite</span>
+                  <h5 class="fw-bold mb-1">Volcano Ahi Rush</h5>
+                  <p class="text-muted fs-8 mb-3">Brown Rice • Wild Ahi • Avocado • Fresh Jalapeño • Sriracha Aioli</p>
+                </div>
+                <div class="mt-auto pt-3 border-top border-border-color">
+                  <span class="fw-bold text-emerald-500 fs-5 font-heading d-block mb-2">$15.95</span>
+                  <button type="button" class="btn btn-sm btn-coral-poke w-100 rounded-pill btn-combo-order" data-name="Volcano Ahi Rush" data-price="15.95" data-badge="Crowd Favorite" data-badge-class="badge-green" data-ingredients="Brown Rice • Wild Ahi • Avocado • Fresh Jalapeño • Sriracha Aioli">
+                    <i class="bi bi-bag-check-fill me-1"></i> Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 2 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke h-100 p-4 text-center d-flex flex-column justify-content-between">
+                <div>
+                  <span class="badge badge-poke badge-coral mx-auto mb-2">Omega Boost</span>
+                  <h5 class="fw-bold mb-1">Yuzu Citrus Salmon</h5>
+                  <p class="text-muted fs-8 mb-3">Sushi Rice • Atlantic Salmon • Mango • Seaweed • Ponzu Lime</p>
+                </div>
+                <div class="mt-auto pt-3 border-top border-border-color">
+                  <span class="fw-bold text-emerald-500 fs-5 font-heading d-block mb-2">$16.25</span>
+                  <button type="button" class="btn btn-sm btn-coral-poke w-100 rounded-pill btn-combo-order" data-name="Yuzu Citrus Salmon" data-price="16.25" data-badge="Omega Boost" data-badge-class="badge-coral" data-ingredients="Sushi Rice • Atlantic Salmon • Mango • Seaweed • Ponzu Lime">
+                    <i class="bi bi-bag-check-fill me-1"></i> Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 3 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke h-100 p-4 text-center d-flex flex-column justify-content-between">
+                <div>
+                  <span class="badge badge-poke badge-amber mx-auto mb-2">Clean Lean</span>
+                  <h5 class="fw-bold mb-1">Teriyaki Chicken Zest</h5>
+                  <p class="text-muted fs-8 mb-3">Mixed Grains • Grilled Chicken • Edamame • Cucumber • Sesame Shoyu</p>
+                </div>
+                <div class="mt-auto pt-3 border-top border-border-color">
+                  <span class="fw-bold text-emerald-500 fs-5 font-heading d-block mb-2">$14.50</span>
+                  <button type="button" class="btn btn-sm btn-coral-poke w-100 rounded-pill btn-combo-order" data-name="Teriyaki Chicken Zest" data-price="14.50" data-badge="Clean Lean" data-badge-class="badge-amber" data-ingredients="Mixed Grains • Grilled Chicken • Edamame • Cucumber • Sesame Shoyu">
+                    <i class="bi bi-bag-check-fill me-1"></i> Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 4 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke h-100 p-4 text-center d-flex flex-column justify-content-between">
+                <div>
+                  <span class="badge badge-poke badge-blue mx-auto mb-2">100% Vegan</span>
+                  <h5 class="fw-bold mb-1">Goddess Tofu Crunch</h5>
+                  <p class="text-muted fs-8 mb-3">Mixed Greens • Organic Tofu • Avocado • Seaweed • Ginger Tamari</p>
+                </div>
+                <div class="mt-auto pt-3 border-top border-border-color">
+                  <span class="fw-bold text-emerald-500 fs-5 font-heading d-block mb-2">$13.25</span>
+                  <button type="button" class="btn btn-sm btn-coral-poke w-100 rounded-pill btn-combo-order" data-name="Goddess Tofu Crunch" data-price="13.25" data-badge="100% Vegan" data-badge-class="badge-blue" data-ingredients="Mixed Greens • Organic Tofu • Avocado • Seaweed • Ginger Tamari">
+                    <i class="bi bi-bag-check-fill me-1"></i> Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 5 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke h-100 p-4 text-center d-flex flex-column justify-content-between">
+                <div>
+                  <span class="badge badge-poke badge-green mx-auto mb-2">Seafood Special</span>
+                  <h5 class="fw-bold mb-1">Sweet Chili Tiger Shrimp</h5>
+                  <p class="text-muted fs-8 mb-3">Sushi Rice • Tiger Shrimp • Pineapple Salsa • Carrots • Sweet Chili</p>
+                </div>
+                <div class="mt-auto pt-3 border-top border-border-color">
+                  <span class="fw-bold text-emerald-500 fs-5 font-heading d-block mb-2">$16.50</span>
+                  <button type="button" class="btn btn-sm btn-coral-poke w-100 rounded-pill btn-combo-order" data-name="Sweet Chili Tiger Shrimp" data-price="16.50" data-badge="Seafood Special" data-badge-class="badge-green" data-ingredients="Sushi Rice • Tiger Shrimp • Pineapple Salsa • Carrots • Sweet Chili">
+                    <i class="bi bi-bag-check-fill me-1"></i> Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 6 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke h-100 p-4 text-center d-flex flex-column justify-content-between">
+                <div>
+                  <span class="badge badge-poke badge-coral mx-auto mb-2">Spicy Fire</span>
+                  <h5 class="fw-bold mb-1">Wasabi Dynamite Tuna</h5>
+                  <p class="text-muted fs-8 mb-3">Mixed Grains • Ahi Tuna • Pickled Ginger • Radish • Wasabi Aioli</p>
+                </div>
+                <div class="mt-auto pt-3 border-top border-border-color">
+                  <span class="fw-bold text-emerald-500 fs-5 font-heading d-block mb-2">$16.75</span>
+                  <button type="button" class="btn btn-sm btn-coral-poke w-100 rounded-pill btn-combo-order" data-name="Wasabi Dynamite Tuna" data-price="16.75" data-badge="Spicy Fire" data-badge-class="badge-coral" data-ingredients="Mixed Grains • Ahi Tuna • Pickled Ginger • Radish • Wasabi Aioli">
+                    <i class="bi bi-bag-check-fill me-1"></i> Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Glider Controls: Pagination Dots & Navigation Buttons -->
+        <div class="poke-glider-controls">
+          <div class="poke-glider-dots" aria-label="Carousel pagination"></div>
+          <div class="poke-glider-nav">
+            <button class="poke-glider-btn poke-glider-prev" type="button" aria-label="Previous combos">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="poke-glider-btn poke-glider-next" type="button" aria-label="Next combos">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Footer (Consistent Across All Pages)
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       Custom Bowl Cart Modal (Responsive One-Product Cart Confirmation)
+       ======================================================================== -->
+  <div class="modal fade" id="customBowlCartModal" tabindex="-1" aria-labelledby="customBowlCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-cart-check-fill fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0 text-white" id="customBowlCartModalLabel">Custom Bowl Added to Cart</h5>
+              <small class="text-muted">1 Product Cart • Handcrafted To Order</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          <div class="card-poke p-3 mb-3 bg-secondary/30">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <span class="badge badge-poke badge-coral mb-1 fs-9">Item #1 in Cart</span>
+                <h6 class="fw-bold mb-0 text-emerald-600 font-heading">Custom Poke Bowl</h6>
+              </div>
+              <span class="badge badge-poke badge-green fs-8" id="modalBowlQty">Qty: 1</span>
+            </div>
+            <div class="fs-8 text-muted mb-2 lh-base" id="modalBowlIngredients">
+              <!-- Dynamically populated by bowl-builder.js -->
+            </div>
+            <div class="d-flex justify-content-between fs-8 pt-2 border-top border-border-color">
+              <span class="text-muted">Estimated Nutrition:</span>
+              <strong id="modalBowlCalories" class="text-emerald-500">565 kcal / bowl</strong>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center p-3 rounded-3 bg-secondary/50 border border-border-color mb-3">
+            <div>
+              <small class="text-muted d-block fs-8">Total Order Price</small>
+              <h4 class="fw-bolder text-emerald-600 mb-0 font-heading" id="modalBowlTotal">$15.25</h4>
+            </div>
+            <span class="badge badge-poke badge-blue fs-8">Free Dine-In & Pickup</span>
+          </div>
+
+          <div class="d-flex flex-column gap-2">
+            <a id="modalProceedBtn" href="contact.html" class="btn-coral-poke w-100 justify-content-center py-2.5">
+              <i class="bi bi-bag-check-fill"></i>
+              <span>Proceed to Order / Checkout</span>
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill py-2" data-bs-dismiss="modal">
+              <i class="bi bi-arrow-left"></i> Keep Customizing
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Instant Quick Order / Buying Form Modal
+       ======================================================================== -->
+  <div class="modal fade" id="quickOrderModal" tabindex="-1" aria-labelledby="quickOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-bag-heart-fill fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0" id="quickOrderModalLabel">Order Poke Bowl</h5>
+              <small class="text-muted">Instant Buying &amp; Order Form</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          
+          <!-- Selected Item Detail Card -->
+          <div class="card-poke p-3 mb-3 bg-secondary/30" id="quickOrderSummaryCard">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <span id="quickOrderBadge" class="badge badge-poke badge-coral mb-1 fs-9">Chef's Special</span>
+                <h5 id="quickOrderBowlName" class="fw-bold mb-0 text-emerald-600 font-heading">Volcano Ahi Rush</h5>
+              </div>
+              <span id="quickOrderUnitPrice" class="fw-bold fs-6 text-emerald-500 font-heading">$15.95</span>
+            </div>
+            <p id="quickOrderIngredients" class="fs-8 text-muted mb-0">Brown Rice • Wild Ahi • Avocado • Fresh Jalapeño • Sriracha Aioli</p>
+          </div>
+
+          <!-- Buying Form -->
+          <form id="quickOrderForm" novalidate>
+            <!-- Quantity and Total Price Row -->
+            <div class="d-flex justify-content-between align-items-center p-2.5 rounded-3 bg-secondary/50 border border-border-color mb-3">
+              <div>
+                <span class="fs-8 text-muted fw-semibold d-block">Quantity</span>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                  <button id="quickOrderQtyMinus" type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 26px; height: 26px;" aria-label="Decrease quantity">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                  <span id="quickOrderQtyVal" class="fw-bold fs-7 px-1">1</span>
+                  <button id="quickOrderQtyPlus" type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 26px; height: 26px;" aria-label="Increase quantity">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="text-end">
+                <span class="fs-8 text-muted d-block">Total Amount</span>
+                <h4 id="quickOrderTotalPrice" class="fw-bolder text-emerald-600 mb-0 font-heading">$15.95</h4>
+              </div>
+            </div>
+
+            <!-- Customer Name & Phone -->
+            <div class="row g-2 mb-2.5">
+              <div class="col-md-6 form-group">
+                <label for="quickOrderName" class="form-label fs-8 fw-bold mb-1">Your Name <span class="text-rose-500">*</span></label>
+                <input type="text" class="form-poke-control py-2 fs-8" id="quickOrderName" placeholder="Letters only, e.g. Alex Wong" autocomplete="name" required>
+                <div id="quickOrderNameFeedback" class="invalid-feedback-custom">Name must contain letters only (minimum 2 characters).</div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="quickOrderPhone" class="form-label fs-8 fw-bold mb-1">Phone Number <span class="text-rose-500">*</span></label>
+                <input type="tel" class="form-poke-control py-2 fs-8" id="quickOrderPhone" placeholder="10-digit number, e.g. 9876543210" maxlength="14" autocomplete="tel" required>
+                <div id="quickOrderPhoneFeedback" class="invalid-feedback-custom">Phone number must be exactly 10 digits.</div>
+              </div>
+            </div>
+
+            <!-- Order Type & Preferred Time -->
+            <div class="row g-2 mb-2.5">
+              <div class="col-6 form-group">
+                <label for="quickOrderType" class="form-label fs-8 fw-bold mb-1">Order Mode <span class="text-rose-500">*</span></label>
+                <select class="form-poke-control py-2 fs-8" id="quickOrderType" required>
+                  <option value="Takeout Pickup">Takeout Pickup</option>
+                  <option value="Dine-In Table">Dine-In Table</option>
+                  <option value="Prompt Delivery">Prompt Delivery</option>
+                </select>
+                <div id="quickOrderTypeFeedback" class="invalid-feedback-custom">Please select an order mode.</div>
+              </div>
+              <div class="col-6 form-group">
+                <label for="quickOrderTime" class="form-label fs-8 fw-bold mb-1">Preferred Time <span class="text-rose-500">*</span></label>
+                <input type="time" class="form-poke-control py-2 fs-8" id="quickOrderTime" value="12:30" required>
+                <div id="quickOrderTimeFeedback" class="invalid-feedback-custom">Please provide a preferred time.</div>
+              </div>
+            </div>
+
+            <!-- Dietary / Allergy Notes -->
+            <div class="form-group mb-3">
+              <label for="quickOrderNotes" class="form-label fs-8 fw-bold mb-1">Special Instructions / Allergies</label>
+              <textarea class="form-poke-control py-2 fs-8" id="quickOrderNotes" rows="2" placeholder="e.g. Dressing on side, extra napkins..."></textarea>
+            </div>
+
+            <!-- Visible Validation Error Alert -->
+            <div id="quickOrderErrorAlert" class="alert alert-danger py-2 px-3 fs-8 mb-2.5 d-none d-flex align-items-center gap-2 border-0 rounded-3 shadow-xs" style="background-color: rgba(244, 63, 94, 0.12); color: #e11d48;" role="alert">
+              <i class="bi bi-exclamation-triangle-fill fs-6 flex-shrink-0"></i>
+              <span id="quickOrderErrorAlertText">Please fill in all required details correctly (Name with letters only &amp; a 10-digit phone number).</span>
+            </div>
+
+            <!-- Submit Buttons -->
+            <button type="submit" id="quickOrderSubmitBtn" class="btn-coral-poke w-100 justify-content-center py-2.5 mb-2">
+              <i class="bi bi-check-circle-fill"></i>
+              <span>Confirm &amp; Place Order</span>
+            </button>
+            
+            <a id="quickOrderFullFormLink" href="contact.html" class="btn btn-sm btn-outline-secondary rounded-pill w-100 py-1.5 fs-8 text-center d-flex align-items-center justify-content-center gap-1">
+              <i class="bi bi-box-arrow-up-right"></i>
+              <span>Open in Full Enquiry &amp; Catering Page</span>
+            </a>
+          </form>
+
+          <!-- Order Success Feedback Box -->
+          <div id="quickOrderSuccessBox" class="text-center p-3 d-none">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-3 d-inline-flex mb-2">
+              <i class="bi bi-check2-circle fs-1"></i>
+            </div>
+            <h5 class="fw-bold mb-1 font-heading text-emerald-600">Order Confirmed!</h5>
+            <p class="fs-8 text-muted mb-3" id="quickOrderSuccessMsg">Thank you! Your order has been placed successfully for demonstration.</p>
+            <button type="button" class="btn btn-sm btn-primary-poke rounded-pill px-4 py-2" data-bs-dismiss="modal">
+              Back to Bowls
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/bowl-builder.js"></script>
+  <script src="assets/js/glider.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

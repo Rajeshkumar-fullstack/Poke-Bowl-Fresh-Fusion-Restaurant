@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signature Menu by Protein | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Explore our complete menu of Hawaiian poke bowls categorized by protein: sashimi salmon, wild tuna, citrus chicken, sweet poached shrimp, and vegan organic tofu bowls.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link active" aria-current="page" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <div class="poke-nav-controls">
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="false" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link active fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Menu Hero Header
+       ======================================================================== -->
+  <header class="hero-section hero-bg-menu text-center">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative">
+      <div class="reveal">
+        <span class="section-tagline">Chef-Curated Collections</span>
+        <h1 class="hero-title mb-3">Our Protein-Powered Menu</h1>
+        <p class="hero-subtitle mx-auto">
+          Browse by your preferred protein source. Filter dynamically or search by your favorite flavor profile and dietary preferences.
+        </p>
+      </div>
+
+      <div class="menu-filter-sticky-sentinel" id="menuStickySentinel">
+        <div class="menu-filter-sticky-bar" id="menuStickyBar">
+          <div class="container">
+            <!-- Search Input -->
+            <div class="menu-search-wrapper mt-4">
+              <i class="bi bi-search menu-search-icon"></i>
+              <input type="text" class="menu-search-input" placeholder="Search by bowl name, ingredients or dietary tag..." aria-label="Search menu items">
+              <button class="menu-clear-btn" type="button" aria-label="Clear search input">
+                <i class="bi bi-x-circle-fill"></i>
+              </button>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="menu-filter-nav">
+              <button class="btn-filter active" data-menu-filter="all" type="button">All Bowls</button>
+              <button class="btn-filter" data-menu-filter="salmon" type="button">Salmon Bowls</button>
+              <button class="btn-filter" data-menu-filter="tuna" type="button">Tuna Bowls</button>
+              <button class="btn-filter" data-menu-filter="chicken" type="button">Chicken Bowls</button>
+              <button class="btn-filter" data-menu-filter="shrimp" type="button">Shrimp Bowls</button>
+              <button class="btn-filter" data-menu-filter="tofu-veg" type="button">Tofu & Vegetarian</button>
+              <button class="btn-filter" data-menu-filter="fusion" type="button">Signature Fusion</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Menu Gallery Grid
+       ======================================================================== -->
+  <section class="section-py" id="menuGallerySection">
+    <div class="container">
+      
+      <!-- Empty State if no filters match -->
+      <div class="menu-empty-state d-none text-center py-5">
+        <div class="feature-icon-circle mx-auto mb-3" style="width: 80px; height: 80px;">
+          <i class="bi bi-search"></i>
+        </div>
+        <h4 class="fw-bold mb-2">No Matching Bowls Found</h4>
+        <p class="text-muted mb-4">Try searching with a different ingredient or reset the category filters.</p>
+        <button class="btn-primary-poke btn-reset-filters mx-auto" type="button">
+          <i class="bi bi-arrow-counterclockwise"></i>
+          <span>Reset All Filters</span>
+        </button>
+      </div>
+
+      <div class="row g-4" id="menuGridContainer">
+
+        <!-- Card 1: Hawaiian Classic Ahi Tuna -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tuna fusion" data-title="Hawaiian Classic Ahi Tuna" data-img="assets/images/bowls/classic-ahi-tuna.jpg" data-desc="Wild Ahi tuna, sushi rice, sweet Maui onions, scallions, toasted sesame, cucumber, and classic sesame shoyu dressing." data-price="$14.95" data-calories="480 kcal" data-protein="38g" data-carbs="48g" data-fats="12g" data-fiber="6g" data-sodium="620mg" data-allergens="Fish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/classic-ahi-tuna.jpg" alt="Hawaiian Classic Ahi Tuna" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">Tuna Special</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Hawaiian Classic Ahi</h5>
+                <span class="card-poke-price">$14.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Wild Ahi tuna cubes, fluffy sushi rice, sweet Maui onions, green scallions, toasted sesame seeds, crisp cucumber, and classic shoyu sauce.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Gluten-Free</span>
+                <span class="badge badge-poke badge-green">38g Protein</span>
+                <span class="badge badge-poke badge-amber">480 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Spicy Atlantic Salmon Crunch -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="salmon" data-title="Spicy Atlantic Salmon Crunch" data-img="assets/images/bowls/spicy-salmon-crunch.jpg" data-desc="Fresh Atlantic salmon, spicy sriracha mayo, Hass avocado, jalapeño rings, crispy tempura flakes, and edamame over brown rice." data-price="$15.50" data-calories="560 kcal" data-protein="34g" data-carbs="52g" data-fats="18g" data-fiber="7g" data-sodium="680mg" data-allergens="Fish, Soy, Sesame, Wheat (tempura)">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/spicy-salmon-crunch.jpg" alt="Spicy Atlantic Salmon Crunch" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Top Seller</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Spicy Salmon Crunch</h5>
+                <span class="card-poke-price">$15.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Sashimi Norwegian salmon, house spicy mayo, ripe Hass avocado, fresh jalapeño, crispy crunch, and edamame over wholesome brown rice.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Spicy</span>
+                <span class="badge badge-poke badge-green">34g Protein</span>
+                <span class="badge badge-poke badge-amber">560 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Citrus Yuzu Ponzu Salmon -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="salmon fusion" data-title="Citrus Yuzu Ponzu Salmon" data-img="assets/images/bowls/yuzu-ponzu-salmon.jpg" data-desc="Norwegian salmon slices, citrus yuzu lime ponzu, diced mango, cilantro, cucumber ribbons, and crushed roasted macadamia nuts." data-price="$15.95" data-calories="490 kcal" data-protein="32g" data-carbs="46g" data-fats="15g" data-fiber="6g" data-sodium="590mg" data-allergens="Fish, Tree Nuts, Soy">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/yuzu-ponzu-salmon.jpg" alt="Citrus Yuzu Ponzu Salmon" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-amber">Chef Special</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Citrus Yuzu Salmon</h5>
+                <span class="card-poke-price">$15.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Atlantic salmon tossed in fragrant yuzu ponzu citrus dressing, diced golden mango, fresh cilantro, cucumber, and crushed macadamia.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Omega-3</span>
+                <span class="badge badge-poke badge-green">32g Protein</span>
+                <span class="badge badge-poke badge-amber">490 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Wasabi Dynamite Ahi Tuna -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tuna" data-title="Wasabi Dynamite Ahi Tuna" data-img="assets/images/bowls/wasabi-tuna-dynamite.jpg" data-desc="Spicy wasabi aioli marinated Ahi tuna, furikake seasoning, pickled ginger, radish, seaweed salad, and mixed grains." data-price="$16.50" data-calories="510 kcal" data-protein="39g" data-carbs="47g" data-fats="13g" data-fiber="6g" data-sodium="650mg" data-allergens="Fish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/wasabi-tuna-dynamite.jpg" alt="Wasabi Dynamite Ahi Tuna" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Zesty Heat</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Wasabi Dynamite Tuna</h5>
+                <span class="card-poke-price">$16.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Line-caught Ahi marinated in house wasabi aioli, house furikake seasoning, pickled pink ginger, radish, and mineral-rich wakame seaweed.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Wasabi Kick</span>
+                <span class="badge badge-poke badge-green">39g Protein</span>
+                <span class="badge badge-poke badge-amber">510 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Sesame Ginger Grilled Chicken -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="chicken" data-title="Sesame Ginger Grilled Chicken" data-img="assets/images/bowls/sesame-ginger-chicken.jpg" data-desc="Tender grilled chicken breast, sesame ginger glaze, purple cabbage slaw, roasted sweet corn, and crisp wonton strips." data-price="$13.75" data-calories="460 kcal" data-protein="42g" data-carbs="45g" data-fats="10g" data-fiber="5g" data-sodium="580mg" data-allergens="Soy, Sesame, Wheat (crisps)">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/sesame-ginger-chicken.jpg" alt="Sesame Ginger Chicken" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-blue">Lean Chicken</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Sesame Ginger Chicken</h5>
+                <span class="card-poke-price">$13.75</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Char-grilled antibiotic-free chicken breast, savory ginger tamari glaze, crunchy purple cabbage slaw, roasted corn, and sesame.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Dairy-Free</span>
+                <span class="badge badge-poke badge-green">42g Protein</span>
+                <span class="badge badge-poke badge-amber">460 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Teriyaki Glazed Chicken Bowl -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="chicken" data-title="Teriyaki Glazed Chicken" data-img="assets/images/bowls/teriyaki-glazed-chicken.jpg" data-desc="Sweet teriyaki glazed chicken slices, warm sushi rice, steamed broccoli florets, shredded carrots, and green onions." data-price="$13.95" data-calories="480 kcal" data-protein="40g" data-carbs="52g" data-fats="9g" data-fiber="4g" data-sodium="610mg" data-allergens="Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/teriyaki-glazed-chicken.jpg" alt="Teriyaki Glazed Chicken" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">Comfort Bowl</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Teriyaki Glazed Chicken</h5>
+                <span class="card-poke-price">$13.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Juicy chicken simmered in house low-sodium teriyaki reduction over warm sushi rice with steamed broccoli and rainbow carrots.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-green">Kid-Friendly</span>
+                <span class="badge badge-poke badge-green">40g Protein</span>
+                <span class="badge badge-poke badge-amber">480 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7: Sweet Chili Poached Shrimp -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="shrimp fusion" data-title="Sweet Chili Poached Shrimp" data-img="assets/images/bowls/sweet-chili-shrimp.jpg" data-desc="Plump sweet poached tiger shrimp, pineapple salsa, shredded carrots, avocado, cilantro, and toasted coconut flakes." data-price="$16.25" data-calories="430 kcal" data-protein="31g" data-carbs="48g" data-fats="10g" data-fiber="5g" data-sodium="570mg" data-allergens="Shellfish, Soy">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/sweet-chili-shrimp.jpg" alt="Sweet Chili Poached Shrimp" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Wild Prawns</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Sweet Chili Shrimp</h5>
+                <span class="card-poke-price">$16.25</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Sweet chilled poached shrimp tossed with mild Thai chili lime, ripe pineapple cubes, carrots, and organic avocado slices.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Gluten-Free</span>
+                <span class="badge badge-poke badge-green">31g Protein</span>
+                <span class="badge badge-poke badge-amber">430 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8: Garlic Butter Seared Shrimp -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="shrimp" data-title="Garlic Butter Seared Shrimp" data-img="assets/images/bowls/garlic-butter-shrimp.jpg" data-desc="Warm garlic-seared jumbo shrimp, brown rice, baby spinach, sautéed bell peppers, and scallions with light lemon shoyu." data-price="$16.75" data-calories="495 kcal" data-protein="33g" data-carbs="44g" data-fats="16g" data-fiber="5g" data-sodium="610mg" data-allergens="Shellfish, Milk/Butter, Soy">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/garlic-butter-shrimp.jpg" alt="Garlic Butter Seared Shrimp" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-amber">Warm Seared</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Garlic Butter Shrimp</h5>
+                <span class="card-poke-price">$16.75</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Pan-flashed jumbo prawns with aromatic garlic butter, crisp tender baby spinach, roasted peppers, and lemon ponzu drizzle.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-amber">Warm Bowl</span>
+                <span class="badge badge-poke badge-green">33g Protein</span>
+                <span class="badge badge-poke badge-amber">495 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 9: Organic Tofu Green Goddess -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tofu-veg" data-title="Organic Tofu Green Goddess" data-img="assets/images/bowls/organic-tofu-goddess.jpg" data-desc="Crispy organic sesame-crusted tofu, creamy herb avocado sauce, edamame, cucumber ribbons, wakame seaweed, and chia seeds." data-price="$12.95" data-calories="390 kcal" data-protein="22g" data-carbs="42g" data-fats="14g" data-fiber="9g" data-sodium="480mg" data-allergens="Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/organic-tofu-goddess.jpg" alt="Organic Tofu Green Goddess" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">100% Vegan</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Tofu Green Goddess</h5>
+                <span class="card-poke-price">$12.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Sesame-pan-seared organic non-GMO tofu, avocado herb green goddess dressing, steamed edamame, and cucumber ribbons.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-green">Plant-Based</span>
+                <span class="badge badge-poke badge-blue">High Fiber</span>
+                <span class="badge badge-poke badge-amber">390 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 10: Rainbow Vegan Edamame Crunch -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tofu-veg" data-title="Rainbow Vegan Edamame Crunch" data-img="assets/images/bowls/rainbow-vegan-crunch.jpg" data-desc="Marinated pressed tofu, edamame, purple cabbage, spiraled beet ribbons, avocado, and toasted sesame tahini dressing." data-price="$12.50" data-calories="380 kcal" data-protein="20g" data-carbs="45g" data-fats="12g" data-fiber="10g" data-sodium="420mg" data-allergens="Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/rainbow-vegan-crunch.jpg" alt="Rainbow Vegan Edamame Crunch" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">Plant-Based</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Rainbow Vegan Crunch</h5>
+                <span class="card-poke-price">$12.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                A colorful spectrum of organic produce: shaved beets, purple cabbage, edamame, avocado, and creamy sesame tahini over greens.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-green">Vegan</span>
+                <span class="badge badge-poke badge-blue">10g Fiber</span>
+                <span class="badge badge-poke badge-amber">380 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 11: Tropical Mango Salmon Fiesta -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="salmon fusion" data-title="Tropical Mango Salmon Fiesta" data-img="assets/images/bowls/tropical-fusion-fiesta.jpg" data-desc="Norwegian salmon, sweet mango, coconut flakes, cilantro lime dressing, cucumber, and black forbidden rice." data-price="$16.50" data-calories="520 kcal" data-protein="33g" data-carbs="50g" data-fats="15g" data-fiber="7g" data-sodium="540mg" data-allergens="Fish, Soy">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/tropical-fusion-fiesta.jpg" alt="Tropical Mango Salmon Fiesta" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-amber">Tropical</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Mango Salmon Fiesta</h5>
+                <span class="card-poke-price">$16.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Atlantic salmon cubes tossed with golden mango salsa, shredded toasted coconut, cilantro lime glaze, and black nutrient grains.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Fusion</span>
+                <span class="badge badge-poke badge-green">33g Protein</span>
+                <span class="badge badge-poke badge-amber">520 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 12: Keto Avocado Power Bowl -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tuna fusion" data-title="Keto Avocado Power Bowl" data-img="assets/images/bowls/keto-avocado-power.jpg" data-desc="Wild Ahi tuna, double Hass avocado, crisp cauliflower rice, sesame seeds, cucumber, and olive oil ginger tamari." data-price="$15.75" data-calories="420 kcal" data-protein="36g" data-carbs="9g" data-fats="26g" data-fiber="8g" data-sodium="560mg" data-allergens="Fish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/keto-avocado-power.jpg" alt="Keto Avocado Power Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-blue">Low Carb / Keto</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Keto Avocado Power</h5>
+                <span class="card-poke-price">$15.75</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Riced cauliflower base, wild line-caught tuna, a full Hass avocado, cold-pressed ginger tamari, and healthy macadamia crunch.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">&lt;10g Carbs</span>
+                <span class="badge badge-poke badge-green">36g Protein</span>
+                <span class="badge badge-poke badge-amber">420 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 13: Miso Honey Glazed Salmon -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="salmon fusion" data-title="Miso Honey Glazed Salmon" data-img="assets/images/bowls/miso-honey-salmon.jpg" data-desc="Torch-kissed Norwegian salmon in white miso honey glaze, warm sushi rice, pickled radish, edamame, avocado, and toasted black sesame." data-price="$16.25" data-calories="510 kcal" data-protein="35g" data-carbs="49g" data-fats="16g" data-fiber="6g" data-sodium="590mg" data-allergens="Fish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/miso-honey-salmon.jpg" alt="Miso Honey Glazed Salmon" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-amber">Umami Glaze</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Miso Honey Salmon</h5>
+                <span class="card-poke-price">$16.25</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Torch-kissed Norwegian salmon with sweet white miso glaze, steamed edamame, pickled daikon radish, avocado, and black sesame.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-amber">Rich Umami</span>
+                <span class="badge badge-poke badge-green">35g Protein</span>
+                <span class="badge badge-poke badge-amber">510 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 14: Black Garlic Truffle Ahi Tuna -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tuna fusion" data-title="Black Garlic Truffle Ahi Tuna" data-img="assets/images/bowls/black-garlic-ahi-tuna.jpg" data-desc="Sashimi-grade wild Ahi tuna, aged black garlic truffle ponzu, forbidden black rice, microgreens, Persian cucumber, and crispy shallots." data-price="$16.95" data-calories="495 kcal" data-protein="40g" data-carbs="46g" data-fats="14g" data-fiber="7g" data-sodium="610mg" data-allergens="Fish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/black-garlic-ahi-tuna.jpg" alt="Black Garlic Truffle Ahi Tuna" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Chef Reserve</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Black Garlic Truffle Tuna</h5>
+                <span class="card-poke-price">$16.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Line-caught Ahi tuna tossed in aged black garlic truffle ponzu over forbidden black rice with Persian cucumber and crispy shallots.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Artisan Fusion</span>
+                <span class="badge badge-poke badge-green">40g Protein</span>
+                <span class="badge badge-poke badge-amber">495 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 15: Lemongrass Coconut Grilled Chicken -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="chicken fusion" data-title="Lemongrass Coconut Grilled Chicken" data-img="assets/images/bowls/lemongrass-coconut-chicken.jpg" data-desc="Char-grilled lemongrass marinated chicken breast, fragrant jasmine brown rice, mango ribbons, Thai basil, pickled carrots, and coconut lime dressing." data-price="$14.50" data-calories="470 kcal" data-protein="41g" data-carbs="48g" data-fats="11g" data-fiber="6g" data-sodium="550mg" data-allergens="Soy, Tree Nuts (Coconut)">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/lemongrass-coconut-chicken.jpg" alt="Lemongrass Coconut Grilled Chicken" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">Herb Grilled</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Lemongrass Coconut Chicken</h5>
+                <span class="card-poke-price">$14.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Aromatic lemongrass char-grilled chicken, brown rice, fresh mango ribbons, pickled rainbow carrots, and zesty coconut lime drizzle.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Gluten-Free</span>
+                <span class="badge badge-poke badge-green">41g Protein</span>
+                <span class="badge badge-poke badge-amber">470 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 16: Yuzu Kosho Crispy Tiger Shrimp -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="shrimp fusion" data-title="Yuzu Kosho Crispy Tiger Shrimp" data-img="assets/images/bowls/yuzu-kosho-tiger-shrimp.jpg" data-desc="Wild Pacific tiger shrimp glazed in bright yuzu kosho citrus chili, sushi rice, Hass avocado, wakame seaweed, and toasted furikake crunch." data-price="$16.50" data-calories="460 kcal" data-protein="32g" data-carbs="47g" data-fats="12g" data-fiber="6g" data-sodium="590mg" data-allergens="Shellfish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/yuzu-kosho-tiger-shrimp.jpg" alt="Yuzu Kosho Crispy Tiger Shrimp" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Citrus Heat</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Yuzu Kosho Tiger Shrimp</h5>
+                <span class="card-poke-price">$16.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Wild tiger prawns tossed in bright Japanese yuzu kosho pepper citrus glaze with avocado, wakame seaweed, and furikake crunch.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Zesty Citrus</span>
+                <span class="badge badge-poke badge-green">32g Protein</span>
+                <span class="badge badge-poke badge-amber">460 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 17: Crispy Shiitake & Miso Organic Tofu -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="tofu-veg fusion" data-title="Crispy Shiitake & Miso Organic Tofu" data-img="assets/images/bowls/crispy-shiitake-tofu.jpg" data-desc="Pan-crisped organic tofu and caramelized shiitake mushrooms, ancient quinoa grains, baby kale, edamame, avocado, and roasted sesame miso dressing." data-price="$13.50" data-calories="410 kcal" data-protein="24g" data-carbs="44g" data-fats="14g" data-fiber="11g" data-sodium="460mg" data-allergens="Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/crispy-shiitake-tofu.jpg" alt="Crispy Shiitake & Miso Organic Tofu" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">100% Plant-Based</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Crispy Shiitake &amp; Tofu</h5>
+                <span class="card-poke-price">$13.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Caramelized organic tofu and umami shiitake mushrooms over tri-color quinoa &amp; baby kale with edamame and roasted sesame miso.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-green">Vegan</span>
+                <span class="badge badge-poke badge-blue">24g Protein</span>
+                <span class="badge badge-poke badge-amber">410 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 18: Pacific Volcano Surf & Chicken Fusion -->
+        <div class="col-md-6 col-lg-4 menu-item-card" data-category="chicken shrimp fusion" data-title="Pacific Volcano Surf & Chicken Fusion" data-img="assets/images/bowls/volcano-surf-turf-fusion.jpg" data-desc="Double-protein pairing of char-grilled ginger chicken and poached Pacific tiger shrimp, spicy volcano aioli, avocado, sweet corn, and sushi rice." data-price="$17.50" data-calories="580 kcal" data-protein="48g" data-carbs="51g" data-fats="16g" data-fiber="6g" data-sodium="660mg" data-allergens="Shellfish, Soy, Sesame, Egg">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/volcano-surf-turf-fusion.jpg" alt="Pacific Volcano Surf & Chicken Fusion" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-amber">Double Protein</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Pacific Volcano Surf Bowl</h5>
+                <span class="card-poke-price">$17.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                High-protein duo of ginger char-grilled chicken and sweet Pacific shrimp with house volcano chili aioli, avocado, and roasted corn.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Signature Fusion</span>
+                <span class="badge badge-poke badge-green">48g Protein</span>
+                <span class="badge badge-poke badge-amber">580 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Bowl Detail Modal (Nutrition & Ingredients)
+       ======================================================================== -->
+  <div class="modal fade" id="bowlDetailModal" tabindex="-1" aria-labelledby="bowlDetailTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-card border-border-color rounded-4 overflow-hidden">
+        
+        <div class="modal-header border-border-color pb-2">
+          <div>
+            <span class="badge badge-poke badge-green mb-1">Detailed Nutritional Profile</span>
+            <h4 class="modal-title fw-bold" id="bowlDetailTitle">Signature Poke Bowl</h4>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <div class="row g-4 align-items-center">
+            
+            <div class="col-md-5">
+              <div class="rounded-4 overflow-hidden shadow-sm" style="aspect-ratio: 4/3;">
+                <img id="bowlDetailImg" src="" alt="Bowl Detail" class="w-100 h-100 object-cover">
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="text-muted fs-7">Estimated Price:</span>
+                <span id="bowlDetailPrice" class="fs-4 fw-bold text-emerald-500 font-heading">$15.00</span>
+              </div>
+            </div>
+
+            <div class="col-md-7">
+              <p id="bowlDetailDesc" class="text-muted fs-7 mb-3"></p>
+
+              <!-- Nutrition Specs Matrix -->
+              <h6 class="fw-bold fs-7 text-uppercase letter-spacing-1 text-muted mb-2">Estimated Macro Breakdown</h6>
+              <div class="row g-2 text-center mb-3">
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Calories</small>
+                    <span id="bowlDetailCalories" class="fw-bold fs-7 text-emerald-500">520 kcal</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Protein</small>
+                    <span id="bowlDetailProtein" class="fw-bold fs-7 text-rose-500">34g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Carbs</small>
+                    <span id="bowlDetailCarbs" class="fw-bold fs-7 text-amber-500">48g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Healthy Fats</small>
+                    <span id="bowlDetailFats" class="fw-bold fs-7 text-emerald-600">16g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Fiber</small>
+                    <span id="bowlDetailFiber" class="fw-bold fs-7 text-sky-500">7g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Sodium</small>
+                    <span id="bowlDetailSodium" class="fw-bold fs-7 text-indigo-500">640mg</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Allergen Notice -->
+              <div class="p-2.5 rounded-3 border border-amber-500/30 bg-amber-500/10 mb-3">
+                <small class="fw-bold text-amber-600 d-block mb-1"><i class="bi bi-exclamation-triangle-fill me-1"></i> Allergen Information:</small>
+                <small id="bowlDetailAllergens" class="text-muted fs-8">Fish, Soy, Sesame</small>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" id="bowlDetailAddToCartBtn" class="btn-primary-poke w-100 justify-content-center py-2.5"><i class="bi bi-cart-plus-fill me-1"></i><span>Add Bowl to Cart</span></button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer border-border-color py-2 bg-secondary/20">
+          <small class="text-muted fs-9 w-100 text-center">
+            *All values are illustrative estimates. Actual values depend on dressing portions and prep. Not medical advice.
+          </small>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Menu Bowl Cart Confirmation Modal (Responsive One-Product Cart)
+       ======================================================================== -->
+  <div class="modal fade" id="menuBowlCartModal" tabindex="-1" aria-labelledby="menuBowlCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-cart-check-fill fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0 text-white" id="menuBowlCartModalLabel">Added to Cart!</h5>
+              <small class="text-muted">Fresh Kitchen Order • Prepared Fresh</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          <!-- Item Card -->
+          <div class="card-poke p-3 mb-3 bg-secondary/30">
+            <div class="d-flex align-items-center gap-3">
+              <img id="cartModalImg" src="assets/images/bowls/classic-ahi-tuna.jpg" alt="Selected Bowl" class="rounded-3 object-cover flex-shrink-0" width="70" height="70">
+              <div class="flex-grow-1">
+                <span class="badge badge-poke badge-coral mb-1 fs-9">Item Added to Cart</span>
+                <h6 class="fw-bold mb-1 text-emerald-600 font-heading" id="cartModalTitle">Hawaiian Classic Ahi</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="badge badge-poke badge-green fs-9" id="cartModalQty">Qty: 1</span>
+                  <span class="fw-bolder fs-6 text-emerald-600 font-heading" id="cartModalUnitPrice">$14.95</span>
+                </div>
+              </div>
+            </div>
+            <div class="fs-8 text-muted mt-2 pt-2 border-top border-border-color" id="cartModalDesc">
+              Wild Ahi tuna, sushi rice, sweet Maui onions, scallions, toasted sesame, cucumber.
+            </div>
+          </div>
+
+          <!-- Total Summary -->
+          <div class="d-flex justify-content-between align-items-center p-3 rounded-3 bg-secondary/50 border border-border-color mb-3">
+            <div>
+              <small class="text-muted d-block fs-8">Total Order Price</small>
+              <h4 class="fw-bolder text-emerald-600 mb-0 font-heading" id="cartModalTotal">$14.95</h4>
+            </div>
+            <span class="badge badge-poke badge-blue fs-8">Free Dine-In &amp; Pickup</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex flex-column gap-2">
+            <a id="cartModalProceedBtn" href="contact.html?source=cart#order-enquiry-section" class="btn-coral-poke w-100 justify-content-center py-2.5">
+              <i class="bi bi-bag-check-fill"></i>
+              <span>Proceed to Order / Checkout</span>
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill py-2" data-bs-dismiss="modal">
+              <i class="bi bi-arrow-left"></i> Continue Browsing Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Footer (Consistent Across All Pages)
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

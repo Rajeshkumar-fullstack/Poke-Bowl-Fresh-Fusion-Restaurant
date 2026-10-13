@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268 72" fill="none" width="268" height="72">
+  <defs>
+    <linearGradient id="bowlGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="salmonGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB7185"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+    <linearGradient id="avocadoGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#84CC16"/>
+      <stop offset="100%" stop-color="#4D7C0F"/>
+    </linearGradient>
+    <linearGradient id="accentLineGradDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F4A261"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <filter id="glowDark" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#10B981" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Bowl Icon Container -->
+  <g transform="translate(4, 4)" filter="url(#glowDark)">
+    <!-- Soft Warm Halo Badge Behind Bowl -->
+    <circle cx="38" cy="34" r="28" fill="#34D399" fill-opacity="0.12"/>
+
+    <!-- Chopsticks -->
+    <path d="M10 9 L55 31" stroke="#F4A261" stroke-width="3" stroke-linecap="round"/>
+    <path d="M15 4 L59 27" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Bowl Base -->
+    <path d="M9 30 C9 51 24 59 38 59 C52 59 67 51 67 30 Z" fill="url(#bowlGradDark)"/>
+    <path d="M26 58 L50 58" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="38" cy="30" rx="29" ry="8.5" fill="#064E3B"/>
+
+    <!-- Sashimi Salmon Cube -->
+    <rect x="30" y="20" width="12" height="10" rx="3" fill="url(#salmonGradDark)" transform="rotate(-10 36 25)"/>
+    <line x1="32" y1="23" x2="40" y2="27" stroke="#FFE4E6" stroke-width="1.1" stroke-linecap="round"/>
+
+    <!-- Avocado Slice -->
+    <path d="M20 22 C20 18 26 15 32 21 C28 25 22 26 20 22 Z" fill="url(#avocadoGradDark)"/>
+
+    <!-- Edamame Beans -->
+    <circle cx="46" cy="23" r="3.5" fill="#A3E635"/>
+    <circle cx="53" cy="25" r="3" fill="#84CC16"/>
+
+    <!-- Fresh Botanical Leaf -->
+    <path d="M38 16 C43 8 53 10 50 17 C45 19 40 18 38 16 Z" fill="#22C55E"/>
+
+    <!-- Toasted Sesame Seeds -->
+    <circle cx="26" cy="28" r="1.1" fill="#FEF3C7"/>
+    <circle cx="43" cy="29" r="1.2" fill="#FEF3C7"/>
+    <circle cx="34" cy="33" r="1.1" fill="#FEF3C7"/>
+  </g>
+
+  <!-- Crisp Dark Mode Brand Typography (No overlapping elements) -->
+  <g transform="translate(80, 11)">
+    <text x="0" y="25" font-family="'Outfit', 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" letter-spacing="0.2" fill="#FFF8ED">
+      POKE <tspan fill="#34D399">BOWL</tspan><tspan fill="#F4A261">.</tspan>
+    </text>
+
+    <!-- Decorative Accent Pill Bar + Subtitle -->
+    <rect x="1" y="34" width="18" height="3.2" rx="1.6" fill="url(#accentLineGradDark)"/>
+    <text x="25" y="39" font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" letter-spacing="2.6" fill="#E2D9C8">
+      FRESH FUSION
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Our Story, Team & Mission | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Learn about Poke Bowl & Fresh Fusion Restaurant. Discover our ocean-to-table culinary philosophy, expert culinary team, sustainable sourcing, and history.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link active" aria-current="page" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <div class="poke-nav-controls">
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="false" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link active fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       About Hero Banner
+       ======================================================================== -->
+  <header class="hero-section hero-bg-about text-center">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative reveal">
+      <span class="section-tagline">Rooted in Tradition, Crafted for Wellness</span>
+      <h1 class="hero-title mb-3">Our Passion For Fresh Food</h1>
+      <p class="hero-subtitle mx-auto">
+        Bringing the authentic soul of Hawaiian poke together with contemporary Asian culinary artistry and balanced, nutrient-dense ingredients.
+      </p>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Our Story Section
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal">
+          <div class="rounded-4 overflow-hidden shadow-xl hover-zoom-card">
+            <img src="assets/images/about/story-heritage.jpg" alt="Pacific Coast Ocean view reflecting our heritage" class="w-100 object-cover about-feature-img">
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal reveal-delay-200">
+          <span class="section-tagline">Our Heritage</span>
+          <h2 class="section-heading">Born from the Waves of the Pacific</h2>
+          <p class="text-muted mb-3">
+            In native Hawaiian culture, <em>"Poke"</em> literally means "to slice or cut crosswise into pieces." For generations, Pacific fishermen seasoned their raw catch with sea salt, limu seaweed, and crushed kukui nuts right on the harbor shores.
+          </p>
+          <p class="text-muted mb-4">
+            Founded with a passion to honor this ancient culinary tradition, <strong>Poke Bowl & Fresh Fusion</strong> was established to bring pristine seafood, Japanese culinary techniques, and modern nutritional science under one roof. We believe eating healthy should never mean eating bland food.
+          </p>
+
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2 p-2 rounded-3 bg-secondary/50">
+                <i class="bi bi-water text-emerald-500 fs-4"></i>
+                <div>
+                  <h6 class="fw-bold mb-0 fs-7">Ocean-Conscious</h6>
+                  <small class="text-muted">Marine Stewardship Certified</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2 p-2 rounded-3 bg-secondary/50">
+                <i class="bi bi-flower1 text-emerald-500 fs-4"></i>
+                <div>
+                  <h6 class="fw-bold mb-0 fs-7">Pure Ingredients</h6>
+                  <small class="text-muted">No High-Fructose Syrups</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Our Mission Section
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        
+        <div class="col-lg-6 order-2 order-lg-1 reveal">
+          <span class="section-tagline">Guiding Purpose</span>
+          <h2 class="section-heading">Our Three Core Commitments</h2>
+          <p class="text-muted mb-4">
+            Our mission is simple yet uncompromising: to nourish bodies, delight palates, and respect the natural resources that sustain us.
+          </p>
+
+          <div class="d-flex flex-column gap-3">
+            <div class="card-poke p-3 flex-row gap-3 align-items-center">
+              <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem;">
+                <i class="bi bi-patch-check-fill"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">1. Uncompromised Quality & Safety</h6>
+                <p class="text-muted fs-8 mb-0">Daily temperature-monitored cold chains guarantee that every fish cube is at peak sashimi sweetness.</p>
+              </div>
+            </div>
+
+            <div class="card-poke p-3 flex-row gap-3 align-items-center">
+              <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem; background: var(--badge-coral-bg); color: var(--color-secondary);">
+                <i class="bi bi-heart-pulse-fill"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">2. Transparent Health & Customization</h6>
+                <p class="text-muted fs-8 mb-0">Every patron is empowered to curate their optimal fuel—whether keto, gluten-free, vegan, or athletic high-protein.</p>
+              </div>
+            </div>
+
+            <div class="card-poke p-3 flex-row gap-3 align-items-center">
+              <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem; background: var(--badge-amber-bg); color: var(--color-accent);">
+                <i class="bi bi-globe-americas"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">3. Ecological Stewardship</h6>
+                <p class="text-muted fs-8 mb-0">100% compostable sugar cane fiber bowls, wooden utensils, and partnership with zero-waste local composting.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 order-1 order-lg-2 reveal reveal-delay-200">
+          <div class="rounded-4 overflow-hidden shadow-xl hover-zoom-card">
+            <img src="assets/images/about/mission-quality.jpg" alt="Fresh harvest organic farm produce" class="w-100 object-cover about-feature-img">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Visual History Timeline
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Evolution & Journey</span>
+        <h2 class="section-heading">Our Milestones Timeline</h2>
+        <p class="section-description">
+          A brief look at our journey from coastal food pop-up to an award-winning fusion dining destination.
+          <span class="d-block fs-8 text-muted mt-1 fst-italic">(Illustrative sample milestones for demonstration)</span>
+        </p>
+      </div>
+
+      <div class="timeline-wrap">
+        
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <div class="card-poke card-black p-4">
+            <span class="badge badge-poke badge-green mb-2">2019 &bull; Genesis</span>
+            <h5 class="fw-bold mb-1">The Seed of An Idea</h5>
+            <p class="text-muted fs-7 mb-0">
+              Chef Kai Nakamura traveled across Oahu studying traditional poke shops and started serving weekend pop-up bowls to local surfers and fitness lovers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item reveal reveal-delay-100">
+          <span class="timeline-dot"></span>
+          <div class="card-poke card-black p-4">
+            <span class="badge badge-poke badge-coral mb-2">2021 &bull; Flagship Opening</span>
+            <h5 class="fw-bold mb-1">First Coastal Kitchen</h5>
+            <p class="text-muted fs-7 mb-0">
+              Opened our first dedicated brick-and-mortar restaurant featuring a 20-foot open ingredient bar and rapid-assembly prep stations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="timeline-item reveal reveal-delay-200">
+          <span class="timeline-dot"></span>
+          <div class="card-poke card-black p-4">
+            <span class="badge badge-poke badge-amber mb-2">2023 &bull; Sustainability</span>
+            <h5 class="fw-bold mb-1">Zero-Waste Packaging Initiative</h5>
+            <p class="text-muted fs-7 mb-0">
+              Eliminated 100% of single-use petroleum plastics across all takeout packaging, transitioning entirely to bagasse sugarcane bowls.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="timeline-item reveal reveal-delay-300">
+          <span class="timeline-dot"></span>
+          <div class="card-poke card-black p-4">
+            <span class="badge badge-poke badge-blue mb-2">2025 &bull; Recognition</span>
+            <h5 class="fw-bold mb-1">100,000 Bowls Crafted</h5>
+            <p class="text-muted fs-7 mb-0">
+              Celebrated our 100,000th custom bowl milestone, honored as "Best Health-Forward Fusion Casual" by the Regional Hospitality Association.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Meet Our Team
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Culinary & Wellness Specialists</span>
+        <h2 class="section-heading">Meet The Passionate Minds Behind Your Bowl</h2>
+        <p class="section-description">
+          Our culinary directors, nutritionists, and kitchen leaders work in close harmony every day.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        
+        <!-- Team Member 1 -->
+        <div class="col-sm-6 col-lg-3 reveal">
+          <div class="card-poke team-member-card h-100">
+            <div class="team-card-img-wrap">
+              <img src="assets/images/team/chef-kai.jpg" alt="Chef Kai Nakamura" loading="lazy">
+            </div>
+            <div class="card-poke-body text-center">
+              <h5 class="fw-bold mb-1">Chef Kai Nakamura</h5>
+              <span class="badge badge-poke badge-green mb-2">Executive Culinary Director</span>
+              <p class="text-muted fs-8 mb-3">
+                Classically trained sushi chef with 15 years mastering sashimi preparation and Hawaiian marinade techniques.
+              </p>
+              <div class="mt-auto pt-2 border-top">
+                <small class="text-muted d-block fs-9">FAVORITE BOWL</small>
+                <span class="fw-bold fs-8 text-emerald-500">Classic Ahi Shoyu</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="col-sm-6 col-lg-3 reveal reveal-delay-100">
+          <div class="card-poke team-member-card h-100">
+            <div class="team-card-img-wrap">
+              <img src="assets/images/team/nutritionist-maya.jpg" alt="Dr. Maya Lin" loading="lazy">
+            </div>
+            <div class="card-poke-body text-center">
+              <h5 class="fw-bold mb-1">Dr. Maya Lin, MS, RD</h5>
+              <span class="badge badge-poke badge-coral mb-2">Lead Dietary Strategist</span>
+              <p class="text-muted fs-8 mb-3">
+                Registered Dietitian formulating micronutrient balances, allergen protocols, and athletic recovery menus.
+              </p>
+              <div class="mt-auto pt-2 border-top">
+                <small class="text-muted d-block fs-9">FAVORITE BOWL</small>
+                <span class="fw-bold fs-8 text-rose-500">Yuzu Ponzu Salmon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="col-sm-6 col-lg-3 reveal reveal-delay-200">
+          <div class="card-poke team-member-card h-100">
+            <div class="team-card-img-wrap">
+              <img src="assets/images/team/manager-david.jpg" alt="David Vance" loading="lazy">
+            </div>
+            <div class="card-poke-body text-center">
+              <h5 class="fw-bold mb-1">David Vance</h5>
+              <span class="badge badge-poke badge-amber mb-2">General Hospitality Lead</span>
+              <p class="text-muted fs-8 mb-3">
+                Dedicated to exceptional guest hospitality, smooth catering logistics, and warm community dining experiences.
+              </p>
+              <div class="mt-auto pt-2 border-top">
+                <small class="text-muted d-block fs-9">FAVORITE BOWL</small>
+                <span class="fw-bold fs-8 text-amber-500">Spicy Volcano Crunch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="col-sm-6 col-lg-3 reveal reveal-delay-300">
+          <div class="card-poke team-member-card h-100">
+            <div class="team-card-img-wrap">
+              <img src="assets/images/Leila Alvarez.jpg" alt="Leila Alvarez" loading="lazy">
+            </div>
+            <div class="card-poke-body text-center">
+              <h5 class="fw-bold mb-1">Leila Alvarez</h5>
+              <span class="badge badge-poke badge-blue mb-2">Prep & Quality Specialist</span>
+              <p class="text-muted fs-8 mb-3">
+                Oversees morning produce arrivals, precision knife cuts, and fresh small-batch dressing emulsions.
+              </p>
+              <div class="mt-auto pt-2 border-top">
+                <small class="text-muted d-block fs-9">FAVORITE BOWL</small>
+                <span class="fw-bold fs-8 text-sky-500">Goddess Tofu Crunch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Atmosphere & Kitchen Snapshots
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 reveal">
+          <div class="atmosphere-card h-100 d-flex flex-column">
+            <div class="atmosphere-img-wrap rounded-4 overflow-hidden shadow-lg mb-3">
+              <img src="assets/images/about/interior-vibes.jpg" alt="Restaurant Interior dining room" class="w-100 h-100 object-fit-cover" loading="lazy">
+            </div>
+            <h5 class="atmosphere-title fw-bold mb-2">Vibrant Botanical Ambiance</h5>
+            <p class="atmosphere-desc text-muted fs-7 mb-0">Airy dining hall with live tropical greenery, natural timber accents, and soothing coastal music.</p>
+          </div>
+        </div>
+        <div class="col-md-6 reveal reveal-delay-200">
+          <div class="atmosphere-card h-100 d-flex flex-column">
+            <div class="atmosphere-img-wrap rounded-4 overflow-hidden shadow-lg mb-3">
+              <img src="assets/images/Chef prep counter station.jpg" alt="Chef prep counter station" class="w-100 h-100 object-fit-cover" loading="lazy">
+            </div>
+            <h5 class="atmosphere-title fw-bold mb-2">Spotless Open Prep Counters</h5>
+            <p class="atmosphere-desc text-muted fs-7 mb-0">Observe your meal being prepared right before your eyes with spotless sanitization standards.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Footer (Consistent Across All Pages)
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Order Enquiry | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Get in touch with Poke Bowl & Fresh Fusion Restaurant. Submit your order enquiry, check opening hours, view sample location placeholder, or ask dietary questions.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link active" aria-current="page" role="menuitem">Contact</a></li>
+      </ul>
+
+      <div class="poke-nav-controls">
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="false" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link active fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Contact Header
+       ======================================================================== -->
+  <header class="hero-section hero-bg-contact text-center">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative reveal">
+      <span class="section-tagline">We'd Love To Hear From You</span>
+      <h1 class="hero-title mb-3">Get In Touch & Order Enquiry</h1>
+      <p class="hero-subtitle mx-auto mb-4">
+        Have a dietary question, catering request, or pre-order inquiry? Complete the form below or drop by our kitchen location.
+      </p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <a href="#order-enquiry-section" class="btn-primary-poke">
+          <i class="bi bi-pencil-square"></i>
+          <span>Go to Enquiry Form</span>
+        </a>
+        <a href="#restaurant-location" class="btn-secondary-poke">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>View Kitchen Location</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Contact & Form Section
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="row g-5">
+        
+        <!-- Contact Information Column (Section 1) -->
+        <div class="col-lg-5 reveal">
+          <div class="pe-lg-3">
+            <span class="section-tagline">Store Details</span>
+            <h3 class="fw-bold mb-4 font-heading">Visit or Reach Out</h3>
+            
+            <p class="text-muted fs-7 mb-4">
+              Our hospitality team is available 7 days a week to assist with group platters, corporate catering, and customized dietary preparations.
+            </p>
+
+            <!-- Editable Placeholders List -->
+            <div class="d-flex flex-column gap-3 mb-4">
+              
+              <!-- Address Card Linking to Map -->
+              <a href="#restaurant-location" class="card-poke p-3 flex-row gap-3 align-items-center text-decoration-none text-reset hover-lift">
+                <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                  <i class="bi bi-geo-alt-fill text-emerald-500"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block fw-semibold fs-8">RESTAURANT LOCATION &bull; <span class="text-emerald-500 text-decoration-underline">View Map Below</span></small>
+                  <span class="fw-bold fs-7">124 Fresh Harvest Way, Suite 100, Marina Bay</span>
+                </div>
+              </a>
+
+              <!-- Phone Placeholder -->
+              <div class="card-poke p-3 flex-row gap-3 align-items-center">
+                <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                  <i class="bi bi-telephone-fill"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block fw-semibold fs-8">PHONE NUMBER (SAMPLE DEMO)</small>
+                  <span class="fw-bold fs-7">(555) 019-4829</span>
+                </div>
+              </div>
+
+              <!-- Email Placeholder -->
+              <div class="card-poke p-3 flex-row gap-3 align-items-center">
+                <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                  <i class="bi bi-envelope-fill"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block fw-semibold fs-8">DIRECT EMAIL (SAMPLE PLACEHOLDER)</small>
+                  <span class="fw-bold fs-7">hello@pokebowl-freshfusion.sample</span>
+                </div>
+              </div>
+
+              <!-- Hours Placeholder -->
+              <div class="card-poke p-3 flex-row gap-3 align-items-center">
+                <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                  <i class="bi bi-clock-fill"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block fw-semibold fs-8">KITCHEN OPENING HOURS</small>
+                  <span class="fw-bold fs-7 d-block">Monday – Friday: 10:30 AM – 9:30 PM</span>
+                  <span class="fw-bold fs-7 d-block">Saturday – Sunday: 11:00 AM – 10:00 PM</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Social Media Handles -->
+            <div class="pt-3 border-top">
+              <h6 class="fw-bold mb-2 fs-7">Connect on Social Channels:</h6>
+              <div class="d-flex gap-2">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link bg-emerald-500/10 text-emerald-600" aria-label="Instagram">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link bg-emerald-500/10 text-emerald-600" aria-label="Facebook">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link bg-emerald-500/10 text-emerald-600" aria-label="YouTube">
+                  <i class="bi bi-youtube"></i>
+                </a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link bg-emerald-500/10 text-emerald-600" aria-label="TikTok">
+                  <i class="bi bi-tiktok"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Order Enquiry Form Column (Section 2) -->
+        <div class="col-lg-7 reveal reveal-delay-200" id="order-enquiry-section">
+          <div class="card-poke p-4 p-md-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <span class="badge badge-poke badge-green mb-1">Pre-Orders & Inquiries</span>
+                <h4 class="fw-bold mb-0 font-heading">Order Enquiry Form</h4>
+              </div>
+              <span class="badge badge-poke badge-amber fs-8">Frontend Demo</span>
+            </div>
+
+            <!-- Cart Redirect Item Summary Banner (Shown when arriving from Add to Cart) -->
+            <div id="cartOrderNoticeBanner" class="alert alert-success d-none py-2.5 px-3 fs-8 mb-3 border-0 rounded-3 d-flex align-items-center justify-content-between gap-2 shadow-xs" style="background-color: var(--badge-green-bg); color: var(--badge-green-text);" role="alert">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-cart-check-fill fs-5 text-emerald-600 flex-shrink-0"></i>
+                <div>
+                  <span class="fw-bold d-block" id="cartOrderNoticeTitle">Item Selected from Menu</span>
+                  <span class="fs-9 opacity-85" id="cartOrderNoticeDetail">Ready to finalize your pre-order details below.</span>
+                </div>
+              </div>
+              <span class="badge badge-poke badge-green fs-8 fw-bold" id="cartOrderNoticePrice"></span>
+            </div>
+
+            <p class="text-muted fs-8 mb-4">
+              Fill in your contact and meal preferences below. All inputs undergo validation.
+            </p>
+
+            <form id="orderEnquiryForm" novalidate>
+              
+              <!-- Name & Email Row -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6 form-group">
+                  <label for="enquiryFullName" class="form-label fs-8 fw-bold">Full Name <span class="text-rose-500">*</span></label>
+                  <input type="text" class="form-poke-control" id="enquiryFullName" placeholder="e.g. Maya Chen" required>
+                  <div class="invalid-feedback-custom">Please enter your full name.</div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label for="enquiryEmail" class="form-label fs-8 fw-bold">Email Address <span class="text-rose-500">*</span></label>
+                  <input type="email" class="form-poke-control" id="enquiryEmail" placeholder="e.g. name@example.com" required>
+                  <div class="invalid-feedback-custom">Please enter a valid email address.</div>
+                </div>
+              </div>
+
+              <!-- Phone & Enquiry Type Row -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6 form-group">
+                  <label for="enquiryPhone" class="form-label fs-8 fw-bold">Phone Number <span class="text-rose-500">*</span></label>
+                  <input type="tel" class="form-poke-control" id="enquiryPhone" placeholder="e.g. (555) 123-4567" required>
+                  <div class="invalid-feedback-custom">Please enter a valid phone number.</div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label for="enquiryType" class="form-label fs-8 fw-bold">Enquiry Type <span class="text-rose-500">*</span></label>
+                  <select class="form-poke-control" id="enquiryType">
+                    <option value="takeout">Takeout Pre-Order Enquiry</option>
+                    <option value="dinein">Dine-In Table Reservation</option>
+                    <option value="catering">Corporate & Event Catering</option>
+                    <option value="dietary">Dietary or Nutrition Query</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Preferred Bowl & Quantity Row -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-8 form-group">
+                  <label for="enquiryBowl" class="form-label fs-8 fw-bold">Preferred Bowl or Protein</label>
+                  <select class="form-poke-control" id="enquiryBowl">
+                    <option value="Volcano Ahi Rush">Volcano Ahi Rush ($15.95)</option>
+                    <option value="Yuzu Citrus Salmon">Yuzu Citrus Salmon ($16.25)</option>
+                    <option value="Teriyaki Chicken Zest">Teriyaki Chicken Zest ($14.50)</option>
+                    <option value="Goddess Tofu Crunch">Goddess Tofu Crunch ($13.25)</option>
+                    <option value="Sweet Chili Tiger Shrimp">Sweet Chili Tiger Shrimp ($16.50)</option>
+                    <option value="Wasabi Dynamite Tuna">Wasabi Dynamite Tuna ($16.75)</option>
+                    <option value="Hawaiian Classic Ahi Tuna">Hawaiian Classic Ahi Tuna ($14.95)</option>
+                    <option value="Spicy Atlantic Salmon Crunch">Spicy Atlantic Salmon Crunch ($15.50)</option>
+                    <option value="Citrus Yuzu Ponzu Salmon">Citrus Yuzu Ponzu Salmon ($15.95)</option>
+                    <option value="Wasabi Dynamite Ahi Tuna">Wasabi Dynamite Ahi Tuna ($16.50)</option>
+                    <option value="Sesame Ginger Grilled Chicken">Sesame Ginger Grilled Chicken ($13.75)</option>
+                    <option value="Teriyaki Glazed Chicken">Teriyaki Glazed Chicken ($13.95)</option>
+                    <option value="Sweet Chili Poached Shrimp">Sweet Chili Poached Shrimp ($16.25)</option>
+                    <option value="Garlic Butter Seared Shrimp">Garlic Butter Seared Shrimp ($16.75)</option>
+                    <option value="Organic Tofu Green Goddess">Organic Tofu Green Goddess ($12.95)</option>
+                    <option value="Rainbow Vegan Edamame Crunch">Rainbow Vegan Edamame Crunch ($12.50)</option>
+                    <option value="Tropical Mango Salmon Fiesta">Tropical Mango Salmon Fiesta ($16.50)</option>
+                    <option value="Keto Avocado Power Bowl">Keto Avocado Power Bowl ($15.75)</option>
+                    <option value="Custom Crafted Bowl">Custom Crafted Bowl (From Studio)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4 form-group">
+                  <label for="enquiryQuantity" class="form-label fs-8 fw-bold">Quantity <span class="text-rose-500">*</span></label>
+                  <input type="number" class="form-poke-control" id="enquiryQuantity" value="1" min="1" max="100" required>
+                  <div class="invalid-feedback-custom">Quantity must be 1 or more.</div>
+                </div>
+              </div>
+
+              <!-- Preferred Date & Time -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6 form-group">
+                  <label for="enquiryDate" class="form-label fs-8 fw-bold">Preferred Pickup / Visit Date</label>
+                  <input type="date" class="form-poke-control" id="enquiryDate">
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label for="enquiryTime" class="form-label fs-8 fw-bold">Preferred Time Window</label>
+                  <input type="time" class="form-poke-control" id="enquiryTime" value="12:30">
+                </div>
+              </div>
+
+              <!-- Message / Allergies -->
+              <div class="form-group mb-3">
+                <label for="enquiryMessage" class="form-label fs-8 fw-bold">Additional Requests or Allergy Notes</label>
+                <textarea class="form-poke-control" id="enquiryMessage" rows="3" placeholder="Tell us about special dressing requests, gluten sensitivities, or custom studio ingredients..."></textarea>
+              </div>
+
+              <!-- Privacy Consent Checkbox -->
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="enquiryConsent" required>
+                <label class="form-check-label fs-8 text-muted" for="enquiryConsent">
+                  I agree that this inquiry is a demonstration form and acknowledge the <a href="pages/legal/privacy.html" class="text-emerald-500 text-decoration-underline" target="_blank">Privacy Notice</a>. <span class="text-rose-500">*</span>
+                </label>
+                <div class="invalid-feedback-custom">You must accept the privacy consent before submitting.</div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="enquirySubmitBtn" class="btn-primary-poke w-100 justify-content-center py-3">
+                <i class="bi bi-send-fill"></i>
+                <span>Submit Order Enquiry</span>
+              </button>
+
+              <small class="text-muted fs-8 d-block text-center mt-3 fst-italic">
+                *Note: This is a frontend demo. Submitting validates form inputs without transmitting data to a live restaurant backend.
+              </small>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Interactive Google Maps Section (Section 3)
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30" id="restaurant-location">
+    <div class="container">
+      <div class="section-title-wrap text-center reveal mb-5">
+        <span class="section-tagline">Location &amp; Directions</span>
+        <h2 class="section-heading">Visit Our Seaside Kitchen</h2>
+        <p class="section-description mx-auto">
+          Conveniently located on the Marina Bay coastal promenade. Dine on our ocean-breeze patio, pick up online orders, or enjoy 2 hours of complimentary guest parking.
+        </p>
+      </div>
+
+      <div class="row g-4 align-items-stretch reveal">
+        
+        <!-- Store Information & Transit Card -->
+        <div class="col-lg-4 d-flex flex-column">
+          <div class="card-poke p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                  <i class="bi bi-geo-alt-fill text-emerald-500"></i>
+                </div>
+                <div>
+                  <span class="badge badge-poke badge-green fs-8 mb-1">Dine-In &amp; Takeout</span>
+                  <h5 class="fw-bold mb-0 fs-6">Marina Bay Kitchen</h5>
+                </div>
+              </div>
+
+              <!-- Address Details -->
+              <div class="border-top border-border-color pt-3 mb-3">
+                <h6 class="fs-8 text-muted fw-bold text-uppercase mb-1">Kitchen Address</h6>
+                <p class="fs-7 fw-semibold mb-0">124 Fresh Harvest Way, Suite 100</p>
+                <p class="fs-8 text-muted mb-0">Marina Bay Coastal Promenade, HI 96815</p>
+              </div>
+
+              <!-- Hours Summary -->
+              <div class="border-top border-border-color pt-3 mb-3">
+                <h6 class="fs-8 text-muted fw-bold text-uppercase mb-2">Kitchen Hours</h6>
+                <div class="d-flex justify-content-between fs-8 mb-1">
+                  <span class="text-muted">Monday – Friday:</span>
+                  <span class="fw-semibold">10:30 AM – 9:30 PM</span>
+                </div>
+                <div class="d-flex justify-content-between fs-8">
+                  <span class="text-muted">Saturday – Sunday:</span>
+                  <span class="fw-semibold">11:00 AM – 10:00 PM</span>
+                </div>
+              </div>
+
+              <!-- Transit & Parking Info -->
+              <div class="border-top border-border-color pt-3 mb-3">
+                <h6 class="fs-8 text-muted fw-bold text-uppercase mb-2">Parking &amp; Transit</h6>
+                <ul class="list-unstyled fs-8 text-muted mb-0 d-flex flex-column gap-2">
+                  <li class="d-flex align-items-start gap-2">
+                    <i class="bi bi-p-circle-fill text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                    <span>Free 2-Hour validated underground parking with any meal</span>
+                  </li>
+                  <li class="d-flex align-items-start gap-2">
+                    <i class="bi bi-bus-front-fill text-blue-500 mt-0.5 flex-shrink-0"></i>
+                    <span>Promenade Transit Stop (Bus Lines 19, 20 &amp; Coastal Trolley)</span>
+                  </li>
+                  <li class="d-flex align-items-start gap-2">
+                    <i class="bi bi-bicycle text-amber-500 mt-0.5 flex-shrink-0"></i>
+                    <span>Beachside bicycle racks &amp; direct promenade footpath access</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Quick Action Direction Buttons -->
+            <div class="pt-3 border-top border-border-color mt-auto d-flex flex-column gap-2">
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=21.2845,-157.8285" target="_blank" rel="noopener noreferrer" class="btn-primary-poke w-100 justify-content-center py-2.5">
+                <i class="bi bi-signpost-2-fill"></i>
+                <span>Get Directions in Google Maps</span>
+              </a>
+              <a href="tel:5550194829" class="btn btn-outline-secondary rounded-pill py-2 fs-7 fw-semibold d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-telephone-fill text-emerald-500"></i>
+                <span>Call Kitchen (555) 019-4829</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Responsive Google Map Embed -->
+        <div class="col-lg-8">
+          <div class="map-frame-wrapper card-poke p-0 overflow-hidden position-relative">
+            <!-- Loading Fallback Indicator -->
+            <div class="position-absolute top-50 start-50 translate-middle text-muted fs-8 d-flex align-items-center gap-2 pointer-events-none" style="z-index: 1;">
+              <span class="spinner-border spinner-border-sm text-emerald-500" role="status" aria-hidden="true"></span>
+              <span>Loading Google Maps...</span>
+            </div>
+
+            <!-- Interactive Responsive Google Maps Iframe -->
+            <iframe 
+              class="w-100 h-100 border-0 position-relative" 
+              src="https://maps.google.com/maps?q=21.2845,-157.8285+(Poke+Bowl+%26+Fresh+Fusion+Restaurant)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade" 
+              title="Poke Bowl &amp; Fresh Fusion Restaurant Location on Google Maps"
+              onload="if(this.previousElementSibling) this.previousElementSibling.style.display='none';">
+            </iframe>
+
+            <!-- Floating Location Quick Badge -->
+            <div class="position-absolute bottom-3 start-3 d-none d-sm-inline-flex align-items-center gap-2 p-2 px-3 rounded-pill bg-card shadow-sm border border-border-color pointer-events-none" style="z-index: 2;">
+              <span class="d-inline-block rounded-circle bg-emerald-500" style="width: 10px; height: 10px;"></span>
+              <span class="fs-8 fw-bold">Poke Bowl &amp; Fresh Fusion</span>
+              <span class="badge badge-poke badge-green fs-8 py-0.5 px-2">Coastal Promenade</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Frontend Demo Modal Feedback
+       ======================================================================== -->
+  <div class="modal fade" id="demoFeedbackModal" tabindex="-1" aria-labelledby="demoFeedbackTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-card border-border-color rounded-4 overflow-hidden">
+        <div class="modal-body p-4 text-center">
+          <div class="feature-icon-circle mx-auto mb-3 bg-emerald-500/20 text-emerald-600" style="width: 72px; height: 72px; font-size: 2rem;">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          <h4 class="fw-bold mb-2" id="demoFeedbackTitle">Form Validated Successfully!</h4>
+          <p class="text-muted fs-7 mb-3">
+            All fields, email syntax, phone format, and privacy consent passed client-side validation.
+          </p>
+          <div class="p-3 rounded-3 bg-secondary/60 text-start fs-8 text-muted mb-4">
+            <strong class="d-block text-primary mb-1"><i class="bi bi-info-circle-fill text-amber-500 me-1"></i> Frontend Demonstration Notice:</strong>
+            As specified in the project requirements, this application runs entirely on the frontend without a live backend email gateway. <strong>No actual email or reservation was transmitted to the restaurant.</strong>
+          </div>
+          <button type="button" class="btn-primary-poke w-100 justify-content-center" data-bs-dismiss="modal">
+            <span>Got It, Thanks!</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Footer (Consistent Across All Pages)
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/contact-form.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrition & Allergen Guide | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Detailed macro breakdown, calorie comparison, protein guides, allergen transparency, and nutrition FAQ for Poke Bowl & Fresh Fusion Restaurant.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link active" aria-current="page" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <div class="poke-nav-controls">
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="false" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link active fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Nutrition Hero Header
+       ======================================================================== -->
+  <header class="hero-section hero-bg-nutrition text-center">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative reveal">
+      <span class="section-tagline">Complete Transparency</span>
+      <h1 class="hero-title mb-3">Nutritional Information & Macro Guide</h1>
+      <p class="hero-subtitle mx-auto">
+        Know exactly what enters your body. We provide detailed estimates of calories, macronutrients, and allergens across all signature combinations.
+      </p>
+
+      <!-- Disclaimer Alert -->
+      <div class="alert alert-warning border-0 rounded-4 max-w-2xl mx-auto text-start d-flex gap-3 align-items-start mt-4 bg-amber-500/10 text-amber-800 dark:text-amber-300">
+        <i class="bi bi-info-circle-fill fs-5 mt-0.5 text-amber-600"></i>
+        <div class="fs-8">
+          <strong>Nutritional Disclaimer:</strong> All nutritional facts and values presented on this page are illustrative estimates calculated for standard bowl serving portions. Actual values may vary based on dressing portions, seasonal produce variation, and customized ingredient selections. This information does not constitute medical advice.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Macro Overview Highlights
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-md-4 reveal">
+          <div class="card-poke p-4 h-100">
+            <div class="feature-icon-circle bg-emerald-500/15 text-emerald-500 mb-3">
+              <i class="bi bi-shield-shaded"></i>
+            </div>
+            <h5 class="fw-bold mb-2">High Clean Protein</h5>
+            <p class="text-muted fs-7 mb-0">Between 22g and 42g of complete protein per regular bowl, fueling lean muscle repair and sustained all-day satiety.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal reveal-delay-100">
+          <div class="card-poke p-4 h-100">
+            <div class="feature-icon-circle bg-rose-500/15 text-rose-500 mb-3">
+              <i class="bi bi-heart-pulse"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Heart-Healthy Fats</h5>
+            <p class="text-muted fs-7 mb-0">Rich in natural Omega-3 fatty acids from fresh Atlantic salmon, line-caught Ahi tuna, cold-pressed sesame, and ripe Hass avocados.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal reveal-delay-200">
+          <div class="card-poke p-4 h-100">
+            <div class="feature-icon-circle bg-amber-500/15 text-amber-500 mb-3">
+              <i class="bi bi-flower2"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Complex Slow Carbs</h5>
+            <p class="text-muted fs-7 mb-0">Wholesome whole grains, ancient mixed seeds, and vibrant vegetables provide sustained energy with zero sugar crashes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Nutritional Comparison Table
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Direct Comparison</span>
+        <h2 class="section-heading">Signature Bowls Nutritional Matrix</h2>
+        <p class="section-description">
+          Estimated values based on regular standard bowl portions with standard dressing portions.
+        </p>
+      </div>
+
+      <div class="table-responsive-poke reveal">
+        <table class="nutrition-table">
+          <thead>
+            <tr>
+              <th>Signature Bowl Name</th>
+              <th>Base & Protein</th>
+              <th>Calories</th>
+              <th>Protein</th>
+              <th>Carbs</th>
+              <th>Fats</th>
+              <th>Fiber</th>
+              <th>Sodium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hawaiian Classic Ahi</strong></td>
+              <td>Sushi Rice + Wild Ahi Tuna</td>
+              <td><span class="badge badge-poke badge-green">480 kcal</span></td>
+              <td><strong>38g</strong></td>
+              <td>48g</td>
+              <td>12g</td>
+              <td>6g</td>
+              <td>620mg</td>
+            </tr>
+            <tr>
+              <td><strong>Spicy Salmon Crunch</strong></td>
+              <td>Brown Rice + Norwegian Salmon</td>
+              <td><span class="badge badge-poke badge-coral">560 kcal</span></td>
+              <td><strong>34g</strong></td>
+              <td>52g</td>
+              <td>18g</td>
+              <td>7g</td>
+              <td>680mg</td>
+            </tr>
+            <tr>
+              <td><strong>Citrus Yuzu Salmon</strong></td>
+              <td>Mixed Grains + Salmon</td>
+              <td><span class="badge badge-poke badge-amber">490 kcal</span></td>
+              <td><strong>32g</strong></td>
+              <td>46g</td>
+              <td>15g</td>
+              <td>6g</td>
+              <td>590mg</td>
+            </tr>
+            <tr>
+              <td><strong>Sesame Ginger Chicken</strong></td>
+              <td>Sushi Rice + Grilled Chicken</td>
+              <td><span class="badge badge-poke badge-blue">460 kcal</span></td>
+              <td><strong>42g</strong></td>
+              <td>45g</td>
+              <td>10g</td>
+              <td>5g</td>
+              <td>580mg</td>
+            </tr>
+            <tr>
+              <td><strong>Sweet Chili Poached Shrimp</strong></td>
+              <td>Sushi Rice + Tiger Prawns</td>
+              <td><span class="badge badge-poke badge-green">430 kcal</span></td>
+              <td><strong>31g</strong></td>
+              <td>48g</td>
+              <td>10g</td>
+              <td>5g</td>
+              <td>570mg</td>
+            </tr>
+            <tr>
+              <td><strong>Organic Tofu Green Goddess</strong></td>
+              <td>Mixed Greens + Sesame Tofu</td>
+              <td><span class="badge badge-poke badge-green">390 kcal</span></td>
+              <td><strong>22g</strong></td>
+              <td>42g</td>
+              <td>14g</td>
+              <td>9g</td>
+              <td>480mg</td>
+            </tr>
+            <tr>
+              <td><strong>Keto Avocado Power</strong></td>
+              <td>Cauliflower Rice + Ahi Tuna</td>
+              <td><span class="badge badge-poke badge-blue">420 kcal</span></td>
+              <td><strong>36g</strong></td>
+              <td>9g</td>
+              <td>26g</td>
+              <td>8g</td>
+              <td>560mg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Protein Source Deep-Dive
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Fuel Breakdown</span>
+        <h2 class="section-heading">Comparing Our Protein Sources</h2>
+        <p class="section-description">
+          Detailed metrics per standard 4 oz (115g) cooked/prepared serving size.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        
+        <!-- Protein 1: Salmon -->
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-poke p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="protein-card-header">
+                <img src="assets/images/ingredients/protein-salmon.jpg" alt="Atlantic Salmon" class="protein-thumb" width="58" height="58">
+                <div>
+                  <h5 class="protein-card-title">Atlantic Salmon</h5>
+                  <span class="badge badge-poke badge-coral fs-8">25g Protein</span>
+                </div>
+              </div>
+              <p class="protein-card-desc">
+                Packed with EPA & DHA Omega-3 fatty acids, vitamin D, and B-complex vitamins for heart health and anti-inflammatory benefits.
+              </p>
+            </div>
+            <div class="protein-stats-box">
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Calories:</span>
+                <span class="protein-stat-value">210 kcal</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Healthy Fats:</span>
+                <span class="protein-stat-value">12g</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Carbs:</span>
+                <span class="protein-stat-value">0g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protein 2: Tuna -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-100">
+          <div class="card-poke p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="protein-card-header">
+                <img src="assets/images/ingredients/protein-tuna.jpg" alt="Wild Ahi Tuna" class="protein-thumb" width="58" height="58">
+                <div>
+                  <h5 class="protein-card-title">Wild Ahi Tuna</h5>
+                  <span class="badge badge-poke badge-coral fs-8">28g Protein</span>
+                </div>
+              </div>
+              <p class="protein-card-desc">
+                Ultra-lean high-density protein source rich in selenium, potassium, and vitamin B12 for peak energy metabolism.
+              </p>
+            </div>
+            <div class="protein-stats-box">
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Calories:</span>
+                <span class="protein-stat-value">180 kcal</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Healthy Fats:</span>
+                <span class="protein-stat-value">2g</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Carbs:</span>
+                <span class="protein-stat-value">0g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protein 3: Chicken -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-200">
+          <div class="card-poke p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="protein-card-header">
+                <img src="assets/images/ingredients/protein-chicken.jpg" alt="Grilled Herb Chicken" class="protein-thumb" width="58" height="58">
+                <div>
+                  <h5 class="protein-card-title">Grilled Herb Chicken</h5>
+                  <span class="badge badge-poke badge-blue fs-8">27g Protein</span>
+                </div>
+              </div>
+              <p class="protein-card-desc">
+                100% antibiotic-free lean breast meat lightly marinated with fresh thyme, rosemary, garlic, and cold-pressed citrus oil.
+              </p>
+            </div>
+            <div class="protein-stats-box">
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Calories:</span>
+                <span class="protein-stat-value">160 kcal</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Healthy Fats:</span>
+                <span class="protein-stat-value">4g</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Carbs:</span>
+                <span class="protein-stat-value">2g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protein 4: Shrimp -->
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-poke p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="protein-card-header">
+                <img src="assets/images/ingredients/protein-shrimp.jpg" alt="Poached Tiger Shrimp" class="protein-thumb" width="58" height="58">
+                <div>
+                  <h5 class="protein-card-title">Poached Tiger Shrimp</h5>
+                  <span class="badge badge-poke badge-green fs-8">24g Protein</span>
+                </div>
+              </div>
+              <p class="protein-card-desc">
+                Naturally low calorie and high in astaxanthin antioxidant, zinc, and iodine for thyroid wellness.
+              </p>
+            </div>
+            <div class="protein-stats-box">
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Calories:</span>
+                <span class="protein-stat-value">120 kcal</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Healthy Fats:</span>
+                <span class="protein-stat-value">1.5g</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Carbs:</span>
+                <span class="protein-stat-value">1g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protein 5: Tofu -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-100">
+          <div class="card-poke p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="protein-card-header">
+                <img src="assets/images/ingredients/protein-tofu.jpg" alt="Organic Sesame Tofu" class="protein-thumb" width="58" height="58">
+                <div>
+                  <h5 class="protein-card-title">Organic Sesame Tofu</h5>
+                  <span class="badge badge-poke badge-green fs-8">14g Protein</span>
+                </div>
+              </div>
+              <p class="protein-card-desc">
+                Non-GMO pressed organic soybean tofu delivering all 9 essential amino acids alongside plant calcium and iron.
+              </p>
+            </div>
+            <div class="protein-stats-box">
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Calories:</span>
+                <span class="protein-stat-value">130 kcal</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Healthy Fats:</span>
+                <span class="protein-stat-value">7g</span>
+              </div>
+              <div class="protein-stat-row">
+                <span class="protein-stat-label">Carbs:</span>
+                <span class="protein-stat-value">4g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Goal Guidance Card -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-200">
+          <div class="card-poke p-4 h-100 protein-tips-card justify-content-between">
+            <div>
+              <div class="protein-card-header">
+                <div class="feature-icon-circle bg-emerald-500/20 text-emerald-600 m-0" style="width: 58px; height: 58px; min-width: 58px; font-size: 1.35rem;">
+                  <i class="bi bi-lightbulb-fill"></i>
+                </div>
+                <div>
+                  <h5 class="protein-card-title text-emerald-600">Goal Customization</h5>
+                  <span class="badge badge-poke badge-green fs-8">Dietary Tips</span>
+                </div>
+              </div>
+              <p class="text-muted fs-8 mb-3">
+                Tailor any signature or custom bowl to meet your specific wellness targets:
+              </p>
+              <ul class="protein-tips-list">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><strong>Low Sodium:</strong> Request dressings on the side and choose Sweet Ponzu Lime over soy shoyu.</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><strong>Ketogenic:</strong> Swap rice for mixed greens or cauliflower rice + double avocado.</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span><strong>Muscle Gain:</strong> Add double protein (Salmon + Ahi Tuna) for 50g+ clean protein.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Allergen Matrix & Cross-Contact Protocol
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Safety First</span>
+        <h2 class="section-heading">Allergen Transparency & Cross-Contact Protocols</h2>
+        <p class="section-description">
+          We take food sensitivities with maximum diligence. Review our common allergen chart below.
+        </p>
+      </div>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7 reveal">
+          <div class="table-responsive-poke">
+            <table class="nutrition-table">
+              <thead>
+                <tr>
+                  <th>Ingredient Group</th>
+                  <th>Gluten</th>
+                  <th>Soy</th>
+                  <th>Sesame</th>
+                  <th>Fish</th>
+                  <th>Shellfish</th>
+                  <th>Nuts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>White / Brown Rice</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                </tr>
+                <tr>
+                  <td>Atlantic Salmon & Ahi Tuna</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-check-circle-fill text-rose-500"></i> Yes</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                </tr>
+                <tr>
+                  <td>Poached Tiger Shrimp</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-check-circle-fill text-rose-500"></i> Yes</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                </tr>
+                <tr>
+                  <td>Classic Sesame Shoyu</td>
+                  <td><i class="bi bi-check-circle-fill text-amber-500"></i> (Tamari opt)</td>
+                  <td><i class="bi bi-check-circle-fill text-rose-500"></i> Yes</td>
+                  <td><i class="bi bi-check-circle-fill text-rose-500"></i> Yes</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                </tr>
+                <tr>
+                  <td>Spicy Sriracha Aioli</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-check-circle-fill text-rose-500"></i> Yes</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                </tr>
+                <tr>
+                  <td>Macadamia Nut Crunch</td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-x-circle text-muted"></i></td>
+                  <td><i class="bi bi-check-circle-fill text-rose-500"></i> Yes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-lg-5 reveal reveal-delay-200">
+          <div class="card-poke p-4">
+            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+              <i class="bi bi-shield-lock-fill text-emerald-500"></i>
+              <span>Allergy Notification Procedure</span>
+            </h5>
+            <p class="text-muted fs-8 mb-3">
+              If you or anyone in your party has a severe food allergy, please alert our team before placing your order enquiry:
+            </p>
+            <ol class="fs-8 text-muted ps-3 mb-3 d-flex flex-column gap-2">
+              <li>Our prep team changes gloves, uses sanitized cutting boards, and wipes down prep tables.</li>
+              <li>Dedicated gluten-free tamari and separate utensils are designated for allergen orders.</li>
+              <li>However, please note our open kitchen handles sesame, soy, seafood, and nuts, so 100% trace absence cannot be legally guaranteed.</li>
+            </ol>
+            <a href="contact.html" class="btn btn-outline-success btn-sm rounded-pill w-100">Send Dietary Question Via Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Nutrition FAQs Accordion
+       ======================================================================== -->
+  <section class="section-py bg-secondary/20">
+    <div class="container">
+      <div class="section-title-wrap reveal text-center">
+        <span class="section-tagline">Got Questions?</span>
+        <h2 class="section-heading">Frequently Asked Nutrition Questions</h2>
+        <p class="section-description mx-auto">
+          Common dietary questions about raw seafood safety, gluten-free dining, calorie calculations, and keto customization.
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="accordion reveal" id="nutritionAccordion">
+            
+            <div class="accordion-item mb-3">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <span class="accordion-title">Are gluten-free options available for every bowl?</span>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#nutritionAccordion">
+                <div class="accordion-body">
+                  Yes! Almost all of our bowls can be made 100% gluten-free upon request. We carry certified gluten-free organic tamari soy sauce, naturally gluten-free sushi rice, and fresh vegetables. Simply request gluten-free dressing when ordering.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-3">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <span class="accordion-title">How are calories calculated for custom bowls?</span>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#nutritionAccordion">
+                <div class="accordion-body">
+                  Our interactive Bowl Studio uses standard ingredient measurement guidelines verified with USDA food databases and supplier lab specifications. When you toggle bases, proteins, and sauces, the calculator computes the summed estimate dynamically.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-3">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <span class="accordion-title">Is raw sashimi-grade fish safe for everyone?</span>
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#nutritionAccordion">
+                <div class="accordion-body">
+                  Our sashimi-grade fish adheres to strict FDA deep-freeze safety parameters to ensure raw quality. However, public health advisories note that pregnant women, immunocompromised individuals, and young children should opt for our cooked proteins like grilled chicken or poached shrimp.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-3">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  <span class="accordion-title">Can I customize my bowl to fit a strict Keto diet?</span>
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#nutritionAccordion">
+                <div class="accordion-body">
+                  Absolutely! Our Keto Avocado Power bowl features under 10 net carbs by swapping rice for mixed greens and riced cauliflower, paired with wild tuna and avocado for sustained healthy ketosis.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Footer (Consistent Across All Pages)
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

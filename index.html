@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poke Bowl & Fresh Fusion Restaurant | Fresh Bowls. Bold Flavors.</title>
+  <meta name="description" content="Discover vibrant, nutritious Hawaiian poke bowls and Asian fusion delicacies made with daily sashimi-grade seafood, crisp organic toppings, and handcrafted dressings.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Immediate Theme & Direction Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <!-- External Stylesheets (Bootstrap 5, Bootstrap Icons, Tailwind) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false } // Prevent Tailwind from resetting Bootstrap
+    };
+  </script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Sticky Navbar
+       ======================================================================== -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="poke-nav-brand" aria-label="Poke Bowl & Fresh Fusion Home">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <ul class="poke-nav-menu" role="menubar">
+        <li class="poke-nav-dropdown" role="none">
+          <button class="poke-nav-link poke-nav-dropdown-toggle active" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <span>Home</span>
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+          <ul class="poke-nav-dropdown-menu" role="menu">
+            <li role="none">
+              <a href="index.html" class="poke-nav-dropdown-item active" role="menuitem">
+                <span class="poke-nav-dropdown-title">Fresh Poke Classic</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="home-2.html" class="poke-nav-dropdown-item" role="menuitem">
+                <span class="poke-nav-dropdown-title">Interactive Bowl Studio</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a href="about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <!-- Controls & CTA -->
+      <div class="poke-nav-controls">
+        <!-- Direction Switcher -->
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+
+        <!-- Dark/Light Theme Switcher -->
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <!-- Build Bowl CTA -->
+        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <!-- Hamburger for Mobile -->
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Backdrop & Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="index.html" class="poke-nav-brand">
+        <img src="assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <ul class="nav flex-column gap-2 mb-4">
+      <!-- Mobile Home Accordion / Submenu -->
+      <li class="nav-item">
+        <button class="nav-link mobile-nav-link mobile-home-dropdown-toggle fw-bold w-100 d-flex align-items-center justify-content-between bg-transparent border-0 text-start active" type="button" data-bs-toggle="collapse" data-bs-target="#mobileHomeCollapse" aria-expanded="true" aria-controls="mobileHomeCollapse">
+          <span><i class="bi bi-house-door me-2"></i> Home</span>
+          <i class="bi bi-chevron-down fs-8"></i>
+        </button>
+        <div class="collapse show" id="mobileHomeCollapse">
+          <ul class="mobile-nav-submenu">
+            <li>
+              <a href="index.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block active">
+                <i class="bi bi-dot text-emerald-500"></i> Fresh Poke Classic
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="mobile-nav-link fs-8 fw-semibold py-1 d-block">
+                <i class="bi bi-dot text-muted"></i> Interactive Bowl Studio
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item"><a href="about.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-people me-2"></i> About Our Story</a></li>
+      <li class="nav-item"><a href="menu.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-menu-button-wide me-2"></i> Signature Menu</a></li>
+      <li class="nav-item"><a href="nutrition.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
+    </ul>
+
+    <div class="mt-auto pt-3 border-top">
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">LTR</span>
+        </button>
+        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <span>Theme</span>
+        </button>
+      </div>
+      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Hero Section
+       ======================================================================== -->
+  <header class="hero-section hero-bg-home1">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        
+        <!-- Hero Text -->
+        <div class="col-lg-6 reveal">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill badge-green mb-3">
+            <i class="bi bi-stars"></i>
+            <span class="fw-bold fs-7">Sustainably Sourced Seafood Daily</span>
+          </div>
+          
+          <h1 class="hero-title">
+            Fresh Bowls. <br>
+            <span class="text-emerald-500">Bold Flavors.</span> <br>
+            Better Living.
+          </h1>
+          
+          <p class="hero-subtitle">
+            Experience the ultimate ocean-to-table culinary fusion. Hand-cut sashimi-grade salmon, wild Ahi tuna, crisp organic superfoods, and artisan-crafted dressings made fresh in every bowl.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 hero-cta-group mb-4">
+            <a href="menu.html" class="btn-primary-poke">
+              <i class="bi bi-grid-fill"></i>
+              <span>Explore Our Menu</span>
+            </a>
+            <a href="home-2.html#bowl-builder" class="btn-secondary-poke">
+              <i class="bi bi-sliders"></i>
+              <span>Build Your Bowl</span>
+            </a>
+          </div>
+
+          <!-- Highlight Metrics -->
+          <div class="row pt-3 border-top g-3">
+            <div class="col-4">
+              <h4 class="fw-bolder mb-0 text-emerald-600"><span class="counter-number" data-target="100">100</span>%</h4>
+              <small class="text-muted">Fresh &amp; Wild Caught</small>
+            </div>
+            <div class="col-4">
+              <h4 class="fw-bolder mb-0 text-emerald-600"><span class="counter-number" data-target="30">30</span>+</h4>
+              <small class="text-muted">Daily Ingredients</small>
+            </div>
+            <div class="col-4">
+              <h4 class="fw-bolder mb-0 text-emerald-600"><span class="counter-number" data-target="4.9">4.9</span> ★</h4>
+              <small class="text-muted">Customer Rating</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Image Container -->
+        <div class="col-lg-6 reveal reveal-delay-200">
+          <div class="hero-image-container hover-zoom-card">
+            <img src="assets/images/home/hero-home1.jpg" alt="Vibrant Poke Bowl with Fresh Salmon and Organic Ingredients" loading="eager" width="700" height="520">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Food Preparation & Story Highlight Section
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        
+        <div class="col-lg-6 order-2 order-lg-1 reveal">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="rounded-4 overflow-hidden shadow-sm h-100">
+                <img src="assets/images/home/fresh-prep.jpg" alt="Fresh vegetable and fish prep in restaurant kitchen" class="w-100 h-100 object-cover" style="min-height: 240px;">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="rounded-4 overflow-hidden shadow-sm h-100">
+                <img src="assets/images/home/about-intro.jpg" alt="Artisan chef plating fresh poke bowl" class="w-100 h-100 object-cover" style="min-height: 240px;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 order-1 order-lg-2 reveal reveal-delay-200">
+          <span class="section-tagline">Artisanal Craftsmanship</span>
+          <h2 class="section-heading">How We Craft Every Single Bowl With Precision</h2>
+          <p class="text-muted mb-4">
+            At Poke Bowl & Fresh Fusion, we reject compromises. Every morning at 6:00 AM, our culinary artisans receive fresh wild-caught fish, crisp hydroponic greens, and ripe produce. We slice every filet by hand, simmer signature sauces in small batches, and assemble each bowl custom to order in under 3 minutes.
+          </p>
+
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.2rem;">
+                <i class="bi bi-check2-circle"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Zero Artificial Preservatives</h6>
+                <p class="text-muted mb-0 fs-7">All house marinades, ponzu sauces, and aiolis are mixed fresh with natural citrus and tamari.</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start">
+              <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.2rem;">
+                <i class="bi bi-droplet-half"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Sashimi-Grade Seafood Only</h6>
+                <p class="text-muted mb-0 fs-7">Certified wild Hawaiian Ahi tuna and sustainably farmed Norwegian salmon filets.</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start">
+              <div class="feature-icon-circle m-0 flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.2rem;">
+                <i class="bi bi-recycle"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">100% Eco-Friendly Packaging</h6>
+                <p class="text-muted mb-0 fs-7">Our take-out bowls, lids, and cutlery are 100% commercially compostable plant fiber.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <a href="about.html" class="btn-secondary-poke">
+              <span>Read Our Full Story</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Signature Poke Bowls (Featured)
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Signature Creations</span>
+        <h2 class="section-heading">Our Most Loved Bowls</h2>
+        <p class="section-description">
+          Carefully balanced by our head chef and nutrition specialist for optimum flavor harmony, high clean protein, and satisfying texture.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        
+        <!-- Bowl Card 1 -->
+        <div class="col-md-6 col-lg-4 menu-item-card reveal" data-category="tuna fusion" data-title="Hawaiian Classic Ahi Tuna" data-img="assets/images/bowls/classic-ahi-tuna.jpg" data-desc="Wild Ahi tuna, sushi rice, sweet Maui onions, scallions, toasted sesame, cucumber, and classic sesame shoyu dressing." data-price="$14.95" data-calories="480 kcal" data-protein="38g" data-carbs="48g" data-fats="12g" data-fiber="6g" data-sodium="620mg" data-allergens="Fish, Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/classic-ahi-tuna.jpg" alt="Hawaiian Classic Ahi Tuna Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">Tuna Special</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Hawaiian Classic Ahi</h5>
+                <span class="card-poke-price">$14.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Wild Ahi tuna, sushi rice, sweet Maui onions, scallions, toasted sesame, cucumber, and classic sesame shoyu dressing.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Gluten-Free</span>
+                <span class="badge badge-poke badge-green">38g Protein</span>
+                <span class="badge badge-poke badge-amber">480 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center gap-2 card-action-row">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bowl Card 2 -->
+        <div class="col-md-6 col-lg-4 menu-item-card reveal reveal-delay-100" data-category="salmon" data-title="Spicy Atlantic Salmon Crunch" data-img="assets/images/bowls/spicy-salmon-crunch.jpg" data-desc="Fresh Atlantic salmon, spicy sriracha mayo, Hass avocado, jalapeño rings, crispy tempura flakes, and edamame over brown rice." data-price="$15.50" data-calories="560 kcal" data-protein="34g" data-carbs="52g" data-fats="18g" data-fiber="7g" data-sodium="680mg" data-allergens="Fish, Soy, Sesame, Wheat (tempura)">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/spicy-salmon-crunch.jpg" alt="Spicy Salmon Crunch Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Top Seller</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Spicy Salmon Crunch</h5>
+                <span class="card-poke-price">$15.50</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Fresh Atlantic salmon, spicy sriracha mayo, Hass avocado, jalapeño rings, crispy tempura flakes, and edamame over brown rice.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-coral">Spicy</span>
+                <span class="badge badge-poke badge-green">34g Protein</span>
+                <span class="badge badge-poke badge-amber">560 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center gap-2 card-action-row">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bowl Card 3 -->
+        <div class="col-md-6 col-lg-4 menu-item-card reveal reveal-delay-200" data-category="salmon fusion" data-title="Citrus Yuzu Ponzu Salmon" data-img="assets/images/bowls/yuzu-ponzu-salmon.jpg" data-desc="Norwegian salmon slices, citrus yuzu lime ponzu, diced mango, cilantro, cucumber ribbons, and crushed roasted macadamia nuts." data-price="$15.95" data-calories="490 kcal" data-protein="32g" data-carbs="46g" data-fats="15g" data-fiber="6g" data-sodium="590mg" data-allergens="Fish, Tree Nuts, Soy">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/yuzu-ponzu-salmon.jpg" alt="Citrus Yuzu Ponzu Salmon Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-amber">Chef Special</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Citrus Yuzu Salmon</h5>
+                <span class="card-poke-price">$15.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Norwegian salmon slices, citrus yuzu lime ponzu, diced mango, cilantro, cucumber ribbons, and crushed roasted macadamia nuts.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Omega-3 Rich</span>
+                <span class="badge badge-poke badge-green">32g Protein</span>
+                <span class="badge badge-poke badge-amber">490 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center gap-2 card-action-row">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bowl Card 4 -->
+        <div class="col-md-6 col-lg-4 menu-item-card reveal" data-category="chicken" data-title="Sesame Ginger Grilled Chicken" data-img="assets/images/bowls/sesame-ginger-chicken.jpg" data-desc="Tender marinated grilled chicken breast, sesame ginger glaze, purple cabbage slaw, roasted sweet corn, and crisp wonton crisps." data-price="$13.75" data-calories="460 kcal" data-protein="42g" data-carbs="45g" data-fats="10g" data-fiber="5g" data-sodium="580mg" data-allergens="Soy, Sesame, Wheat (crisps)">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/sesame-ginger-chicken.jpg" alt="Sesame Ginger Chicken Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-blue">High Protein</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Sesame Ginger Chicken</h5>
+                <span class="card-poke-price">$13.75</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Tender marinated grilled chicken breast, sesame ginger glaze, purple cabbage slaw, roasted sweet corn, and crisp wonton crisps.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Dairy-Free</span>
+                <span class="badge badge-poke badge-green">42g Protein</span>
+                <span class="badge badge-poke badge-amber">460 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center gap-2 card-action-row">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bowl Card 5 -->
+        <div class="col-md-6 col-lg-4 menu-item-card reveal reveal-delay-100" data-category="shrimp fusion" data-title="Sweet Chili Poached Shrimp" data-img="assets/images/bowls/sweet-chili-shrimp.jpg" data-desc="Plump sweet poached tiger shrimp, pineapple salsa, shredded carrots, avocado, cilantro, and toasted coconut flakes." data-price="$16.25" data-calories="430 kcal" data-protein="31g" data-carbs="48g" data-fats="10g" data-fiber="5g" data-sodium="570mg" data-allergens="Shellfish, Soy">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/sweet-chili-shrimp.jpg" alt="Sweet Chili Poached Shrimp Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-coral">Seafood</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Sweet Chili Shrimp</h5>
+                <span class="card-poke-price">$16.25</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Plump sweet poached tiger shrimp, pineapple salsa, shredded carrots, avocado, cilantro, and toasted coconut flakes.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-blue">Gluten-Free</span>
+                <span class="badge badge-poke badge-green">31g Protein</span>
+                <span class="badge badge-poke badge-amber">430 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center gap-2 card-action-row">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bowl Card 6 -->
+        <div class="col-md-6 col-lg-4 menu-item-card reveal reveal-delay-200" data-category="tofu-veg" data-title="Organic Tofu Green Goddess" data-img="assets/images/bowls/organic-tofu-goddess.jpg" data-desc="Crispy organic sesame-crusted tofu, creamy herb avocado sauce, edamame, cucumber ribbons, wakame seaweed, and chia seeds." data-price="$12.95" data-calories="390 kcal" data-protein="22g" data-carbs="42g" data-fats="14g" data-fiber="9g" data-sodium="480mg" data-allergens="Soy, Sesame">
+          <div class="card-poke">
+            <div class="card-poke-img-wrap">
+              <img src="assets/images/bowls/organic-tofu-goddess.jpg" alt="Organic Tofu Green Goddess Bowl" loading="lazy">
+              <span class="position-absolute top-3 start-3 badge badge-poke badge-green">100% Vegan</span>
+            </div>
+            <div class="card-poke-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-poke-title mb-0">Tofu Green Goddess</h5>
+                <span class="card-poke-price">$12.95</span>
+              </div>
+              <p class="card-poke-desc text-muted fs-7 mb-3">
+                Crispy organic sesame-crusted tofu, creamy herb avocado sauce, edamame, cucumber ribbons, wakame seaweed, and chia seeds.
+              </p>
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-3">
+                <span class="badge badge-poke badge-green">Plant-Based</span>
+                <span class="badge badge-poke badge-blue">High Fiber</span>
+                <span class="badge badge-poke badge-amber">390 kcal</span>
+              </div>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center gap-2 card-action-row">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#bowlDetailModal">View Details</button>
+                <button type="button" class="btn-primary-poke py-1 px-3 fs-7 btn-menu-add-cart"><i class="bi bi-cart-plus me-1"></i><span>Add to Cart</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-5 reveal">
+        <a href="menu.html" class="btn-primary-poke px-5 py-3">
+          <i class="bi bi-grid-3x3-gap-fill"></i>
+          <span>View All 18 Signature Bowls &amp; Filters</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Fresh Ingredients Section
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Farm-To-Bowl Transparency</span>
+        <h2 class="section-heading">Crisp, Colorful, Premium Ingredients</h2>
+        <p class="section-description">
+          We believe the secret to unforgettable flavor is starting with uncompromised, natural raw ingredients delivered daily.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Ingredient 1 -->
+        <div class="col-6 col-md-4 col-lg-2 reveal">
+          <div class="card-poke text-center p-3 h-100">
+            <img src="assets/images/ingredients/protein-salmon.jpg" alt="Atlantic Salmon" class="rounded-3 mb-2 object-cover" style="height: 100px;">
+            <h6 class="fw-bold mb-1 fs-7">Atlantic Salmon</h6>
+            <span class="text-muted fs-8">Wild & Norwegian</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 2 -->
+        <div class="col-6 col-md-4 col-lg-2 reveal reveal-delay-100">
+          <div class="card-poke text-center p-3 h-100">
+            <img src="assets/images/ingredients/protein-tuna.jpg" alt="Ahi Tuna" class="rounded-3 mb-2 object-cover" style="height: 100px;">
+            <h6 class="fw-bold mb-1 fs-7">Hawaiian Ahi</h6>
+            <span class="text-muted fs-8">Line-Caught Tuna</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 3 -->
+        <div class="col-6 col-md-4 col-lg-2 reveal reveal-delay-200">
+          <div class="card-poke text-center p-3 h-100">
+            <img src="assets/images/ingredients/topping-avocado.jpg" alt="Hass Avocado" class="rounded-3 mb-2 object-cover" style="height: 100px;">
+            <h6 class="fw-bold mb-1 fs-7">Hass Avocado</h6>
+            <span class="text-muted fs-8">Creamy & Fresh</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 4 -->
+        <div class="col-6 col-md-4 col-lg-2 reveal reveal-delay-300">
+          <div class="card-poke text-center p-3 h-100">
+            <img src="assets/images/ingredients/topping-mango.jpg" alt="Golden Mango" class="rounded-3 mb-2 object-cover" style="height: 100px;">
+            <h6 class="fw-bold mb-1 fs-7">Golden Mango</h6>
+            <span class="text-muted fs-8">Sweet Tropical</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 5 -->
+        <div class="col-6 col-md-4 col-lg-2 reveal">
+          <div class="card-poke text-center p-3 h-100">
+            <img src="assets/images/ingredients/topping-edamame.jpg" alt="Steamed Edamame" class="rounded-3 mb-2 object-cover" style="height: 100px;">
+            <h6 class="fw-bold mb-1 fs-7">Green Edamame</h6>
+            <span class="text-muted fs-8">Rich In Fiber</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 6 -->
+        <div class="col-6 col-md-4 col-lg-2 reveal reveal-delay-100">
+          <div class="card-poke text-center p-3 h-100">
+            <img src="assets/images/ingredients/sauce-spicy-mayo.jpg" alt="House Sriracha Mayo" class="rounded-3 mb-2 object-cover" style="height: 100px;">
+            <h6 class="fw-bold mb-1 fs-7">Sriracha Aioli</h6>
+            <span class="text-muted fs-8">Signature Sauce</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="nutrition.html" class="btn-secondary-poke">
+          <i class="bi bi-info-circle-fill"></i>
+          <span>Explore Allergen & Macro Breakdown</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Restaurant Benefits & Service Highlights
+       ======================================================================== -->
+  <section class="section-py wholesome-dining-section position-relative overflow-hidden" aria-labelledby="wholesomeDiningHeading">
+    <!-- Subtle Decorative Food-Inspired Ambient Shapes -->
+    <div class="wholesome-bg-decor decor-leaf-left" aria-hidden="true"></div>
+    <div class="wholesome-bg-decor decor-citrus-right" aria-hidden="true"></div>
+
+    <div class="container position-relative">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">
+          <i class="bi bi-stars me-1 text-accent-warm" aria-hidden="true"></i>Why Guests Choose Us
+        </span>
+        <h2 class="section-heading" id="wholesomeDiningHeading">Wholesome Dining Made Easy</h2>
+        <p class="section-description">
+          Whether you're stopping by for a rapid lunch or picking up dinner for the family, we craft clean, chef-curated nutrition with uncompromising freshness.
+        </p>
+      </div>
+
+      <div class="features-grid-4 stagger-grid">
+        <!-- Feature Card 1: Fresh & Healthy Ingredients -->
+        <article class="feature-box feature-card-green reveal" tabindex="0">
+          <div class="feature-card-top-accent" aria-hidden="true"></div>
+          <div class="feature-icon-circle">
+            <i class="bi bi-flower1" aria-hidden="true"></i>
+            <span class="feature-icon-dot" aria-hidden="true"></span>
+          </div>
+          <span class="feature-pill-tag">Daily Harvest</span>
+          <h3 class="feature-box-title">Fresh &amp; Healthy Ingredients</h3>
+          <p class="feature-box-desc">
+            Sashimi-grade wild fish, crisp organic local greens, and house cold-pressed dressings prepared fresh every morning.
+          </p>
+        </article>
+
+        <!-- Feature Card 2: Strict Allergen Safety -->
+        <article class="feature-box feature-card-orange reveal reveal-delay-100" tabindex="0">
+          <div class="feature-card-top-accent" aria-hidden="true"></div>
+          <div class="feature-icon-circle">
+            <i class="bi bi-shield-check" aria-hidden="true"></i>
+            <span class="feature-icon-dot" aria-hidden="true"></span>
+          </div>
+          <span class="feature-pill-tag">100% Certified Care</span>
+          <h3 class="feature-box-title">Strict Allergen Safety</h3>
+          <p class="feature-box-desc">
+            Dedicated prep stations and color-coded utensils for shellfish, gluten-free substitutions, and plant-based selections.
+          </p>
+        </article>
+
+        <!-- Feature Card 3: Curbside & Takeout -->
+        <article class="feature-box feature-card-green reveal reveal-delay-200" tabindex="0">
+          <div class="feature-card-top-accent" aria-hidden="true"></div>
+          <div class="feature-icon-circle">
+            <i class="bi bi-box-seam" aria-hidden="true"></i>
+            <span class="feature-icon-dot" aria-hidden="true"></span>
+          </div>
+          <span class="feature-pill-tag">3-Min Express Pickup</span>
+          <h3 class="feature-box-title">Curbside &amp; Takeout</h3>
+          <p class="feature-box-desc">
+            Order ahead online or arrange group catering in eco-compostable thermal bowls designed to lock in peak texture.
+          </p>
+        </article>
+
+        <!-- Feature Card 4: Award-Winning Taste -->
+        <article class="feature-box feature-card-orange reveal reveal-delay-300" tabindex="0">
+          <div class="feature-card-top-accent" aria-hidden="true"></div>
+          <div class="feature-icon-circle">
+            <i class="bi bi-award-fill" aria-hidden="true"></i>
+            <span class="feature-icon-dot" aria-hidden="true"></span>
+          </div>
+          <span class="feature-pill-tag">3x Critics' Choice</span>
+          <h3 class="feature-box-title">Award-Winning Taste</h3>
+          <p class="feature-box-desc">
+            Voted Best Healthy Fast-Casual Restaurant by regional culinary critics for three consecutive seasons.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Customer Testimonials (Interactive Glider Carousel)
+       ======================================================================== -->
+  <section class="section-py bg-secondary/30">
+    <div class="container">
+      <div class="section-title-wrap text-center mx-auto reveal">
+        <span class="section-tagline">Guest Testimonials</span>
+        <h2 class="section-heading text-center">Loved By Healthy Food Enthusiasts</h2>
+        <p class="section-description text-center mx-auto">
+          Read what our loyal community says about our fresh bowls, vibrant textures, and attentive service.
+          <em class="d-block fs-8 text-muted mt-1 fst-italic">(Drag, swipe, or use controls to glide through reviews)</em>
+        </p>
+      </div>
+
+      <!-- Interactive Glider Carousel Container -->
+      <div class="poke-glider-container reveal" id="testimonialGlider" data-autoplay="true" data-interval="4200" data-cols-desktop="3">
+        <div class="poke-glider-wrapper">
+          <div class="poke-glider-track">
+            
+            <!-- Slide 1 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke testimonial-card p-4 h-100 d-flex flex-column">
+                <div class="testimonial-content d-flex flex-column flex-grow-1">
+                  <div class="testimonial-header d-flex align-items-center gap-3 mb-3">
+                    <img src="assets/images/testimonials/customer-sarah.jpg" alt="Sarah M." class="testimonial-avatar rounded-circle object-cover flex-shrink-0" width="52" height="52">
+                    <div class="testimonial-author">
+                      <h6 class="fw-bold mb-0 fs-6">Sarah M.</h6>
+                      <small class="text-muted d-block">Marathon Runner</small>
+                    </div>
+                  </div>
+                  <div class="testimonial-stars text-amber-500 mb-2 fs-7" aria-label="5 out of 5 stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="testimonial-quote text-muted fs-7 fst-italic mb-3">
+                    "The freshest poke bowl in the entire city! The Atlantic salmon melts in your mouth, and exact macro metrics make fueling my training effortless."
+                  </p>
+                </div>
+                <div class="testimonial-footer mt-auto pt-3 border-top border-border-color d-flex justify-content-between align-items-center gap-2">
+                  <span class="badge badge-poke badge-green fs-8 text-nowrap flex-shrink-0">Verified Guest</span>
+                  <small class="text-muted fs-8 text-nowrap">Visited 2 days ago</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke testimonial-card p-4 h-100 d-flex flex-column">
+                <div class="testimonial-content d-flex flex-column flex-grow-1">
+                  <div class="testimonial-header d-flex align-items-center gap-3 mb-3">
+                    <img src="assets/images/testimonials/customer-marcus.jpg" alt="Marcus T." class="testimonial-avatar rounded-circle object-cover flex-shrink-0" width="52" height="52">
+                    <div class="testimonial-author">
+                      <h6 class="fw-bold mb-0 fs-6">Marcus T.</h6>
+                      <small class="text-muted d-block">Software Engineer</small>
+                    </div>
+                  </div>
+                  <div class="testimonial-stars text-amber-500 mb-2 fs-7" aria-label="5 out of 5 stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="testimonial-quote text-muted fs-7 fst-italic mb-3">
+                    "I visit at least three times a week for lunch. You never feel heavy after eating their bowls, and the house spicy ponzu sauce is truly addictive!"
+                  </p>
+                </div>
+                <div class="testimonial-footer mt-auto pt-3 border-top border-border-color d-flex justify-content-between align-items-center gap-2">
+                  <span class="badge badge-poke badge-coral fs-8 text-nowrap flex-shrink-0">Top Reviewer</span>
+                  <small class="text-muted fs-8 text-nowrap">Weekly Regular</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke testimonial-card p-4 h-100 d-flex flex-column">
+                <div class="testimonial-content d-flex flex-column flex-grow-1">
+                  <div class="testimonial-header d-flex align-items-center gap-3 mb-3">
+                    <img src="assets/images/testimonials/customer-elena.jpg" alt="Elena R." class="testimonial-avatar rounded-circle object-cover flex-shrink-0" width="52" height="52">
+                    <div class="testimonial-author">
+                      <h6 class="fw-bold mb-0 fs-6">Elena R.</h6>
+                      <small class="text-muted d-block">Nutrition Coach</small>
+                    </div>
+                  </div>
+                  <div class="testimonial-stars text-amber-500 mb-2 fs-7" aria-label="5 out of 5 stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="testimonial-quote text-muted fs-7 fst-italic mb-3">
+                    "As a dietitian, I always recommend Poke Bowl &amp; Fresh Fusion. High protein, healthy fats from fresh avocado, and zero hidden refined syrups."
+                  </p>
+                </div>
+                <div class="testimonial-footer mt-auto pt-3 border-top border-border-color d-flex justify-content-between align-items-center gap-2">
+                  <span class="badge badge-poke badge-blue fs-8 text-nowrap flex-shrink-0">Nutrition Expert</span>
+                  <small class="text-muted fs-8 text-nowrap">Verified Dine-in</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke testimonial-card p-4 h-100 d-flex flex-column">
+                <div class="testimonial-content d-flex flex-column flex-grow-1">
+                  <div class="testimonial-header d-flex align-items-center gap-3 mb-3">
+                    <img src="assets/images/testimonials/customer-jordan.jpg" alt="Jordan K." class="testimonial-avatar rounded-circle object-cover flex-shrink-0" width="52" height="52">
+                    <div class="testimonial-author">
+                      <h6 class="fw-bold mb-0 fs-6">Jordan K.</h6>
+                      <small class="text-muted d-block">Creative Director</small>
+                    </div>
+                  </div>
+                  <div class="testimonial-stars text-amber-500 mb-2 fs-7" aria-label="5 out of 5 stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="testimonial-quote text-muted fs-7 fst-italic mb-3">
+                    "The custom bowl builder is pure genius. Pick your grains, choose your fish, and load up on seaweed and avocado for the best quick meal in town!"
+                  </p>
+                </div>
+                <div class="testimonial-footer mt-auto pt-3 border-top border-border-color d-flex justify-content-between align-items-center gap-2">
+                  <span class="badge badge-poke badge-green fs-8 text-nowrap flex-shrink-0">Verified Guest</span>
+                  <small class="text-muted fs-8 text-nowrap">Online Pre-order</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke testimonial-card p-4 h-100 d-flex flex-column">
+                <div class="testimonial-content d-flex flex-column flex-grow-1">
+                  <div class="testimonial-header d-flex align-items-center gap-3 mb-3">
+                    <img src="assets/images/testimonials/customer-sarah.jpg" alt="Chloe D." class="testimonial-avatar rounded-circle object-cover flex-shrink-0" width="52" height="52">
+                    <div class="testimonial-author">
+                      <h6 class="fw-bold mb-0 fs-6">Chloe D.</h6>
+                      <small class="text-muted d-block">Yoga Instructor</small>
+                    </div>
+                  </div>
+                  <div class="testimonial-stars text-amber-500 mb-2 fs-7" aria-label="5 out of 5 stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="testimonial-quote text-muted fs-7 fst-italic mb-3">
+                    "Their vegan Green Goddess tofu bowl is out of this world! The toasted sesame crust and creamy avocado dressing make plant-based dining a joy."
+                  </p>
+                </div>
+                <div class="testimonial-footer mt-auto pt-3 border-top border-border-color d-flex justify-content-between align-items-center gap-2">
+                  <span class="badge badge-poke badge-green fs-8 text-nowrap flex-shrink-0">Plant Powered</span>
+                  <small class="text-muted fs-8 text-nowrap">Patio Dining</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="poke-glider-slide">
+              <div class="card-poke testimonial-card p-4 h-100 d-flex flex-column">
+                <div class="testimonial-content d-flex flex-column flex-grow-1">
+                  <div class="testimonial-header d-flex align-items-center gap-3 mb-3">
+                    <img src="assets/images/testimonials/customer-marcus.jpg" alt="Liam W." class="testimonial-avatar rounded-circle object-cover flex-shrink-0" width="52" height="52">
+                    <div class="testimonial-author">
+                      <h6 class="fw-bold mb-0 fs-6">Liam W.</h6>
+                      <small class="text-muted d-block">CrossFit Athlete</small>
+                    </div>
+                  </div>
+                  <div class="testimonial-stars text-amber-500 mb-2 fs-7" aria-label="5 out of 5 stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="testimonial-quote text-muted fs-7 fst-italic mb-3">
+                    "Getting 42g of clean protein with double Ahi tuna in under three minutes post-workout is unbeatable. Freshness you can taste in every single bite!"
+                  </p>
+                </div>
+                <div class="testimonial-footer mt-auto pt-3 border-top border-border-color d-flex justify-content-between align-items-center gap-2">
+                  <span class="badge badge-poke badge-coral fs-8 text-nowrap flex-shrink-0">High Protein</span>
+                  <small class="text-muted fs-8 text-nowrap">Takeout Regular</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Glider Controls: Pagination Dots & Next/Prev Navigation -->
+        <div class="poke-glider-controls">
+          <div class="poke-glider-dots" aria-label="Carousel pagination"></div>
+          <div class="poke-glider-nav">
+            <button class="poke-glider-btn poke-glider-prev" type="button" aria-label="Previous reviews">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="poke-glider-btn poke-glider-next" type="button" aria-label="Next reviews">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Promotional CTA Banner
+       ======================================================================== -->
+  <section class="section-py text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);">
+    <div class="container text-center reveal">
+      <div class="max-w-3xl mx-auto">
+        <span class="badge badge-poke badge-coral mb-3">Special Introductory Offer</span>
+        <h2 class="display-5 fw-bold mb-3 text-white">Taste The Difference Today</h2>
+        <p class="lead text-emerald-100 mb-4">
+          Enjoy <strong>15% OFF</strong> your first custom-crafted bowl or order enquiry with promotional promo code <code>FRESHFUSION15</code>.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="home-2.html#bowl-builder" class="btn-coral-poke px-4 py-3">
+            <i class="bi bi-lightning-charge-fill"></i>
+            <span>Build Your Custom Bowl Now</span>
+          </a>
+          <a href="contact.html" class="btn-secondary-poke px-4 py-3">
+            <i class="bi bi-send-fill"></i>
+            <span>Send An Order Enquiry</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Gallery & Lightbox Preview
+       ======================================================================== -->
+  <section class="section-py">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <span class="section-tagline">Visual Feast</span>
+        <h2 class="section-heading">Captured From Our Kitchen & Dining Patio</h2>
+        <p class="section-description">
+          Click on any photo below to inspect our dishes up close.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-6 col-md-4 reveal">
+          <div class="card-poke-img-wrap rounded-4 cursor-pointer hover-zoom-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-gallery-img="assets/images/gallery/gallery-1.jpg" data-gallery-caption="Table feast with Hawaiian Ahi and Salmon poke bowls">
+            <img src="assets/images/gallery/gallery-1.jpg" alt="Poke bowl feast" loading="lazy">
+          </div>
+        </div>
+        <div class="col-6 col-md-4 reveal reveal-delay-100">
+          <div class="card-poke-img-wrap rounded-4 cursor-pointer hover-zoom-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-gallery-img="assets/images/gallery/gallery-2.jpg" data-gallery-caption="Sashimi-grade salmon cubes tossed with black sesame">
+            <img src="assets/images/gallery/gallery-2.jpg" alt="Salmon cubes with sesame" loading="lazy">
+          </div>
+        </div>
+        <div class="col-6 col-md-4 reveal reveal-delay-200">
+          <div class="card-poke-img-wrap rounded-4 cursor-pointer hover-zoom-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-gallery-img="assets/images/gallery/gallery-3.jpg" data-gallery-caption="Outdoor garden patio dining experience">
+            <img src="assets/images/gallery/gallery-3.jpg" alt="Patio dining" loading="lazy">
+          </div>
+        </div>
+        <div class="col-6 col-md-4 reveal">
+          <div class="card-poke-img-wrap rounded-4 cursor-pointer hover-zoom-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-gallery-img="assets/images/gallery/gallery-4.jpg" data-gallery-caption="Crisp organic vegetable topping bar">
+            <img src="assets/images/gallery/gallery-4.jpg" alt="Crisp vegetable bar" loading="lazy">
+          </div>
+        </div>
+        <div class="col-6 col-md-4 reveal reveal-delay-100">
+          <div class="card-poke-img-wrap rounded-4 cursor-pointer hover-zoom-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-gallery-img="assets/images/gallery/gallery-5.jpg" data-gallery-caption="Chef drizzling artisanal ponzu dressing">
+            <img src="assets/images/gallery/gallery-5.jpg" alt="Chef plating poke bowl" loading="lazy">
+          </div>
+        </div>
+        <div class="col-6 col-md-4 reveal reveal-delay-200">
+          <div class="card-poke-img-wrap rounded-4 cursor-pointer hover-zoom-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-gallery-img="assets/images/gallery/gallery-6.jpg" data-gallery-caption="Organic ceremonial iced matcha pairing">
+            <img src="assets/images/gallery/gallery-6.jpg" alt="Iced beverage and poke bowl" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Lightbox Modal -->
+  <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalCaption" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-body p-0 position-relative text-center">
+          <button type="button" class="btn-close btn-close-white position-absolute top-2 end-2 z-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img id="galleryModalImg" src="" alt="Enlarged gallery view" class="img-fluid rounded-4 shadow-2xl mx-auto" style="max-height: 80vh; object-fit: contain;">
+          <p id="galleryModalCaption" class="text-white mt-3 fw-semibold"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Bowl Detail Modal (Nutrition & Ingredients)
+       ======================================================================== -->
+  <div class="modal fade" id="bowlDetailModal" tabindex="-1" aria-labelledby="bowlDetailTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-card border-border-color rounded-4 overflow-hidden">
+        
+        <div class="modal-header border-border-color pb-2">
+          <div>
+            <span class="badge badge-poke badge-green mb-1">Detailed Nutritional Profile</span>
+            <h4 class="modal-title fw-bold" id="bowlDetailTitle">Signature Poke Bowl</h4>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <div class="row g-4 align-items-center">
+            
+            <div class="col-md-5">
+              <div class="rounded-4 overflow-hidden shadow-sm" style="aspect-ratio: 4/3;">
+                <img id="bowlDetailImg" src="" alt="Bowl Detail" class="w-100 h-100 object-cover">
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="text-muted fs-7">Estimated Price:</span>
+                <span id="bowlDetailPrice" class="fs-4 fw-bold text-emerald-500 font-heading">$15.00</span>
+              </div>
+            </div>
+
+            <div class="col-md-7">
+              <p id="bowlDetailDesc" class="text-muted fs-7 mb-3"></p>
+
+              <!-- Nutrition Specs Matrix -->
+              <h6 class="fw-bold fs-7 text-uppercase letter-spacing-1 text-muted mb-2">Estimated Macro Breakdown</h6>
+              <div class="row g-2 text-center mb-3">
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Calories</small>
+                    <span id="bowlDetailCalories" class="fw-bold fs-7 text-emerald-500">520 kcal</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Protein</small>
+                    <span id="bowlDetailProtein" class="fw-bold fs-7 text-rose-500">34g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Carbs</small>
+                    <span id="bowlDetailCarbs" class="fw-bold fs-7 text-amber-500">48g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Healthy Fats</small>
+                    <span id="bowlDetailFats" class="fw-bold fs-7 text-emerald-600">16g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Fiber</small>
+                    <span id="bowlDetailFiber" class="fw-bold fs-7 text-sky-500">7g</span>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 rounded-3 bg-secondary/60">
+                    <small class="text-muted d-block fs-8">Sodium</small>
+                    <span id="bowlDetailSodium" class="fw-bold fs-7 text-indigo-500">640mg</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Allergen Notice -->
+              <div class="p-2.5 rounded-3 border border-amber-500/30 bg-amber-500/10 mb-3">
+                <small class="fw-bold text-amber-600 d-block mb-1"><i class="bi bi-exclamation-triangle-fill me-1"></i> Allergen Information:</small>
+                <small id="bowlDetailAllergens" class="text-muted fs-8">Fish, Soy, Sesame</small>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" id="bowlDetailAddToCartBtn" class="btn-primary-poke w-100 justify-content-center py-2.5"><i class="bi bi-cart-plus-fill me-1"></i><span>Add Bowl to Cart</span></button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer border-border-color py-2 bg-secondary/20">
+          <small class="text-muted fs-9 w-100 text-center">
+            *All values are illustrative estimates. Actual values depend on dressing portions and prep. Not medical advice.
+          </small>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Menu Bowl Cart Confirmation Modal (Responsive One-Product Cart)
+       ======================================================================== -->
+  <div class="modal fade" id="menuBowlCartModal" tabindex="-1" aria-labelledby="menuBowlCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-cart-check-fill fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0 text-white" id="menuBowlCartModalLabel">Added to Cart!</h5>
+              <small class="text-muted">Fresh Kitchen Order • Prepared Fresh</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          <!-- Item Card -->
+          <div class="card-poke p-3 mb-3 bg-secondary/30">
+            <div class="d-flex align-items-center gap-3">
+              <img id="cartModalImg" src="assets/images/bowls/classic-ahi-tuna.jpg" alt="Selected Bowl" class="rounded-3 object-cover flex-shrink-0" width="70" height="70">
+              <div class="flex-grow-1">
+                <span class="badge badge-poke badge-coral mb-1 fs-9">Item Added to Cart</span>
+                <h6 class="fw-bold mb-1 text-emerald-600 font-heading" id="cartModalTitle">Hawaiian Classic Ahi</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="badge badge-poke badge-green fs-9" id="cartModalQty">Qty: 1</span>
+                  <span class="fw-bolder fs-6 text-emerald-600 font-heading" id="cartModalUnitPrice">$14.95</span>
+                </div>
+              </div>
+            </div>
+            <div class="fs-8 text-muted mt-2 pt-2 border-top border-border-color" id="cartModalDesc">
+              Wild Ahi tuna, sushi rice, sweet Maui onions, scallions, toasted sesame, cucumber.
+            </div>
+          </div>
+
+          <!-- Total Summary -->
+          <div class="d-flex justify-content-between align-items-center p-3 rounded-3 bg-secondary/50 border border-border-color mb-3">
+            <div>
+              <small class="text-muted d-block fs-8">Total Order Price</small>
+              <h4 class="fw-bolder text-emerald-600 mb-0 font-heading" id="cartModalTotal">$14.95</h4>
+            </div>
+            <span class="badge badge-poke badge-blue fs-8">Free Dine-In &amp; Pickup</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex flex-column gap-2">
+            <a id="cartModalProceedBtn" href="contact.html?source=cart#order-enquiry-section" class="btn-coral-poke w-100 justify-content-center py-2.5">
+              <i class="bi bi-bag-check-fill"></i>
+              <span>Proceed to Order / Checkout</span>
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill py-2" data-bs-dismiss="modal">
+              <i class="bi bi-arrow-left"></i> Continue Browsing Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Footer (Consistent Across All Pages)
+       ======================================================================== -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        
+        <!-- Brand Info -->
+        <div class="col-lg-4">
+          <a href="index.html" class="d-inline-block mb-3" aria-label="Home">
+            <img src="assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" style="height: 48px;">
+            <img src="assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" style="height: 48px;">
+          </a>
+          <p class="text-muted fs-7 mb-4 pe-lg-4">
+            Fresh, healthy, Hawaiian-inspired poke bowls crafted with sustainably sourced sashimi-grade seafood, organic greens, and artisanal sauces.
+          </p>
+          <div class="d-flex gap-2 footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Explore</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="index.html">Fresh Poke Classic</a></li>
+            <li><a href="home-2.html">Interactive Bowl Studio</a></li>
+            <li><a href="about.html">About Our Story</a></li>
+            <li><a href="menu.html">Signature Menu</a></li>
+            <li><a href="nutrition.html">Nutrition Information</a></li>
+            <li><a href="blog.html">Fresh Journal & Blog</a></li>
+            <li><a href="contact.html">Contact & Hours</a></li>
+          </ul>
+        </div>
+
+        <!-- Menu Categories -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Bowl Categories</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 fs-7">
+            <li><a href="menu.html?category=salmon">Salmon Bowls</a></li>
+            <li><a href="menu.html?category=tuna">Tuna Bowls</a></li>
+            <li><a href="menu.html?category=chicken">Chicken Bowls</a></li>
+            <li><a href="menu.html?category=shrimp">Shrimp Bowls</a></li>
+            <li><a href="menu.html?category=tofu-veg">Tofu & Vegetarian</a></li>
+            <li><a href="menu.html?category=fusion">Signature Fusion</a></li>
+          </ul>
+        </div>
+
+        <!-- Opening Hours & Sample Location -->
+        <div class="col-md-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Hours & Sample Location</h6>
+          <ul class="list-unstyled text-muted fs-7 d-flex flex-column gap-2 mb-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-emerald-400"></i>
+              <span>124 Fresh Harvest Way, Marina Bay</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-emerald-400"></i>
+              <span>(555) 019-4829</span>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-emerald-400"></i>
+              <span>hello@pokebowl-freshfusion.sample</span>
+            </li>
+            <li class="d-flex align-items-start gap-2 mt-1">
+              <i class="bi bi-clock-fill text-emerald-400 mt-1"></i>
+              <div>
+                <div>Mon - Fri: 10:30 AM – 9:30 PM</div>
+                <div>Sat - Sun: 11:00 AM – 10:00 PM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="pages/legal/privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="pages/legal/terms.html" class="text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Floating Button -->
+  <button id="backToTopBtn" class="btn-icon-round position-fixed bottom-4 end-4 shadow-lg z-3 d-none" aria-label="Back to top" style="background: var(--color-primary); color: #fff; border: none;">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/direction.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/glider.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

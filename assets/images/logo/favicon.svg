@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="favBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="salmonG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB7185"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#favBg)"/>
+  <!-- Bowl Graphic -->
+  <path d="M12 20 L52 44" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M14 34 C14 50 24 54 32 54 C40 54 50 50 50 34 Z" fill="#10B981"/>
+  <ellipse cx="32" cy="34" rx="18" ry="6" fill="#047857"/>
+  <!-- Salmon Cube -->
+  <rect x="26" y="26" width="10" height="8" rx="2" fill="url(#salmonG)" transform="rotate(-10 31 30)"/>
+  <!-- Avocado slice -->
+  <path d="M18 28 C18 24 23 22 28 27 C24 30 19 31 18 28 Z" fill="#84CC16"/>
+  <!-- Leaf -->
+  <path d="M33 22 C37 15 44 17 42 23 C38 25 34 24 33 22 Z" fill="#4ADE80"/>
+  <!-- Sesame seeds -->
+  <circle cx="39" cy="30" r="1.5" fill="#FEF3C7"/>
+  <circle cx="23" cy="35" r="1.2" fill="#FEF3C7"/>
+</svg>

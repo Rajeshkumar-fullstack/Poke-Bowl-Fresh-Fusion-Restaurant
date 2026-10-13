@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Poke Bowl & Fresh Fusion Restaurant</title>
+  <meta name="description" content="Terms of Service and Website Usage Conditions for Poke Bowl & Fresh Fusion Restaurant.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/logo/favicon.svg">
+
+  <script>
+    (function() {
+      const theme = localStorage.getItem('poke_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      const dir = localStorage.getItem('poke_direction') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <link rel="stylesheet" href="../../assets/css/themes.css">
+  <link rel="stylesheet" href="../../assets/css/animations.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="poke-navbar" id="mainNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="../../index.html" class="poke-nav-brand" aria-label="Home">
+        <img src="../../assets/images/logo/logo.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-light" width="180" height="45">
+        <img src="../../assets/images/logo/logo-dark.svg" alt="Poke Bowl & Fresh Fusion Logo" class="logo-dark" width="180" height="45">
+      </a>
+
+      <ul class="poke-nav-menu" role="menubar">
+        <li role="none"><a href="../../index.html" class="poke-nav-link" role="menuitem">Home 1</a></li>
+        <li role="none"><a href="../../home-2.html" class="poke-nav-link" role="menuitem">Home 2</a></li>
+        <li role="none"><a href="../../about.html" class="poke-nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="../../menu.html" class="poke-nav-link" role="menuitem">Menu</a></li>
+        <li role="none"><a href="../../nutrition.html" class="poke-nav-link" role="menuitem">Nutrition</a></li>
+        <li role="none"><a href="../../blog.html" class="poke-nav-link" role="menuitem">Blog</a></li>
+        <li role="none"><a href="../../contact.html" class="poke-nav-link" role="menuitem">Contact</a></li>
+      </ul>
+
+      <div class="poke-nav-controls">
+        <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL">
+          <i class="bi bi-translate"></i>
+          <span class="direction-label">RTL</span>
+        </button>
+
+        <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme">
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+        </button>
+
+        <a href="../../home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
+          <i class="bi bi-lightning-charge-fill"></i>
+          <span>Build Bowl</span>
+        </a>
+
+        <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+      <a href="../../index.html" class="poke-nav-brand">
+        <img src="../../assets/images/logo/logo.svg" alt="Poke Bowl Logo" class="logo-light" style="height: 38px;">
+        <img src="../../assets/images/logo/logo-dark.svg" alt="Poke Bowl Logo" class="logo-dark" style="height: 38px;">
+      </a>
+      <button class="btn-icon-round mobile-nav-close" type="button" aria-label="Close menu" onclick="document.querySelector('.poke-hamburger').click()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <ul class="nav flex-column gap-2 mb-4">
+      <li class="nav-item"><a href="../../index.html" class="nav-link mobile-nav-link fw-bold">Home 1</a></li>
+      <li class="nav-item"><a href="../../home-2.html" class="nav-link mobile-nav-link fw-bold">Home 2</a></li>
+      <li class="nav-item"><a href="../../about.html" class="nav-link mobile-nav-link fw-bold">About Our Story</a></li>
+      <li class="nav-item"><a href="../../menu.html" class="nav-link mobile-nav-link fw-bold">Signature Menu</a></li>
+      <li class="nav-item"><a href="../../nutrition.html" class="nav-link mobile-nav-link fw-bold">Nutrition & Macros</a></li>
+      <li class="nav-item"><a href="../../blog.html" class="nav-link mobile-nav-link fw-bold">Fresh Journal & Blog</a></li>
+      <li class="nav-item"><a href="../../contact.html" class="nav-link mobile-nav-link fw-bold">Contact & Enquiry</a></li>
+    </ul>
+    <div class="mt-auto pt-3 border-top">
+      <a href="../../home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
+        <span>Build Your Bowl</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Content Section -->
+  <main class="section-py">
+    <div class="container max-w-4xl">
+      <div class="mb-4">
+        <a href="../../index.html" class="text-muted fs-8 d-inline-flex align-items-center gap-1 mb-2">
+          <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+        <h1 class="display-6 fw-bold mb-2">Terms of Service</h1>
+        <small class="text-muted">Effective Date: October 2026 &bull; Poke Bowl & Fresh Fusion Restaurant</small>
+      </div>
+
+      <div class="card-poke p-4 p-md-5">
+        <h4 class="fw-bold mb-3">1. Website Purpose</h4>
+        <p class="text-muted fs-7 mb-4">
+          Welcome to the official website of <strong>Poke Bowl & Fresh Fusion Restaurant</strong>. This website is provided to showcase restaurant menus, ingredient transparency, culinary team information, and interactive bowl customization simulations.
+        </p>
+
+        <h4 class="fw-bold mb-3">2. Pricing and Nutritional Disclaimers</h4>
+        <p class="text-muted fs-7 mb-4">
+          All food prices, calorie counts, and macronutrient statistics displayed on this website are illustrative sample estimates. In-restaurant retail prices and actual nutritional values may fluctuate due to market seafood costs, seasonal produce size, and individual customer dressing choices.
+        </p>
+
+        <h4 class="fw-bold mb-3">3. Allergen Advisory</h4>
+        <p class="text-muted fs-7 mb-4">
+          While our kitchen observes strict food handling and sanitization procedures, our facility processes fish, shellfish, soy, sesame, tree nuts, and gluten. Customers with severe anaphylactic allergies should inform management prior to placing catering or customized orders.
+        </p>
+
+        <h4 class="fw-bold mb-3">4. Intellectual Property</h4>
+        <p class="text-muted fs-7 mb-0">
+          All brand marks, logos, graphics, and layout designs are the proprietary assets of Poke Bowl & Fresh Fusion Restaurant. Unauthorized commercial redistribution is strictly prohibited.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="poke-footer">
+    <div class="container">
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center mt-0 pt-0 border-0">
+        <p class="mb-0 text-muted">
+          &copy; 2026 Poke Bowl & Fresh Fusion Restaurant. All rights reserved.
+        </p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="privacy.html" class="text-muted">Privacy Policy</a>
+          <span class="text-muted">&bull;</span>
+          <a href="terms.html" class="text-emerald-400">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/theme.js"></script>
+  <script src="../../assets/js/direction.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>
