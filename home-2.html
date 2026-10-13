@@ -151,17 +151,6 @@
     </ul>
 
     <div class="mt-auto pt-3 border-top">
-      <div class="d-flex gap-2 mb-3">
-        <button class="btn btn-outline-secondary w-50 direction-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
-          <i class="bi bi-translate"></i>
-          <span class="direction-label">LTR</span>
-        </button>
-        <button class="btn btn-outline-secondary w-50 theme-toggle-btn d-flex align-items-center justify-content-center gap-1" type="button">
-          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
-          <i class="bi bi-sun-fill theme-icon-sun"></i>
-          <span>Theme</span>
-        </button>
-      </div>
       <a href="#bowl-builder" class="btn-coral-poke w-100 justify-content-center">
         <i class="bi bi-sliders"></i>
         <span>Build Your Bowl</span>
@@ -546,10 +535,10 @@
         <div class="col-lg-4" id="builderSummaryPanel">
           <div class="builder-summary-card">
             
-            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom flex-wrap gap-2">
               <div>
                 <span class="badge badge-poke badge-coral mb-1"><i class="bi bi-cart3 me-1"></i> One-Product Bowl Cart</span>
-                <h5 class="fw-bold mb-0">Your Custom Bowl</h5>
+                <h5 class="fw-bold mb-0 text-white font-heading">Your Custom Bowl</h5>
               </div>
               <button id="builderResetBtn" class="btn btn-sm btn-outline-secondary rounded-pill px-2.5 py-1" type="button" title="Reset all selections">
                 <i class="bi bi-arrow-counterclockwise"></i> Reset
@@ -655,32 +644,36 @@
       </div>
 
       <!-- Responsive Mobile Sticky Cart Bar (<992px) -->
-      <div id="mobileBuilderCartBar" class="mobile-builder-cart-bar d-lg-none">
+      <div id="mobileBuilderCartBar" class="mobile-builder-cart-bar d-lg-none mobile-cart-hidden">
         <div class="d-flex align-items-center justify-content-between gap-2">
-          <div class="flex-grow-1">
-            <div class="d-flex align-items-center gap-1.5 mb-0.5">
-              <span class="badge badge-poke badge-green fs-9 py-0.5 px-2">1 Custom Bowl</span>
-              <span id="mobileCartQtyBadge" class="badge badge-poke badge-coral fs-9 py-0.5 px-1.5">Qty: 1</span>
+          
+          <!-- Left: Price, Calories & Quantity Badge -->
+          <div class="mobile-cart-info d-flex flex-column justify-content-center min-w-0">
+            <div class="d-flex align-items-baseline gap-1.5 lh-1 mb-1">
+              <span id="mobileCartPrice" class="fw-bolder text-emerald-400 fs-6 font-heading text-nowrap">$15.25</span>
+              <span id="mobileCartCals" class="text-muted fs-8 text-nowrap">565 kcal</span>
             </div>
-            <div class="d-flex align-items-baseline gap-2">
-              <span id="mobileCartPrice" class="fw-bolder text-emerald-600 fs-6 font-heading">$15.25</span>
-              <span id="mobileCartCals" class="text-muted fs-8">565 kcal</span>
+            <div class="d-flex align-items-center gap-1">
+              <span id="mobileCartQtyBadge" class="badge badge-poke badge-coral text-nowrap">Qty: 1</span>
+              <span class="badge badge-poke badge-green text-nowrap d-none d-sm-inline-block">Custom Bowl</span>
             </div>
           </div>
-          <div class="d-flex gap-2 flex-shrink-0">
-            <a href="#builderSummaryPanel" class="btn btn-sm btn-outline-secondary rounded-pill px-2.5 py-1.5 fs-8 d-flex align-items-center gap-1">
+
+          <!-- Right: Details & Add Cart Actions -->
+          <div class="mobile-cart-actions d-flex gap-1.5 flex-shrink-0 align-items-center">
+            <a href="#builderSummaryPanel" class="btn btn-sm btn-outline-secondary rounded-pill px-2.5 py-1.5 fs-8 d-flex align-items-center gap-1 text-nowrap">
               <i class="bi bi-sliders"></i>
               <span>Details</span>
             </a>
-            <button id="mobileAddToCartBtn" type="button" class="btn btn-sm btn-coral-poke rounded-pill px-3 py-1.5 fs-8 d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#customBowlCartModal">
+            <button id="mobileAddToCartBtn" type="button" class="btn btn-sm btn-coral-poke rounded-pill px-2.5 py-1.5 fs-8 d-flex align-items-center gap-1 text-nowrap" data-bs-toggle="modal" data-bs-target="#customBowlCartModal">
               <i class="bi bi-cart-plus-fill"></i>
               <span>Add Cart</span>
             </button>
           </div>
+
         </div>
       </div>
 
-      </div>
     </div>
   </section>
 

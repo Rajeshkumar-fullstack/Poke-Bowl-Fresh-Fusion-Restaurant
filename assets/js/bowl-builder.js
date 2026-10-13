@@ -807,6 +807,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Mobile Details button: smoothly scroll to builderSummaryPanel avoiding sticky navbar overlap
+  const mobileDetailsLink = document.querySelector('a[href="#builderSummaryPanel"]');
+  if (mobileDetailsLink) {
+    mobileDetailsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const panel = document.getElementById('builderSummaryPanel');
+      if (panel) {
+        const navbar = document.querySelector('.poke-navbar');
+        const navHeight = navbar ? navbar.offsetHeight : 75;
+        const panelTop = panel.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+        window.scrollTo({
+          top: Math.max(0, panelTop),
+          behavior: 'smooth'
+        });
+      }
+    });
+  }
+
+  // Smart mobile sticky cart bar visibility:
+  // ONLY show when actively browsing inside the bowl builder ingredient stations,
+  // hide when above it, when summaryPanel is in view, or when scrolled past to Chef's Recommendations.
+  const builderSection = document.getElementById('bowl-builder');
+  const summaryPanelEl = document.getElementById('builderSummaryPanel');
+  const mobileBarEl = document.getElementById('mobileBuilderCartBar');
+
+  if (builderSection && mobileBarEl) {
+    function updateMobileCartBarVisibility() {
+      if (window.innerWidth >= 992) {
+        mobileBarEl.classList.add('mobile-cart-hidden');
+        return;
+      }
+
+      const rect = builderSection.getBoundingClientRect();
+      const winH = window.innerHeight || document.documentElement.clientHeight;
+      const navH = 75;
+
+      // Check if builder section is in view
+      const inBuilder = rect.top <= navH + 100 && rect.bottom >= winH * 0.3;
+
+      if (!inBuilder) {
+        mobileBarEl.classList.add('mobile-cart-hidden');
+        return;
+      }
+
+      // Check if summary panel is visible or reached
+      if (summaryPanelEl) {
+        const sumRect = summaryPanelEl.getBoundingClientRect();
+        // If top of summary panel has entered the viewport (above bottom of screen)
+        if (sumRect.top <= winH * 0.85) {
+          mobileBarEl.classList.add('mobile-cart-hidden');
+          return;
+        }
+      }
+
+      // Inside builder stations before summary panel
+      mobileBarEl.classList.remove('mobile-cart-hidden');
+    }
+
+    window.addEventListener('scroll', updateMobileCartBarVisibility, { passive: true });
+    window.addEventListener('resize', updateMobileCartBarVisibility, { passive: true });
+    updateMobileCartBarVisibility();
+  }
+
   // Initial render
   updateUI();
 });
