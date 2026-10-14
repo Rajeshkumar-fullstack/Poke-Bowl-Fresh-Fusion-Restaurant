@@ -20,90 +20,159 @@
   // Check user preference for reduced motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Mark document as JS-ready for graceful no-js fallback
+  if (typeof document !== 'undefined') {
+    document.documentElement.classList.add('js-ready');
+    if (document.body) document.body.classList.add('js-ready');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    if (document.body) document.body.classList.add('js-ready');
     initHeroCinematicReveal();
     initAnimatedCounters();
     initScrollRevealObserver();
+    initKineticTypography();
     initHeroParallax();
     initMagneticButtons();
     initFailSafeTimeout();
   });
 
   /* --------------------------------------------------------------------------
-     2. Hero Cinematic Split-Word Reveal
+     Split-Text Helper: Splits heading into overflow:hidden masks and sliding inner words
      -------------------------------------------------------------------------- */
-  function initHeroCinematicReveal() {
-    if (prefersReducedMotion) return;
+  function splitHeadingIntoWords(heading) {
+    if (!heading || heading.dataset.splitApplied === 'true') return;
+    heading.dataset.splitApplied = 'true';
 
-    const heroTitle = document.querySelector('.hero-title');
-    if (!heroTitle || heroTitle.dataset.splitApplied) return;
-    heroTitle.dataset.splitApplied = 'true';
+    // Accessibility: preserve full readable string for assistive tech
+    const fullText = heading.textContent.trim().replace(/\s+/g, ' ');
+    if (!heading.getAttribute('aria-label')) {
+      heading.setAttribute('aria-label', fullText);
+    }
 
-    // Helper: Split text into word spans while preserving existing HTML tags
-    function splitNode(node) {
+    function processNode(node) {
       if (node.nodeType === Node.TEXT_NODE) {
-        const words = node.textContent.split(/(\s+)/);
+        const text = node.textContent;
+        if (!text || !text.trim()) {
+          return document.createTextNode(text);
+        }
+        const parts = text.split(/(\s+)/);
         const fragment = document.createDocumentFragment();
-        words.forEach((word) => {
-          if (!word) return;
-          if (/^\s+$/.test(word)) {
-            fragment.appendChild(document.createTextNode(word));
+
+        parts.forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            fragment.appendChild(document.createTextNode(part));
           } else {
-            const wordSpan = document.createElement('span');
-            wordSpan.className = 'split-text-word';
-            wordSpan.setAttribute('dir', 'ltr');
+            const maskSpan = document.createElement('span');
+            maskSpan.className = 'split-word-mask split-text-word';
+            maskSpan.setAttribute('aria-hidden', 'true');
+
             const innerSpan = document.createElement('span');
-            innerSpan.className = 'split-text-inner';
-            innerSpan.setAttribute('dir', 'ltr');
-            innerSpan.textContent = word;
-            wordSpan.appendChild(innerSpan);
-            fragment.appendChild(wordSpan);
+            innerSpan.className = 'split-word-inner split-text-inner';
+            innerSpan.textContent = part;
+
+            maskSpan.appendChild(innerSpan);
+            fragment.appendChild(maskSpan);
           }
         });
-        node.parentNode.replaceChild(fragment, node);
-      } else if (node.nodeType === Node.ELEMENT_NODE) {
-        // Do not split inside BR or already processed elements
-        if (node.tagName !== 'BR') {
-          Array.from(node.childNodes).forEach(splitNode);
-        }
+        return fragment;
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BR') {
+        const childNodes = Array.from(node.childNodes);
+        childNodes.forEach((child) => {
+          const replacement = processNode(child);
+          if (replacement && replacement !== child) {
+            node.replaceChild(replacement, child);
+          }
+        });
+        return node;
       }
+      return node;
     }
 
-    Array.from(heroTitle.childNodes).forEach(splitNode);
-
-    // Stagger word reveal
-    const words = heroTitle.querySelectorAll('.split-text-word');
-    words.forEach((word, index) => {
-      setTimeout(() => {
-        word.classList.add('is-revealed');
-      }, 120 + index * 65);
+    const childNodes = Array.from(heading.childNodes);
+    childNodes.forEach((child) => {
+      const replacement = processNode(child);
+      if (replacement && replacement !== child) {
+        heading.replaceChild(replacement, child);
+      }
     });
 
-    // Animate hero subtitle & CTA with delay
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-      heroSubtitle.style.opacity = '0';
-      heroSubtitle.style.transform = 'translateY(22px)';
-      heroSubtitle.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-      setTimeout(() => {
-        heroSubtitle.style.opacity = '1';
-        heroSubtitle.style.transform = 'translateY(0)';
-      }, 180 + words.length * 60);
+    heading.classList.add('split-heading-ready');
+  }
+
+  function revealSplitHeading(heading, baseDelay = 0, staggerMs = 60) {
+    if (!heading) return;
+    const inners = heading.querySelectorAll('.split-word-inner, .split-text-inner');
+    inners.forEach((inner, idx) => {
+      inner.style.transitionDelay = `${baseDelay + idx * staggerMs}ms`;
+    });
+    heading.classList.add('is-split-revealed', 'is-revealed');
+    heading.querySelectorAll('.split-word-mask, .split-text-word').forEach((mask) => {
+      mask.classList.add('is-revealed');
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     2. Hero Cinematic Staggered Entry Animation (Badge -> Heading -> Subtitle -> CTA -> Meta)
+     -------------------------------------------------------------------------- */
+  function initHeroCinematicReveal() {
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.hero-stagger-badge, .hero-stagger-title, .hero-stagger-desc, .hero-stagger-cta, .hero-stagger-meta').forEach((el) => {
+        el.classList.add('is-animated');
+      });
+      document.querySelectorAll('.split-word-inner, .split-text-inner').forEach((el) => {
+        el.style.transform = 'translateY(0%)';
+        el.style.opacity = '1';
+      });
+      return;
     }
 
-    const heroCtas = document.querySelector('.hero-cta-group');
-    if (heroCtas) {
-      heroCtas.style.opacity = '0';
-      heroCtas.style.transform = 'translateY(18px)';
-      heroCtas.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+    const hero = document.querySelector('.hero-section, .page-hero, .blog-hero');
+    if (!hero) return;
+
+    // 1. Badge Element (First to animate)
+    const heroBadge = hero.querySelector('.hero-pill-badge, .hero-badge, .badge-coral, .badge-green, .badge-amber, .badge-blue, .badge-poke');
+    if (heroBadge) {
+      heroBadge.classList.add('hero-stagger-badge');
+      setTimeout(() => heroBadge.classList.add('is-animated'), 60);
+    }
+
+    // 2. Main Headline (Second to animate, automatic split-text with 0.06s stagger)
+    const heroTitle = hero.querySelector('.hero-title');
+    if (heroTitle) {
+      heroTitle.classList.add('hero-stagger-title');
+      splitHeadingIntoWords(heroTitle);
+
       setTimeout(() => {
-        heroCtas.style.opacity = '1';
-        heroCtas.style.transform = 'translateY(0)';
-      }, 280 + words.length * 60);
+        revealSplitHeading(heroTitle, 80, 60); // 0.06s (60ms) stagger per word
+        heroTitle.classList.add('is-animated');
+      }, 140);
+    }
+
+    // 3. Subheadline / Description (Third to animate)
+    const heroDesc = hero.querySelector('.hero-subtitle, .section-description, .page-hero-container p, .blog-hero-container p');
+    if (heroDesc) {
+      heroDesc.classList.add('hero-stagger-desc');
+      setTimeout(() => heroDesc.classList.add('is-animated'), 320);
+    }
+
+    // 4. CTAs / Action Buttons (Fourth to animate)
+    const heroCtas = hero.querySelector('.hero-cta-group, .hero-actions, .blog-search-container');
+    if (heroCtas) {
+      heroCtas.classList.add('hero-stagger-cta');
+      setTimeout(() => heroCtas.classList.add('is-animated'), 460);
+    }
+
+    // 5. Social Proof / Metrics / Counters (Fifth to animate)
+    const heroMeta = hero.querySelector('.hero-social-proof, .row.border-top, .blog-filter-pills');
+    if (heroMeta) {
+      heroMeta.classList.add('hero-stagger-meta');
+      setTimeout(() => heroMeta.classList.add('is-animated'), 580);
     }
 
     // Hero visual image container cinematic zoom reveal
-    const heroImageContainer = document.querySelector('.hero-image-container');
+    const heroImageContainer = hero.querySelector('.hero-image-container');
     if (heroImageContainer) {
       heroImageContainer.classList.add('cinematic-reveal');
       setTimeout(() => {
@@ -170,39 +239,114 @@
   }
 
   /* --------------------------------------------------------------------------
-     4. Staggered Scroll Reveal Observer
+     4. Staggered Scroll Reveal Observer (Headings, Text & Grids)
      -------------------------------------------------------------------------- */
   function initScrollRevealObserver() {
-    const revealElements = document.querySelectorAll('.reveal, .cinematic-reveal');
+    // 1. Process Section Headings outside heroes with Split-Text Staggered Reveal
+    const sectionHeadings = document.querySelectorAll('.section-heading, .section-title, h2.fw-bold');
+    const splitHeadingTargets = [];
 
-    // Automatically apply staggered delay for grid items
+    sectionHeadings.forEach((heading) => {
+      if (!heading.closest('.hero-section, .page-hero, .blog-hero')) {
+        splitHeadingIntoWords(heading);
+        splitHeadingTargets.push(heading);
+      }
+    });
+
+    // 2. Automatically flag section taglines and descriptions for smooth scroll reveals
+    const textElements = document.querySelectorAll('.section-tagline, .section-description, .section-title-wrap');
+    textElements.forEach((el) => {
+      if (!el.closest('.hero-section, .page-hero, .blog-hero')) {
+        el.classList.add('text-reveal');
+      }
+    });
+
+    const revealElements = document.querySelectorAll('.reveal, .cinematic-reveal, .text-reveal');
+
+    // 3. Automatically apply staggered delay for grid items
     document.querySelectorAll('.row, .stagger-grid, .menu-grid, .features-grid-4').forEach((grid) => {
       const cards = grid.querySelectorAll('.card-poke, .feature-box, .menu-item-card, .blog-card, .timeline-item');
       cards.forEach((card, i) => {
-        card.style.transitionDelay = `${Math.min(i * 90, 480)}ms`;
+        card.style.transitionDelay = `${Math.min(i * 80, 420)}ms`;
       });
     });
 
     if ('IntersectionObserver' in window && !prefersReducedMotion) {
+      // Observer for standard elements & cards
       const scrollObserver = new IntersectionObserver(
         (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add('is-visible', 'is-revealed');
+              observer.unobserve(entry.target); // Animates ONLY once as it enters 15% into viewport
+            }
+          });
+        },
+        {
+          rootMargin: '0px 0px -30px 0px',
+          threshold: 0.15, // Exactly 15% viewport entry threshold
+        }
+      );
+
+      revealElements.forEach((el) => scrollObserver.observe(el));
+
+      // Observer specifically for staggered split-text headings (0.06s / 60ms stagger per word)
+      const splitHeadingObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              revealSplitHeading(entry.target, 0, 60);
               observer.unobserve(entry.target);
             }
           });
         },
         {
-          rootMargin: '0px 0px -45px 0px',
-          threshold: 0.12,
+          rootMargin: '0px 0px -30px 0px',
+          threshold: 0.15,
         }
       );
 
-      revealElements.forEach((el) => scrollObserver.observe(el));
+      splitHeadingTargets.forEach((heading) => splitHeadingObserver.observe(heading));
     } else {
-      revealElements.forEach((el) => el.classList.add('is-visible'));
+      revealElements.forEach((el) => el.classList.add('is-visible', 'is-revealed'));
+      splitHeadingTargets.forEach((heading) => revealSplitHeading(heading, 0, 0));
     }
+  }
+
+  /* --------------------------------------------------------------------------
+     4b. Kinetic Typography & Floating Badge Scroll Motion (Desktop)
+     -------------------------------------------------------------------------- */
+  function initKineticTypography() {
+    if (prefersReducedMotion || window.innerWidth < 992) return;
+
+    const kineticElements = document.querySelectorAll('.hero-badge-float, .kinetic-badge-float, .hero-tagline');
+    if (!kineticElements.length) return;
+
+    let ticking = false;
+
+    function onScrollKinetic() {
+      const vh = window.innerHeight;
+      kineticElements.forEach((el, index) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < vh && rect.bottom > 0) {
+          const speed = index % 2 === 0 ? 0.04 : -0.035;
+          const yOffset = Math.max(-12, Math.min(12, (rect.top - vh / 2) * speed));
+          el.style.transform = `translate3d(0, ${yOffset.toFixed(2)}px, 0)`;
+        }
+      });
+      ticking = false;
+    }
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(onScrollKinetic);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
   }
 
   /* --------------------------------------------------------------------------
@@ -260,12 +404,19 @@
      -------------------------------------------------------------------------- */
   function initFailSafeTimeout() {
     setTimeout(() => {
-      document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
-        el.classList.add('is-visible');
+      document.querySelectorAll('.reveal:not(.is-visible), .text-reveal:not(.is-revealed)').forEach((el) => {
+        el.classList.add('is-visible', 'is-revealed');
       });
-      document.querySelectorAll('.split-text-word:not(.is-revealed)').forEach((el) => {
+      document.querySelectorAll('.split-word-mask:not(.is-revealed), .split-text-word:not(.is-revealed)').forEach((el) => {
         el.classList.add('is-revealed');
       });
-    }, 1400);
+      document.querySelectorAll('.split-word-inner, .split-text-inner').forEach((el) => {
+        el.style.transform = 'translateY(0%)';
+        el.style.opacity = '1';
+      });
+      document.querySelectorAll('.hero-stagger-badge:not(.is-animated), .hero-stagger-title:not(.is-animated), .hero-stagger-desc:not(.is-animated), .hero-stagger-cta:not(.is-animated), .hero-stagger-meta:not(.is-animated)').forEach((el) => {
+        el.classList.add('is-animated');
+      });
+    }, 1200);
   }
 })();

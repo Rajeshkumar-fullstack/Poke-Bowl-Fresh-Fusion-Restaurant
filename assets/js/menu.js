@@ -20,14 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuHero = stickySentinel?.closest('header');
   const menuGallerySection = document.querySelector('#menuGridContainer')?.closest('section');
 
+  // Sticky Filter Bar Controller with sentinel height compensation to prevent layout shifts
   function updateStickyFilterBar() {
     if (!stickySentinel || !stickyBar) return;
-    const navHeight = mainNavbar ? mainNavbar.offsetHeight : 72;
+    const navHeight = mainNavbar ? mainNavbar.offsetHeight : 70;
     const sentinelRect = stickySentinel.getBoundingClientRect();
 
     if (sentinelRect.top <= navHeight) {
       if (!stickyBar.classList.contains('is-stuck')) {
-        stickySentinel.style.height = `${stickyBar.offsetHeight}px`;
+        stickySentinel.style.minHeight = `${stickyBar.offsetHeight}px`;
         stickyBar.classList.add('is-stuck');
         if (menuHero) menuHero.classList.add('has-stuck-bar');
       }
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (stickyBar.classList.contains('is-stuck')) {
         stickyBar.classList.remove('is-stuck');
         stickyBar.style.top = '';
-        stickySentinel.style.height = '';
+        stickySentinel.style.minHeight = '';
         if (menuHero) menuHero.classList.remove('has-stuck-bar');
       }
     }
@@ -209,13 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setCategory(cat, false);
 
-      if (stickyBar && stickyBar.classList.contains('is-stuck') && menuGallerySection) {
-        const navHeight = mainNavbar ? mainNavbar.offsetHeight : 72;
-        const barHeight = stickyBar.offsetHeight || 110;
-        const targetTop = menuGallerySection.getBoundingClientRect().top + window.scrollY - navHeight - barHeight + 16;
-        if (window.scrollY > targetTop) {
-          window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-        }
+      if (menuGallerySection && window.scrollY > menuGallerySection.offsetTop) {
+        const navHeight = mainNavbar ? mainNavbar.offsetHeight : 70;
+        const barHeight = stickyBar && stickyBar.classList.contains('is-stuck') ? stickyBar.offsetHeight : 60;
+        window.scrollTo({ top: Math.max(0, menuGallerySection.offsetTop - navHeight - barHeight - 12), behavior: 'smooth' });
       }
     });
   });
@@ -398,12 +396,173 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handle Add to Cart from the Detail Modal
-  if (bowlDetailAddToCartBtn) {
-    bowlDetailAddToCartBtn.addEventListener('click', (e) => {
+  // Enquiry Modal Elements
+  const bowlDetailEnquiryBtn = document.getElementById('bowlDetailEnquiryBtn') || document.getElementById('bowlDetailAddToCartBtn');
+  const bowlEnquiryModalEl = document.getElementById('bowlEnquiryModal');
+  const enquiryModalBowlTitle = document.getElementById('enquiryModalBowlTitle');
+  const enquiryModalBowlPrice = document.getElementById('enquiryModalBowlPrice');
+  const enquiryModalBowlDesc = document.getElementById('enquiryModalBowlDesc');
+  const enquiryModalFullPageLink = document.getElementById('enquiryModalFullPageLink');
+  const enquiryModalQtyMinus = document.getElementById('enquiryModalQtyMinus');
+  const enquiryModalQtyPlus = document.getElementById('enquiryModalQtyPlus');
+  const enquiryModalQtyVal = document.getElementById('enquiryModalQtyVal');
+  const bowlQuickEnquiryForm = document.getElementById('bowlQuickEnquiryForm');
+  const enquiryModalSuccessBox = document.getElementById('enquiryModalSuccessBox');
+  const enquirySuccessBowlName = document.getElementById('enquirySuccessBowlName');
+  const enquirySuccessRef = document.getElementById('enquirySuccessRef');
+  const enquiryModalErrorAlert = document.getElementById('enquiryModalErrorAlert');
+  const enquiryModalErrorAlertText = document.getElementById('enquiryModalErrorAlertText');
+
+  let currentEnquiryQty = 1;
+
+  function openBowlEnquiryModal(bowlItem) {
+    if (!bowlItem) return;
+
+    // 1. Close bowlDetailModal
+    const detailModalEl = document.getElementById('bowlDetailModal');
+    if (detailModalEl && window.bootstrap && bootstrap.Modal) {
+      const detailInstance = bootstrap.Modal.getInstance(detailModalEl);
+      if (detailInstance) detailInstance.hide();
+    }
+
+    // 2. Populate enquiry modal info
+    if (enquiryModalBowlTitle) enquiryModalBowlTitle.textContent = bowlItem.title;
+    if (enquiryModalBowlPrice) enquiryModalBowlPrice.textContent = bowlItem.price;
+    if (enquiryModalBowlDesc) enquiryModalBowlDesc.textContent = bowlItem.desc || 'Fresh poke bowl selection.';
+
+    // 3. Update full page link
+    if (enquiryModalFullPageLink) {
+      enquiryModalFullPageLink.href = `contact.html?bowl=${encodeURIComponent(bowlItem.title)}&price=${encodeURIComponent(bowlItem.price)}&details=${encodeURIComponent(bowlItem.desc || '')}&source=detail#order-enquiry-section`;
+    }
+
+    // 4. Reset form state
+    currentEnquiryQty = 1;
+    if (enquiryModalQtyVal) enquiryModalQtyVal.textContent = '1';
+    if (enquiryModalErrorAlert) enquiryModalErrorAlert.classList.add('d-none');
+    if (bowlQuickEnquiryForm) {
+      bowlQuickEnquiryForm.reset();
+      bowlQuickEnquiryForm.classList.remove('d-none');
+      // Clear validation state styles
+      bowlQuickEnquiryForm.querySelectorAll('.is-invalid, .is-valid').forEach((el) => {
+        el.classList.remove('is-invalid', 'is-valid');
+      });
+    }
+    if (enquiryModalSuccessBox) enquiryModalSuccessBox.classList.add('d-none');
+
+    // 5. Open enquiry modal
+    if (bowlEnquiryModalEl) {
+      if (window.bootstrap && bootstrap.Modal) {
+        bootstrap.Modal.getOrCreateInstance(bowlEnquiryModalEl).show();
+      } else {
+        bowlEnquiryModalEl.classList.add('show');
+        bowlEnquiryModalEl.style.display = 'block';
+      }
+    }
+  }
+
+  // Setup quantity controls for Enquiry Modal
+  if (enquiryModalQtyMinus) {
+    enquiryModalQtyMinus.addEventListener('click', () => {
+      if (currentEnquiryQty > 1) {
+        currentEnquiryQty--;
+        if (enquiryModalQtyVal) enquiryModalQtyVal.textContent = currentEnquiryQty;
+      }
+    });
+  }
+  if (enquiryModalQtyPlus) {
+    enquiryModalQtyPlus.addEventListener('click', () => {
+      if (currentEnquiryQty < 50) {
+        currentEnquiryQty++;
+        if (enquiryModalQtyVal) enquiryModalQtyVal.textContent = currentEnquiryQty;
+      }
+    });
+  }
+
+  // Handle Enquiry Form Submit with Validation
+  if (bowlQuickEnquiryForm) {
+    bowlQuickEnquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('enquiryModalName');
+      const phoneInput = document.getElementById('enquiryModalPhone');
+      const emailInput = document.getElementById('enquiryModalEmail');
+      const typeSelect = document.getElementById('enquiryModalType');
+      const notesInput = document.getElementById('enquiryModalNotes');
+
+      const nameVal = nameInput ? nameInput.value.trim() : '';
+      const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+      const emailVal = emailInput ? emailInput.value.trim() : '';
+
+      // Validation
+      const nameValid = /^[A-Za-z\s]{2,}$/.test(nameVal);
+      const phoneValid = /^\d{10}$/.test(phoneVal);
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+
+      if (nameInput) {
+        nameInput.classList.toggle('is-invalid', !nameValid);
+        nameInput.classList.toggle('is-valid', nameValid);
+      }
+      if (phoneInput) {
+        phoneInput.classList.toggle('is-invalid', !phoneValid);
+        phoneInput.classList.toggle('is-valid', phoneValid);
+      }
+      if (emailInput) {
+        emailInput.classList.toggle('is-invalid', !emailValid);
+        emailInput.classList.toggle('is-valid', emailValid);
+      }
+
+      if (!nameValid || !phoneValid || !emailValid) {
+        if (enquiryModalErrorAlert) {
+          enquiryModalErrorAlert.classList.remove('d-none');
+          if (!nameValid) {
+            if (enquiryModalErrorAlertText) enquiryModalErrorAlertText.textContent = 'Please enter a valid full name (letters only, minimum 2 characters).';
+          } else if (!phoneValid) {
+            if (enquiryModalErrorAlertText) enquiryModalErrorAlertText.textContent = 'Please enter a valid 10-digit phone number without letters or symbols.';
+          } else {
+            if (enquiryModalErrorAlertText) enquiryModalErrorAlertText.textContent = 'Please enter a valid email address (e.g. name@example.com).';
+          }
+        }
+        return;
+      }
+
+      if (enquiryModalErrorAlert) enquiryModalErrorAlert.classList.add('d-none');
+
+      // Success! Generate unique reference code
+      const refCode = 'POKE-ENQ-' + Math.floor(100000 + Math.random() * 900000);
+      if (enquirySuccessRef) enquirySuccessRef.textContent = refCode;
+      if (enquirySuccessBowlName) enquirySuccessBowlName.textContent = activeModalBowl ? activeModalBowl.title : 'Selected Bowl';
+
+      // Save enquiry to localStorage
+      try {
+        const enquiryRecord = {
+          ref: refCode,
+          bowl: activeModalBowl ? activeModalBowl.title : '',
+          price: activeModalBowl ? activeModalBowl.price : '',
+          qty: currentEnquiryQty,
+          name: nameVal,
+          phone: phoneVal,
+          email: emailVal,
+          type: typeSelect ? typeSelect.value : 'Takeout Pre-Order',
+          notes: notesInput ? notesInput.value : '',
+          submittedAt: new Date().toISOString()
+        };
+        localStorage.setItem('poke_last_enquiry', JSON.stringify(enquiryRecord));
+      } catch (err) {
+        // ignore
+      }
+
+      // Show success confirmation
+      bowlQuickEnquiryForm.classList.add('d-none');
+      if (enquiryModalSuccessBox) enquiryModalSuccessBox.classList.remove('d-none');
+    });
+  }
+
+  // Handle Enquiry click from the Detail Modal
+  if (bowlDetailEnquiryBtn) {
+    bowlDetailEnquiryBtn.addEventListener('click', (e) => {
       e.preventDefault();
       if (activeModalBowl) {
-        openCartConfirmation(activeModalBowl, bowlDetailAddToCartBtn);
+        openBowlEnquiryModal(activeModalBowl);
       }
     });
   }

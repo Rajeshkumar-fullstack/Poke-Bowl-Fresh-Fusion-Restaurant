@@ -359,7 +359,18 @@ document.addEventListener('DOMContentLoaded', () => {
       modalProceedBtn.href = `contact.html?bowl=Custom+Crafted+Bowl&qty=${state.quantity}&price=${encodeURIComponent('$' + currentTotalPrice.toFixed(2))}&details=${encodeURIComponent(customBowlSummary)}&source=cart#order-enquiry-section`;
     }
 
-    // 3. Open Bootstrap Modal
+    // 3. Persist to Global Shopping Cart
+    if (window.PokeCart) {
+      window.PokeCart.addToCart({
+        title: 'Custom Crafted Poke Bowl',
+        price: currentTotalPrice,
+        img: 'assets/images/bowls/classic-ahi-tuna.jpg',
+        details: `Base: ${state.base.name} • Protein: ${state.protein.name} • Sauce: ${state.sauce.name} • Toppings: ${toppingNames}`,
+        qty: state.quantity
+      }, false);
+    }
+
+    // 4. Open Bootstrap Modal
     if (cartModalEl) {
       if (window.bootstrap && bootstrap.Modal) {
         const modalInstance = bootstrap.Modal.getOrCreateInstance(cartModalEl);
@@ -428,16 +439,19 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Helper validation functions
-  // Name: letters, spaces, hyphens, and apostrophes only, between 2 and 50 characters
+  // Name: letters and spaces only, between 2 and 50 characters
   function validateQuickOrderName(value) {
+    if (window.PokeValidation && quickOrderName) {
+      return window.PokeValidation.Rules.name(quickOrderName);
+    }
     const trimmed = value.trim();
     if (!trimmed) {
       return { valid: false, message: 'Please enter your name.' };
     }
-    // Strict letters-only test (no numbers or special punctuation)
-    const letterOnlyRegex = /^[A-Za-z\s'-]+$/;
+    // Strict letters and spaces only (no digits, no special characters)
+    const letterOnlyRegex = /^[A-Za-z\s]+$/;
     if (!letterOnlyRegex.test(trimmed)) {
-      return { valid: false, message: 'Name must contain letters only (no numbers or special characters).' };
+      return { valid: false, message: 'Name must contain letters and spaces only (no numbers or special characters).' };
     }
     if (trimmed.length < 2) {
       return { valid: false, message: 'Name must be at least 2 letters long.' };
@@ -445,17 +459,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return { valid: true, message: '' };
   }
 
-  // Phone: must be a 10-digit number
+  // Phone: must be exactly 10 digits, digits only
   function validateQuickOrderPhone(value) {
+    if (window.PokeValidation && quickOrderPhone) {
+      return window.PokeValidation.Rules.phone(quickOrderPhone);
+    }
     const trimmed = value.trim();
     if (!trimmed) {
       return { valid: false, message: 'Please enter your phone number.' };
     }
-    const digitsOnly = trimmed.replace(/\D/g, '');
-    if (digitsOnly.length !== 10) {
-      return { valid: false, message: `Phone number must be exactly 10 digits (currently ${digitsOnly.length} digits).` };
+    if (/\D/.test(trimmed)) {
+      return { valid: false, message: 'Phone number must contain digits only without letters, spaces or special symbols.' };
     }
-    return { valid: true, message: '', formatted: digitsOnly };
+    if (trimmed.length !== 10) {
+      return { valid: false, message: `Phone number must be exactly 10 digits (currently ${trimmed.length} digits).` };
+    }
+    return { valid: true, message: '', formatted: trimmed };
   }
 
   function updateQuickOrderUI() {

@@ -234,10 +234,11 @@
     overflow-x: auto;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    padding-inline: 0.25rem;
-    padding-bottom: 0.5rem;
+    padding-inline: 0.5rem;
+    padding-bottom: 0.35rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .menu-filter-nav::-webkit-scrollbar,
@@ -253,14 +254,26 @@
 
   .menu-filter-sticky-bar.is-stuck,
   .blog-filter-sticky-bar.is-stuck {
-    padding: 0.5rem 0;
+    padding: 0.45rem 0 0.35rem !important;
+  }
+
+  .menu-filter-sticky-bar.is-stuck .menu-search-wrapper,
+  .blog-filter-sticky-bar.is-stuck .blog-search-container {
+    max-width: 92% !important;
+    margin-bottom: 0.35rem !important;
   }
 
   .menu-filter-sticky-bar.is-stuck .menu-search-input,
   .blog-filter-sticky-bar.is-stuck .blog-search-input {
-    padding-top: 0.55rem;
-    padding-bottom: 0.55rem;
-    font-size: 0.88rem;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .menu-filter-sticky-bar.is-stuck .btn-filter,
+  .blog-filter-sticky-bar.is-stuck .blog-filter-btn {
+    padding: 0.35rem 0.85rem !important;
+    font-size: 0.78rem !important;
   }
 
   .timeline-item {
@@ -270,6 +283,28 @@
 
   .timeline-item .card-poke {
     padding: 1.35rem 1.15rem !important;
+  }
+
+  /* Featured Blog Card Responsive Layout */
+  .featured-blog-card .blog-author-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .featured-blog-card .blog-author-bar .blog-author-info {
+    width: 100%;
+  }
+
+  .featured-blog-card .blog-author-bar .btn-primary-poke {
+    width: 100% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
   }
 
   /* Responsive Footer */
@@ -420,6 +455,29 @@
     width: 100%;
     min-height: 50px;
     font-size: 0.95rem;
+  }
+
+  .featured-content {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .featured-blog-card .blog-author-bar {
+    gap: 0.85rem;
+  }
+
+  .blog-modal-footer .d-flex {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .blog-modal-footer .btn-secondary-poke,
+  .blog-modal-footer .btn-primary-poke {
+    flex: 1 1 0;
+    min-width: 120px;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
   }
 
   .feature-box {

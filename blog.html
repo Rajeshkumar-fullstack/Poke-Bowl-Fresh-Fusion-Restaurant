@@ -85,7 +85,7 @@
         <!-- Direction Switcher -->
         <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
           <i class="bi bi-translate"></i>
-          <span class="direction-label">LTR</span>
+          <span class="direction-label">RTL</span>
         </button>
 
         <!-- Dark/Light Theme Switcher -->
@@ -94,11 +94,18 @@
           <i class="bi bi-sun-fill theme-icon-sun"></i>
         </button>
 
-        <!-- Build Bowl CTA -->
-        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
-          <i class="bi bi-lightning-charge-fill"></i>
-          <span>Build Bowl</span>
-        </a>
+        <!-- Cart Button (Desktop & Tablet) -->
+        <button type="button" class="btn-primary-poke nav-cart-btn d-none d-sm-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#globalCartModal" aria-label="View Shopping Cart">
+          <i class="bi bi-cart3 fs-6"></i>
+          <span>Add To Cart</span>
+          <span class="badge nav-cart-badge bg-white text-emerald-700 rounded-pill px-2 py-0.5 fw-bold">0</span>
+        </button>
+
+        <!-- Cart Icon Button (Mobile) -->
+        <button type="button" class="btn-icon-round nav-cart-btn position-relative d-inline-flex d-sm-none" data-bs-toggle="modal" data-bs-target="#globalCartModal" aria-label="View Shopping Cart">
+          <i class="bi bi-cart3"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger nav-cart-badge fs-9">0</span>
+        </button>
 
         <!-- Hamburger for Mobile -->
         <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
@@ -152,13 +159,6 @@
       <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold active text-emerald-600"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
       <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
     </ul>
-
-    <div class="mt-auto pt-3 border-top">
-      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
-        <i class="bi bi-plus-circle-fill"></i>
-        <span>Build Your Bowl</span>
-      </a>
-    </div>
   </aside>
 
   <!-- ========================================================================
@@ -282,7 +282,7 @@
               </div>
             </div>
 
-            <button type="button" class="btn-primary-poke py-2 px-3 fs-7" data-article-id="perfect-poke-guide">
+            <button type="button" class="btn-primary-poke py-2 px-3 fs-7 justify-content-center text-nowrap" data-article-id="perfect-poke-guide">
               <span>Read Full Story</span>
               <i class="bi bi-arrow-right"></i>
             </button>
@@ -372,13 +372,13 @@
                   src="assets/images/blog/blog-sustainable-fisheries.jpg" 
                   srcset="assets/images/blog/blog-sustainable-fisheries-sm.jpg 480w, assets/images/blog/blog-sustainable-fisheries-md.jpg 800w, assets/images/blog/blog-sustainable-fisheries.jpg 1600w"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  alt="Clear turquoise ocean waters and sustainable fishing boat" 
+                  alt="Fresh sashimi-grade wild Ahi tuna and sustainable fishery poke bowl preparation" 
                   width="480" 
                   height="300" 
                   loading="lazy" 
                   decoding="async">
               </picture>
-              <span class="badge-poke badge-blue blog-card-badge">Sustainability</span>
+              <span class="badge-poke badge-blue blog-card-badge"><i class="bi bi-shield-check me-1"></i>100% Sustainable</span>
             </div>
 
             <div class="blog-card-body">
@@ -392,8 +392,14 @@
                 <a href="#" data-article-id="sustainable-fisheries" class="text-reset">From Ocean to Bowl: Our 100% Sustainable Fishery and Farm Partnerships</a>
               </h3>
 
+              <div class="card-poke-tags d-flex flex-wrap gap-1 mb-2.5">
+                <span class="badge badge-poke badge-green fs-9"><i class="bi bi-patch-check-fill me-1"></i>MSC-Certified</span>
+                <span class="badge badge-poke badge-blue fs-9"><i class="bi bi-water me-1"></i>Pole & Line Caught</span>
+                <span class="badge badge-poke badge-amber fs-9"><i class="bi bi-recycle me-1"></i>Zero-Waste Kitchen</span>
+              </div>
+
               <p class="blog-card-excerpt">
-                Trace our pole-and-line caught Ahi tuna and local organic farming alliances that preserve ocean biodiversity and ensure zero-waste kitchen practices.
+                Trace our 100% pole-and-line caught wild Ahi tuna, certified sustainable Norwegian salmon, and regenerative organic farm partnerships that protect ocean ecosystems and deliver peak freshness to every bowl.
               </p>
 
               <div class="blog-author-bar">
@@ -974,13 +980,20 @@
             Receive monthly chef secrets, seasonal seafood availability alerts, nutrition tips, and special 15% VIP dine-in invitations directly in your inbox.
           </p>
 
-          <form id="blogNewsletterForm" class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-center align-items-stretch align-items-sm-center blog-newsletter-form mx-auto">
-            <input 
-              type="email" 
-              class="form-poke-control blog-newsletter-input" 
-              placeholder="Enter your email address" 
-              required 
-              aria-label="Email address for blog newsletter">
+          <form id="blogNewsletterForm" class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-center align-items-stretch align-items-sm-center blog-newsletter-form mx-auto" novalidate>
+            <div class="form-group flex-grow-1 text-start">
+              <input 
+                type="email" 
+                name="newsletterEmail"
+                id="blogNewsletterEmail"
+                class="form-poke-control blog-newsletter-input" 
+                placeholder="Enter your email address" 
+                data-validate="email"
+                autocomplete="email"
+                required 
+                aria-label="Email address for blog newsletter">
+              <div class="invalid-feedback-custom">Please enter a valid email address (e.g. name@example.com).</div>
+            </div>
             <button type="submit" class="btn-primary-poke btn-newsletter-subscribe text-nowrap">
               <span>Subscribe Free</span>
               <i class="bi bi-send-fill"></i>
@@ -1058,20 +1071,160 @@
             <div class="mt-5 pt-4 border-top d-flex align-items-center justify-content-between flex-wrap gap-3">
               <div class="d-flex align-items-center gap-2">
                 <span class="fs-7 fw-bold text-muted">Share Article:</span>
-                <a href="#" class="btn-icon-round" style="width: 36px; height: 36px;" title="Share on Twitter / X" onclick="event.preventDefault(); alert('Link copied to clipboard!');"><i class="bi bi-twitter-x fs-7"></i></a>
-                <a href="#" class="btn-icon-round" style="width: 36px; height: 36px;" title="Share on Facebook" onclick="event.preventDefault(); alert('Link copied to clipboard!');"><i class="bi bi-facebook fs-7"></i></a>
-                <a href="#" class="btn-icon-round" style="width: 36px; height: 36px;" title="Copy Link" onclick="event.preventDefault(); navigator.clipboard?.writeText(window.location.href); alert('Article link copied to clipboard!');"><i class="bi bi-link-45deg fs-6"></i></a>
+                <button type="button" id="modalShareTwitterBtn" class="btn-icon-round" style="width: 36px; height: 36px;" title="Share on Twitter / X" aria-label="Share on Twitter / X">
+                  <i class="bi bi-twitter-x fs-7"></i>
+                </button>
+                <button type="button" id="modalShareFacebookBtn" class="btn-icon-round" style="width: 36px; height: 36px;" title="Share on Facebook" aria-label="Share on Facebook">
+                  <i class="bi bi-facebook fs-7"></i>
+                </button>
+                <button type="button" id="modalShareCopyBtn" class="btn-icon-round" style="width: 36px; height: 36px;" title="Copy Article Link" aria-label="Copy Article Link">
+                  <i class="bi bi-link-45deg fs-6"></i>
+                </button>
+                <span id="modalShareToastMsg" class="badge bg-emerald-500 text-white fs-9 d-none transition-all py-1 px-2 rounded-pill">
+                  <i class="bi bi-check2 me-1"></i>Copied!
+                </span>
               </div>
 
               <div class="d-flex gap-2">
                 <button type="button" class="btn-secondary-poke py-2 px-3 fs-7" data-bs-dismiss="modal">Close</button>
-                <a href="home-2.html#bowl-builder" class="btn-primary-poke py-2 px-3 fs-7">Order This Bowl</a>
+                <button type="button" id="modalArticleOrderBtn" class="btn-primary-poke py-2 px-3 fs-7 d-inline-flex align-items-center gap-1.5">
+                  <i class="bi bi-bag-check-fill"></i>
+                  <span>Order This Bowl</span>
+                </button>
               </div>
             </div>
 
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Blog Article Order / Enquiry Modal
+       ======================================================================== -->
+  <div class="modal fade" id="blogOrderModal" tabindex="-1" aria-labelledby="blogOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-bag-check-fill fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0" id="blogOrderModalLabel">Order This Bowl</h5>
+              <small class="text-muted">Fresh Culinary Specialty Pre-Order</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          <!-- Selected Bowl Card -->
+          <div class="card-poke p-3 mb-3 bg-secondary/30" id="blogOrderSummaryCard">
+            <div class="d-flex align-items-center gap-3">
+              <img id="blogOrderBowlImg" src="assets/images/bowls/spicy-salmon-crunch.jpg" alt="Selected Dish" class="rounded-3 object-cover flex-shrink-0" width="60" height="60">
+              <div class="flex-grow-1 min-w-0">
+                <span class="badge badge-poke badge-coral mb-1 fs-9">Featured in Article</span>
+                <h6 id="blogOrderBowlTitle" class="fw-bold mb-0 text-emerald-600 font-heading text-truncate">Signature Spicy Sriracha Ahi Bowl</h6>
+                <span id="blogOrderBowlPrice" class="fw-bold fs-7 text-emerald-500 font-heading">$15.50</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Form -->
+          <form id="blogOrderForm" novalidate>
+            <!-- Quantity and Order Mode Row -->
+            <div class="row g-2 mb-2.5">
+              <div class="col-6 form-group">
+                <label class="form-label fs-8 fw-bold mb-1">Quantity <span class="text-rose-500">*</span></label>
+                <div class="d-flex align-items-center gap-2">
+                  <button id="blogOrderQtyMinus" type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" aria-label="Decrease quantity">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                  <span id="blogOrderQtyVal" class="fw-bold fs-7 px-1">1</span>
+                  <button id="blogOrderQtyPlus" type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" aria-label="Increase quantity">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-6 form-group">
+                <label for="blogOrderType" class="form-label fs-8 fw-bold mb-1">Order Mode <span class="text-rose-500">*</span></label>
+                <select class="form-poke-control py-2 fs-8" id="blogOrderType" required>
+                  <option value="Takeout Pickup">Takeout Pickup</option>
+                  <option value="Dine-In Table">Dine-In Table</option>
+                  <option value="Express Delivery">Express Delivery</option>
+                  <option value="Catering Query">Catering Query</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Customer Name & Phone -->
+            <div class="row g-2 mb-2.5">
+              <div class="col-md-6 form-group">
+                <label for="blogOrderName" class="form-label fs-8 fw-bold mb-1">Your Full Name <span class="text-rose-500">*</span></label>
+                <input type="text" class="form-poke-control py-2 fs-8" id="blogOrderName" placeholder="e.g. Maya Chen" required>
+                <div class="invalid-feedback-custom">Name must contain letters only (minimum 2 characters).</div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="blogOrderPhone" class="form-label fs-8 fw-bold mb-1">Phone Number <span class="text-rose-500">*</span></label>
+                <input type="tel" class="form-poke-control py-2 fs-8" id="blogOrderPhone" placeholder="10-digit number" maxlength="10" inputmode="numeric" required>
+                <div class="invalid-feedback-custom">Phone number must be exactly 10 digits.</div>
+              </div>
+            </div>
+
+            <!-- Email & Preferred Time -->
+            <div class="row g-2 mb-2.5">
+              <div class="col-md-6 form-group">
+                <label for="blogOrderEmail" class="form-label fs-8 fw-bold mb-1">Email Address <span class="text-rose-500">*</span></label>
+                <input type="email" class="form-poke-control py-2 fs-8" id="blogOrderEmail" placeholder="e.g. name@example.com" required>
+                <div class="invalid-feedback-custom">Please enter a valid email address.</div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="blogOrderTime" class="form-label fs-8 fw-bold mb-1">Preferred Time <span class="text-rose-500">*</span></label>
+                <input type="time" class="form-poke-control py-2 fs-8" id="blogOrderTime" value="12:30" required>
+              </div>
+            </div>
+
+            <!-- Dietary / Allergy Notes -->
+            <div class="form-group mb-3">
+              <label for="blogOrderNotes" class="form-label fs-8 fw-bold mb-1">Special Instructions / Customizations</label>
+              <textarea class="form-poke-control py-2 fs-8" id="blogOrderNotes" rows="2" placeholder="e.g. Extra sriracha aioli, sesame seeds on side..."></textarea>
+            </div>
+
+            <!-- Visible Validation Error Alert -->
+            <div id="blogOrderErrorAlert" class="alert alert-danger py-2 px-3 fs-8 mb-2.5 d-none d-flex align-items-center gap-2 border-0 rounded-3 shadow-xs" style="background-color: rgba(244, 63, 94, 0.12); color: #e11d48;" role="alert">
+              <i class="bi bi-exclamation-triangle-fill fs-6 flex-shrink-0"></i>
+              <span id="blogOrderErrorAlertText">Please fill in all required fields correctly.</span>
+            </div>
+
+            <!-- Submit Buttons -->
+            <button type="submit" id="blogOrderSubmitBtn" class="btn-primary-poke w-100 justify-content-center py-2.5 mb-2">
+              <i class="bi bi-check-circle-fill me-1.5"></i>
+              <span>Confirm &amp; Place Order</span>
+            </button>
+            
+            <a id="blogOrderFullPageLink" href="contact.html?source=blog#order-enquiry-section" class="btn btn-sm btn-outline-secondary rounded-pill w-100 py-1.5 fs-8 text-center d-flex align-items-center justify-content-center gap-1">
+              <i class="bi bi-box-arrow-up-right me-1"></i>
+              <span>Open in Full Enquiry Page</span>
+            </a>
+          </form>
+
+          <!-- Order Success Feedback Box -->
+          <div id="blogOrderSuccessBox" class="text-center p-3 d-none">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-3 d-inline-flex mb-2">
+              <i class="bi bi-check2-circle fs-1"></i>
+            </div>
+            <h5 class="fw-bold mb-1 font-heading text-emerald-600">Order Placed Successfully!</h5>
+            <p class="text-muted fs-8 mb-3">
+              Thank you! Your order for <strong id="blogOrderSuccessBowlName">Selected Dish</strong> has been confirmed. Order Reference: <strong id="blogOrderSuccessRef" class="text-emerald-700"></strong>.
+            </p>
+            <p class="text-muted fs-9 mb-3">Our kitchen team is preparing your fresh meal. You will receive an SMS confirmation shortly.</p>
+            <button type="button" class="btn btn-sm btn-primary-poke rounded-pill px-4" data-bs-dismiss="modal">
+              Done &amp; Continue Reading
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1102,8 +1255,8 @@
             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
               <i class="bi bi-youtube"></i>
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
-              <i class="bi bi-tiktok"></i>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Twitter / X">
+              <i class="bi bi-twitter-x"></i>
             </a>
           </div>
         </div>
@@ -1182,6 +1335,75 @@
     <i class="bi bi-chevron-up"></i>
   </button>
 
+  <!-- ========================================================================
+       Global Shopping Cart Modal (Persistent Multi-Item Cart)
+       ======================================================================== -->
+  <div class="modal fade" id="globalCartModal" tabindex="-1" aria-labelledby="globalCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-cart3 fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0" id="globalCartModalLabel">Your Shopping Cart</h5>
+              <small class="text-muted">Fresh Poké &amp; Fusion Specialties</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          <!-- Empty State -->
+          <div id="globalCartEmpty" class="text-center py-5 d-none">
+            <div class="rounded-circle bg-secondary/40 d-inline-flex p-3 mb-3 text-muted">
+              <i class="bi bi-cart-x fs-2"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Your cart is currently empty</h6>
+            <p class="text-muted fs-8 mb-3">Explore our fresh poke bowls and hand-crafted bowls to add items.</p>
+            <a href="menu.html" class="btn btn-sm btn-outline-primary rounded-pill px-3" data-bs-dismiss="modal">
+              Browse Menu
+            </a>
+          </div>
+
+          <!-- Filled State -->
+          <div id="globalCartFilled">
+            <div id="globalCartItemsList" class="mb-3">
+              <!-- Cart rows injected dynamically by cart.js -->
+            </div>
+
+            <!-- Subtotal & Checkout -->
+            <div class="p-3 rounded-3 bg-secondary/40 border border-border-color mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="text-muted fs-8">Subtotal</span>
+                <span class="fw-bold fs-7 font-heading" id="globalCartSubtotal">$0.00</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted fs-8">Estimated Prep Time</span>
+                <span class="badge badge-poke badge-green fs-9">12 - 15 mins</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+              <a id="globalCartProceedBtn" href="contact.html?source=cart#order-enquiry-section" class="btn-primary-poke w-100 justify-content-center py-2.5">
+                <i class="bi bi-bag-check-fill"></i>
+                <span>Proceed to Order / Checkout</span>
+              </a>
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-sm text-danger p-0 fs-8" onclick="window.PokeCart.clearCart()">
+                  <i class="bi bi-trash3 me-1"></i> Clear Cart
+                </button>
+                <button type="button" class="btn btn-sm text-muted p-0 fs-8" data-bs-dismiss="modal">
+                  Continue Browsing
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -1189,6 +1411,8 @@
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/direction.js"></script>
   <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/form-validation.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/blog.js"></script>

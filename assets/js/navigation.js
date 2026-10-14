@@ -11,10 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.poke-nav-link, .mobile-nav-link, .poke-nav-dropdown-item');
   const navDropdowns = document.querySelectorAll('.poke-nav-dropdown');
 
-  // Sticky Navbar shadow on scroll
+  // Sticky Navbar shadow on scroll (cross-browser and smooth)
   function handleScroll() {
     if (!navbar) return;
-    if (window.scrollY > 20) {
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+    if (scrollY > 15) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');

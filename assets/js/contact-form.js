@@ -181,63 +181,20 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let isFormValid = true;
-
-    // Full Name
-    if (!fullNameInput || fullNameInput.value.trim().length < 2) {
-      setFieldState(fullNameInput, false, 'Please enter your full name.');
-      isFormValid = false;
-    } else {
-      setFieldState(fullNameInput, true);
-    }
-
-    // Email
-    if (!emailInput || !validateEmail(emailInput.value.trim())) {
-      setFieldState(emailInput, false, 'Please enter a valid email address.');
-      isFormValid = false;
-    } else {
-      setFieldState(emailInput, true);
-    }
-
-    // Phone
-    if (!phoneInput || !validatePhone(phoneInput.value.trim())) {
-      setFieldState(phoneInput, false, 'Please enter a valid contact phone number.');
-      isFormValid = false;
-    } else {
-      setFieldState(phoneInput, true);
-    }
-
-    // Quantity
-    const qty = parseInt(quantityInput?.value || '0', 10);
-    if (isNaN(qty) || qty < 1) {
-      setFieldState(quantityInput, false, 'Please enter a valid quantity of 1 or more.');
-      isFormValid = false;
-    } else {
-      setFieldState(quantityInput, true);
-    }
-
-    // Consent
-    if (!consentCheckbox || !consentCheckbox.checked) {
-      setFieldState(consentCheckbox, false, 'Please accept the privacy consent.');
-      isFormValid = false;
-    } else {
-      setFieldState(consentCheckbox, true);
-    }
-
-    if (!isFormValid) {
-      // Focus first invalid input
-      const firstInvalid = form.querySelector('.is-invalid');
-      if (firstInvalid) {
-        firstInvalid.focus();
+    // Use global validation engine if available
+    if (window.PokeValidation) {
+      const { isValid, firstInvalid } = window.PokeValidation.validateForm(form);
+      if (!isValid) {
+        if (firstInvalid) firstInvalid.focus();
+        return;
       }
-      return;
     }
 
     // Prevent repeated submissions
     if (submitBtn) {
       submitBtn.disabled = true;
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Validating...';
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Processing...';
 
       setTimeout(() => {
         submitBtn.disabled = false;
@@ -247,13 +204,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof bootstrap !== 'undefined' && demoNoticeModal) {
           const bsModal = new bootstrap.Modal(demoNoticeModal);
           bsModal.show();
+        } else if (window.PokeValidation) {
+          window.PokeValidation.showFormAlert(form, 'success', 'Form submitted successfully! (Frontend Demonstration)');
         } else {
-          alert('Frontend Demo Notice: Enquiry validated successfully! Note: As this is a frontend demonstration, no real enquiry was transmitted.');
+          alert('Frontend Demo Notice: Enquiry validated successfully!');
         }
 
-        form.reset();
-        form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
+        if (window.PokeValidation) {
+          window.PokeValidation.resetForm(form);
+        } else {
+          form.reset();
+          form.querySelectorAll('.is-valid, .is-invalid').forEach((el) => el.classList.remove('is-valid', 'is-invalid'));
+        }
       }, 700);
     }
   });
 });
+

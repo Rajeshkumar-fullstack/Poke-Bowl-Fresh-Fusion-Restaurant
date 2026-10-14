@@ -381,20 +381,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const newsletterForm = document.getElementById('blogNewsletterForm');
   const newsletterAlert = document.getElementById('newsletterSuccessAlert');
 
-  // Sticky Search & Filter Bar on Scroll
+  // Search & Filter Bar Sentinel references
   const stickySentinel = document.getElementById('blogStickySentinel');
   const stickyBar = document.getElementById('blogStickyBar');
   const mainNavbar = document.getElementById('mainNavbar');
   const blogHero = stickySentinel?.closest('header');
 
-  function updateBlogStickyBar() {
+  // Sticky Filter Bar Controller with sentinel height compensation
+  function updateStickyFilterBar() {
     if (!stickySentinel || !stickyBar) return;
-    const navHeight = mainNavbar ? mainNavbar.offsetHeight : 72;
+    const navHeight = mainNavbar ? mainNavbar.offsetHeight : 70;
     const sentinelRect = stickySentinel.getBoundingClientRect();
 
     if (sentinelRect.top <= navHeight) {
       if (!stickyBar.classList.contains('is-stuck')) {
-        stickySentinel.style.height = `${stickyBar.offsetHeight}px`;
+        stickySentinel.style.minHeight = `${stickyBar.offsetHeight}px`;
         stickyBar.classList.add('is-stuck');
         if (blogHero) blogHero.classList.add('has-stuck-bar');
       }
@@ -403,15 +404,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (stickyBar.classList.contains('is-stuck')) {
         stickyBar.classList.remove('is-stuck');
         stickyBar.style.top = '';
-        stickySentinel.style.height = '';
+        stickySentinel.style.minHeight = '';
         if (blogHero) blogHero.classList.remove('has-stuck-bar');
       }
     }
   }
 
-  window.addEventListener('scroll', updateBlogStickyBar, { passive: true });
-  window.addEventListener('resize', updateBlogStickyBar);
-  updateBlogStickyBar();
+  window.addEventListener('scroll', updateStickyFilterBar, { passive: true });
+  window.addEventListener('resize', updateStickyFilterBar);
+  updateStickyFilterBar();
 
   let currentCategory = 'all';
   let currentSearchQuery = '';
@@ -477,16 +478,10 @@ document.addEventListener('DOMContentLoaded', () => {
       currentCategory = btn.getAttribute('data-filter') || 'all';
       filterArticles();
 
-      if (stickyBar && stickyBar.classList.contains('is-stuck')) {
-        const targetSec = (featuredSection && !featuredSection.classList.contains('d-none')) ? featuredSection : blogGridSection;
-        if (targetSec) {
-          const navHeight = mainNavbar ? mainNavbar.offsetHeight : 72;
-          const barHeight = stickyBar.offsetHeight || 110;
-          const targetTop = targetSec.getBoundingClientRect().top + window.scrollY - navHeight - barHeight + 16;
-          if (window.scrollY > targetTop) {
-            window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-          }
-        }
+      const targetSec = (featuredSection && !featuredSection.classList.contains('d-none')) ? featuredSection : blogGridSection;
+      if (targetSec && window.scrollY > targetSec.offsetTop) {
+        const navHeight = mainNavbar ? mainNavbar.offsetHeight : 70;
+        window.scrollTo({ top: Math.max(0, targetSec.offsetTop - navHeight - 12), behavior: 'smooth' });
       }
     });
   });
@@ -503,7 +498,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Article Modal Reader Trigger
+  // Article Modal Reader Trigger & Active State
+  let currentOpenArticle = null;
   document.querySelectorAll('[data-article-id]').forEach((trigger) => {
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
@@ -544,6 +540,9 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.alt = article.title;
       }
 
+      // Store active article for sharing and ordering
+      currentOpenArticle = { id: articleId, ...article };
+
       // Open Bootstrap Modal
       if (window.bootstrap && modalElement) {
         const bsModal = bootstrap.Modal.getOrCreateInstance(modalElement);
@@ -551,6 +550,295 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // ========================================================================
+  // Article Social Media Sharing Handlers
+  // ========================================================================
+  const shareTwitterBtn = document.getElementById('modalShareTwitterBtn');
+  const shareFacebookBtn = document.getElementById('modalShareFacebookBtn');
+  const shareCopyBtn = document.getElementById('modalShareCopyBtn');
+  const shareToastMsg = document.getElementById('modalShareToastMsg');
+
+  function getArticleShareUrl() {
+    const origin = window.location.origin && window.location.origin !== 'null' ? window.location.origin : '';
+    const pathname = window.location.pathname || '';
+    const articleId = currentOpenArticle ? currentOpenArticle.id : '';
+    return articleId ? `${origin}${pathname}?article=${encodeURIComponent(articleId)}` : window.location.href;
+  }
+
+  function getArticleShareTitle() {
+    return currentOpenArticle ? `${currentOpenArticle.title} | Poke Bowl & Fresh Fusion` : document.title;
+  }
+
+  if (shareTwitterBtn) {
+    shareTwitterBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const text = getArticleShareTitle();
+      const url = getArticleShareUrl();
+      const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+      window.open(tweetUrl, '_blank', 'width=600,height=450,noopener,noreferrer');
+    });
+  }
+
+  if (shareFacebookBtn) {
+    shareFacebookBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = getArticleShareUrl();
+      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      window.open(fbUrl, '_blank', 'width=600,height=500,noopener,noreferrer');
+    });
+  }
+
+  function fallbackCopyText(text) {
+    const temp = document.createElement('textarea');
+    temp.value = text;
+    temp.style.position = 'fixed';
+    temp.style.opacity = '0';
+    document.body.appendChild(temp);
+    temp.focus();
+    temp.select();
+    try {
+      document.execCommand('copy');
+      showCopyToast();
+    } catch (err) {
+      console.warn('Copy fallback failed', err);
+    }
+    document.body.removeChild(temp);
+  }
+
+  function showCopyToast() {
+    if (shareToastMsg) {
+      shareToastMsg.classList.remove('d-none');
+      setTimeout(() => {
+        shareToastMsg.classList.add('d-none');
+      }, 2500);
+    }
+    if (shareCopyBtn) {
+      const origHtml = shareCopyBtn.innerHTML;
+      shareCopyBtn.innerHTML = '<i class="bi bi-check-lg text-emerald-500 fs-6"></i>';
+      setTimeout(() => {
+        shareCopyBtn.innerHTML = origHtml;
+      }, 2000);
+    }
+    if (window.PokeCart && typeof window.PokeCart.showToastNotification === 'function') {
+      window.PokeCart.showToastNotification('Article link copied to clipboard!');
+    }
+  }
+
+  if (shareCopyBtn) {
+    shareCopyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = getArticleShareUrl();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showCopyToast();
+        }).catch(() => {
+          fallbackCopyText(url);
+        });
+      } else {
+        fallbackCopyText(url);
+      }
+    });
+  }
+
+  // ========================================================================
+  // "Order This Bowl" Modal & Form Handling
+  // ========================================================================
+  const modalArticleOrderBtn = document.getElementById('modalArticleOrderBtn');
+  const blogOrderModalEl = document.getElementById('blogOrderModal');
+  const blogOrderBowlImg = document.getElementById('blogOrderBowlImg');
+  const blogOrderBowlTitle = document.getElementById('blogOrderBowlTitle');
+  const blogOrderBowlPrice = document.getElementById('blogOrderBowlPrice');
+  const blogOrderForm = document.getElementById('blogOrderForm');
+  const blogOrderSuccessBox = document.getElementById('blogOrderSuccessBox');
+  const blogOrderSuccessBowlName = document.getElementById('blogOrderSuccessBowlName');
+  const blogOrderSuccessRef = document.getElementById('blogOrderSuccessRef');
+  const blogOrderErrorAlert = document.getElementById('blogOrderErrorAlert');
+  const blogOrderErrorAlertText = document.getElementById('blogOrderErrorAlertText');
+  const blogOrderFullPageLink = document.getElementById('blogOrderFullPageLink');
+  const blogOrderQtyMinus = document.getElementById('blogOrderQtyMinus');
+  const blogOrderQtyPlus = document.getElementById('blogOrderQtyPlus');
+  const blogOrderQtyVal = document.getElementById('blogOrderQtyVal');
+
+  let currentBlogOrderQty = 1;
+
+  function getArticleBowlInfo(article) {
+    if (!article) return { title: 'Signature Hawaiian Poke Bowl', price: '$14.95', img: 'assets/images/bowls/classic-ahi-tuna.jpg' };
+    
+    const bowlMap = {
+      'perfect-poke-guide': { title: 'Classic Hawaiian Ahi Tuna Bowl', price: '$14.95', img: 'assets/images/bowls/classic-ahi-tuna.jpg' },
+      'omega3-health-boost': { title: 'Spicy Atlantic Salmon Crunch', price: '$15.50', img: 'assets/images/bowls/spicy-salmon-crunch.jpg' },
+      'sustainable-fisheries': { title: 'Wild Pacific Hamachi Citrus Bowl', price: '$16.25', img: 'assets/images/bowls/wild-hamachi-citrus.jpg' },
+      'plant-based-poke': { title: 'Sesame Ginger Tofu & Edamame Bowl', price: '$13.50', img: 'assets/images/bowls/sesame-tofu-vegan.jpg' },
+      'authentic-shoyu-yuzu-ponzu': { title: 'Yuzu Ponzu Albacore Tuna Bowl', price: '$14.95', img: 'assets/images/bowls/yuzu-ponzu-albacore.jpg' },
+      'high-protein-athletes': { title: 'High-Protein Double Salmon Superbowl', price: '$17.50', img: 'assets/images/bowls/double-salmon-protein.jpg' },
+      'hawaiian-poke-history': { title: 'Heritage Inamona Shoyu Poke', price: '$14.50', img: 'assets/images/bowls/heritage-inamona.jpg' },
+      'knife-mastery-sashimi': { title: 'Chef Kai Master Cut Sashimi Bowl', price: '$16.95', img: 'assets/images/bowls/master-cut-sashimi.jpg' },
+      'seaweed-ferments-microbiome': { title: 'Fermented Kimchi & Seaweed Poke', price: '$14.25', img: 'assets/images/bowls/kimchi-seaweed-poke.jpg' },
+      'plastic-free-compostable': { title: 'Eco Island Harvest Bowl', price: '$13.95', img: 'assets/images/bowls/island-harvest.jpg' },
+      'avocado-edamame-vegan': { title: 'Green Goddess Avocado Superfood Bowl', price: '$13.75', img: 'assets/images/bowls/green-goddess-avocado.jpg' },
+      'spicy-sriracha-aioli': { title: 'Roasted Chili Sriracha Aioli Salmon Bowl', price: '$15.50', img: 'assets/images/bowls/spicy-salmon-crunch.jpg' },
+      'workout-nutrition-timing': { title: 'Post-Workout Fuel Power Bowl', price: '$16.50', img: 'assets/images/bowls/power-protein-bowl.jpg' }
+    };
+
+    return bowlMap[article.id] || {
+      title: article.relatedBowl || article.title,
+      price: article.bowlPrice || '$14.95',
+      img: article.imageSm || 'assets/images/bowls/classic-ahi-tuna.jpg'
+    };
+  }
+
+  function openBlogOrderModal(article) {
+    const bowlInfo = getArticleBowlInfo(article);
+
+    // 1. Hide blogArticleModal
+    if (modalElement && window.bootstrap && bootstrap.Modal) {
+      const articleModalInstance = bootstrap.Modal.getInstance(modalElement);
+      if (articleModalInstance) articleModalInstance.hide();
+    }
+
+    // 2. Populate Bowl Info
+    if (blogOrderBowlTitle) blogOrderBowlTitle.textContent = bowlInfo.title;
+    if (blogOrderBowlPrice) blogOrderBowlPrice.textContent = bowlInfo.price;
+    if (blogOrderBowlImg) {
+      blogOrderBowlImg.src = bowlInfo.img;
+      blogOrderBowlImg.onerror = function() { this.src = 'assets/images/bowls/spicy-salmon-crunch.jpg'; };
+    }
+
+    // 3. Update Full Page Link
+    if (blogOrderFullPageLink) {
+      blogOrderFullPageLink.href = `contact.html?bowl=${encodeURIComponent(bowlInfo.title)}&price=${encodeURIComponent(bowlInfo.price)}&source=blog#order-enquiry-section`;
+    }
+
+    // 4. Reset Form State
+    currentBlogOrderQty = 1;
+    if (blogOrderQtyVal) blogOrderQtyVal.textContent = '1';
+    if (blogOrderErrorAlert) blogOrderErrorAlert.classList.add('d-none');
+    if (blogOrderForm) {
+      blogOrderForm.reset();
+      blogOrderForm.classList.remove('d-none');
+      blogOrderForm.querySelectorAll('.is-invalid, .is-valid').forEach((el) => {
+        el.classList.remove('is-invalid', 'is-valid');
+      });
+    }
+    if (blogOrderSuccessBox) blogOrderSuccessBox.classList.add('d-none');
+
+    // 5. Show blogOrderModal
+    if (blogOrderModalEl && window.bootstrap && bootstrap.Modal) {
+      bootstrap.Modal.getOrCreateInstance(blogOrderModalEl).show();
+    } else if (blogOrderModalEl) {
+      blogOrderModalEl.classList.add('show');
+      blogOrderModalEl.style.display = 'block';
+    }
+  }
+
+  // Quantity Stepper Controls
+  if (blogOrderQtyMinus) {
+    blogOrderQtyMinus.addEventListener('click', () => {
+      if (currentBlogOrderQty > 1) {
+        currentBlogOrderQty--;
+        if (blogOrderQtyVal) blogOrderQtyVal.textContent = currentBlogOrderQty;
+      }
+    });
+  }
+  if (blogOrderQtyPlus) {
+    blogOrderQtyPlus.addEventListener('click', () => {
+      if (currentBlogOrderQty < 50) {
+        currentBlogOrderQty++;
+        if (blogOrderQtyVal) blogOrderQtyVal.textContent = currentBlogOrderQty;
+      }
+    });
+  }
+
+  // Handle Form Submission with Validation
+  if (blogOrderForm) {
+    blogOrderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('blogOrderName');
+      const phoneInput = document.getElementById('blogOrderPhone');
+      const emailInput = document.getElementById('blogOrderEmail');
+      const typeSelect = document.getElementById('blogOrderType');
+      const notesInput = document.getElementById('blogOrderNotes');
+
+      const nameVal = nameInput ? nameInput.value.trim() : '';
+      const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+      const emailVal = emailInput ? emailInput.value.trim() : '';
+
+      // Validation
+      const nameValid = /^[A-Za-z\s]{2,}$/.test(nameVal);
+      const phoneValid = /^\d{10}$/.test(phoneVal);
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+
+      if (nameInput) {
+        nameInput.classList.toggle('is-invalid', !nameValid);
+        nameInput.classList.toggle('is-valid', nameValid);
+      }
+      if (phoneInput) {
+        phoneInput.classList.toggle('is-invalid', !phoneValid);
+        phoneInput.classList.toggle('is-valid', phoneValid);
+      }
+      if (emailInput) {
+        emailInput.classList.toggle('is-invalid', !emailValid);
+        emailInput.classList.toggle('is-valid', emailValid);
+      }
+
+      if (!nameValid || !phoneValid || !emailValid) {
+        if (blogOrderErrorAlert) {
+          blogOrderErrorAlert.classList.remove('d-none');
+          if (!nameValid) {
+            if (blogOrderErrorAlertText) blogOrderErrorAlertText.textContent = 'Please enter a valid full name (letters only, minimum 2 characters).';
+          } else if (!phoneValid) {
+            if (blogOrderErrorAlertText) blogOrderErrorAlertText.textContent = 'Please enter a valid 10-digit phone number without letters or symbols.';
+          } else {
+            if (blogOrderErrorAlertText) blogOrderErrorAlertText.textContent = 'Please enter a valid email address (e.g. name@example.com).';
+          }
+        }
+        return;
+      }
+
+      if (blogOrderErrorAlert) blogOrderErrorAlert.classList.add('d-none');
+
+      // Generate Reference Code
+      const orderRef = 'POKE-ORD-' + Math.floor(100000 + Math.random() * 900000);
+      const bowlInfo = getArticleBowlInfo(currentOpenArticle);
+
+      if (blogOrderSuccessRef) blogOrderSuccessRef.textContent = orderRef;
+      if (blogOrderSuccessBowlName) blogOrderSuccessBowlName.textContent = bowlInfo.title;
+
+      // Save to localStorage
+      try {
+        const orderRecord = {
+          ref: orderRef,
+          bowl: bowlInfo.title,
+          price: bowlInfo.price,
+          qty: currentBlogOrderQty,
+          name: nameVal,
+          phone: phoneVal,
+          email: emailVal,
+          type: typeSelect ? typeSelect.value : 'Takeout Pickup',
+          notes: notesInput ? notesInput.value : '',
+          source: 'blog',
+          submittedAt: new Date().toISOString()
+        };
+        localStorage.setItem('poke_last_blog_order', JSON.stringify(orderRecord));
+      } catch (err) {
+        // ignore
+      }
+
+      // Show success feedback box
+      blogOrderForm.classList.add('d-none');
+      if (blogOrderSuccessBox) blogOrderSuccessBox.classList.remove('d-none');
+    });
+  }
+
+  // Trigger Order Modal on "Order This Bowl" click
+  if (modalArticleOrderBtn) {
+    modalArticleOrderBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openBlogOrderModal(currentOpenArticle);
+    });
+  }
 
   // Modal Scroll Reading Progress Bar
   const modalDialog = modalElement?.querySelector('.modal-body');
@@ -573,16 +861,41 @@ document.addEventListener('DOMContentLoaded', () => {
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const emailInput = newsletterForm.querySelector('input[type="email"]');
-      if (emailInput && emailInput.value) {
-        if (newsletterAlert) {
-          newsletterAlert.classList.remove('d-none');
-          newsletterAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      if (window.PokeValidation) {
+        const { isValid, firstInvalid } = window.PokeValidation.validateForm(newsletterForm);
+        if (!isValid) {
+          if (firstInvalid) firstInvalid.focus();
+          return;
         }
-        newsletterForm.reset();
+      }
+
+      const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Subscribing...';
+
         setTimeout(() => {
-          if (newsletterAlert) newsletterAlert.classList.add('d-none');
-        }, 6000);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+
+          if (newsletterAlert) {
+            newsletterAlert.classList.remove('d-none');
+            newsletterAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+
+          if (window.PokeValidation) {
+            window.PokeValidation.resetForm(newsletterForm);
+          } else {
+            newsletterForm.reset();
+            newsletterForm.querySelectorAll('.is-valid, .is-invalid').forEach((el) => el.classList.remove('is-valid', 'is-invalid'));
+          }
+
+          setTimeout(() => {
+            if (newsletterAlert) newsletterAlert.classList.add('d-none');
+          }, 6000);
+        }, 600);
       }
     });
   }

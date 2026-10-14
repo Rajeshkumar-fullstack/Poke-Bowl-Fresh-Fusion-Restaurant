@@ -19,12 +19,12 @@
     document.documentElement.classList.toggle('rtl', dir === 'rtl');
     localStorage.setItem(STORAGE_KEY, dir);
 
-    // Update direction toggle button labels to accurately display current active mode
+    // Update direction toggle button labels: LTR mode displays "RTL", RTL mode displays "LTR"
     const toggles = document.querySelectorAll('.direction-toggle-btn');
     toggles.forEach((btn) => {
       const textElem = btn.querySelector('.direction-label');
       if (textElem) {
-        textElem.textContent = dir === 'rtl' ? 'RTL' : 'LTR';
+        textElem.textContent = dir === 'rtl' ? 'LTR' : 'RTL';
       }
       btn.classList.toggle('is-rtl', dir === 'rtl');
       const currentLabel = dir === 'rtl' ? 'Right-to-Left (RTL)' : 'Left-to-Right (LTR)';

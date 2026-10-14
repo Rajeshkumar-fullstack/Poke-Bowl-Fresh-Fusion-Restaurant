@@ -143,29 +143,46 @@
 /* --------------------------------------------------------------------------
    2. Cinematic Text Reveal (Word & Letter Level)
    -------------------------------------------------------------------------- */
+.split-word-mask,
 .split-text-word {
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
-  direction: ltr !important;
-  unicode-bidi: isolate !important;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  margin-inline-end: 0.28em;
+  white-space: nowrap; /* Ensures letters in a single word never break awkwardly across lines */
+  box-sizing: border-box;
 }
 
+.split-word-inner,
 .split-text-inner {
   display: inline-block;
-  transform: translateY(115%);
+  transform: translateY(100%);
   opacity: 0;
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.55s ease;
   will-change: transform, opacity;
-  direction: ltr !important;
-  unicode-bidi: isolate !important;
 }
 
+/* Revealed State: Animate each word sliding up from translateY(100%) to translateY(0%) */
+.is-split-revealed .split-word-inner,
+.is-split-revealed .split-text-inner,
+.split-word-mask.is-revealed .split-word-inner,
 .split-text-word.is-revealed .split-text-inner {
-  transform: translateY(0);
-  opacity: 1;
+  transform: translateY(0%) !important;
+  opacity: 1 !important;
+}
+
+/* Fallback for browsers where JavaScript is disabled or not yet ready */
+noscript .split-word-inner,
+noscript .split-text-inner,
+body.no-js .split-word-inner,
+body.no-js .split-text-inner,
+body:not(.js-ready) .split-word-inner,
+body:not(.js-ready) .split-text-inner {
+  transform: none !important;
+  opacity: 1 !important;
 }
 
 /* Text Highlights with Animated Brush / Underline */
@@ -182,6 +199,56 @@
 .is-visible .animated-highlight,
 .is-revealed .animated-highlight {
   background-size: 100% 0.35em;
+}
+
+/* --------------------------------------------------------------------------
+   3. Kinetic Typography & Accent Shimmer Effects
+   -------------------------------------------------------------------------- */
+@keyframes textAccentShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes textFloatKinetic {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Gradient Shimmer for Keyword Accents */
+.text-shimmer-accent,
+.text-emerald-500,
+.text-rose-500,
+.text-primary-gradient,
+.text-gradient {
+  background: linear-gradient(
+    115deg,
+    var(--color-primary, #10B981) 0%,
+    var(--color-accent-amber, #F59E0B) 28%,
+    var(--color-primary-light, #34D399) 50%,
+    var(--color-accent-coral, #F43F5E) 74%,
+    var(--color-primary, #10B981) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textAccentShimmer 7.5s linear infinite;
+  display: inline;
+}
+
+/* Kinetic Subtle Badge Floating */
+.kinetic-badge-float,
+.hero-badge-float {
+  display: inline-flex;
+  animation: textFloatKinetic 4.5s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* --------------------------------------------------------------------------
@@ -430,6 +497,132 @@
   transition-delay: 220ms;
 }
 
+/* --------------------------------------------------------------------------
+   7b. Hero Staggered Text Sequence & Universal Scroll Text Reveal
+   -------------------------------------------------------------------------- */
+.hero-stagger-badge {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-stagger-badge.is-animated {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-stagger-title {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-stagger-title.is-animated {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-stagger-desc {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-stagger-desc.is-animated {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-stagger-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-stagger-cta.is-animated {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-stagger-meta {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-stagger-meta.is-animated {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Universal Scroll-Triggered Text Reveal */
+.text-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.text-reveal.is-revealed,
+.text-reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* Stagger sequence for text reveal containers */
+.text-reveal-stagger > *:nth-child(1) { transition-delay: 50ms; }
+.text-reveal-stagger > *:nth-child(2) { transition-delay: 140ms; }
+.text-reveal-stagger > *:nth-child(3) { transition-delay: 230ms; }
+.text-reveal-stagger > *:nth-child(4) { transition-delay: 320ms; }
+
+@media (max-width: 991.98px) {
+  .hero-stagger-badge,
+  .hero-stagger-title,
+  .hero-stagger-desc,
+  .hero-stagger-cta,
+  .hero-stagger-meta,
+  .text-reveal {
+    transform: translateY(16px);
+    transition-duration: 0.5s;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-stagger-badge,
+  .hero-stagger-title,
+  .hero-stagger-desc,
+  .hero-stagger-cta,
+  .hero-stagger-meta,
+  .text-reveal {
+    transform: translateY(12px);
+    transition-duration: 0.4s;
+  }
+
+  .split-word-mask,
+  .split-text-word {
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+    margin-inline-end: 0.22em;
+  }
+
+  .split-word-inner,
+  .split-text-inner {
+    transition-duration: 0.45s, 0.4s;
+  }
+}
+
 /* Stagger Delay Modifiers */
 .reveal-delay-100 { transition-delay: 100ms; }
 .reveal-delay-200 { transition-delay: 200ms; }
@@ -662,6 +855,12 @@
   }
 
   .reveal,
+  .text-reveal,
+  .hero-stagger-badge,
+  .hero-stagger-title,
+  .hero-stagger-desc,
+  .hero-stagger-cta,
+  .hero-stagger-meta,
   .split-text-inner,
   .cinematic-reveal img {
     opacity: 1 !important;
@@ -670,13 +869,24 @@
     filter: none !important;
   }
 
+  .text-shimmer-accent,
+  .text-emerald-500,
+  .text-rose-500,
+  .text-primary-gradient,
+  .text-gradient {
+    animation: none !important;
+    background-size: auto !important;
+  }
+
   .animate-float,
   .animate-float-reverse,
   .animate-pulse-glow,
   .animate-spin-slow,
   .hero-section,
   .blog-hero,
-  .page-hero {
+  .page-hero,
+  .kinetic-badge-float,
+  .hero-badge-float {
     animation: none !important;
   }
 }

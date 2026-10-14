@@ -78,7 +78,7 @@
       <div class="poke-nav-controls">
         <button class="btn-direction-toggle direction-toggle-btn" type="button" aria-label="Toggle text direction LTR/RTL" title="Toggle text direction">
           <i class="bi bi-translate"></i>
-          <span class="direction-label">LTR</span>
+          <span class="direction-label">RTL</span>
         </button>
 
         <button class="btn-icon-round theme-toggle-btn" type="button" aria-label="Switch color theme" title="Switch color theme">
@@ -86,10 +86,18 @@
           <i class="bi bi-sun-fill theme-icon-sun"></i>
         </button>
 
-        <a href="home-2.html#bowl-builder" class="btn-primary-poke d-none d-md-inline-flex">
-          <i class="bi bi-lightning-charge-fill"></i>
-          <span>Build Bowl</span>
-        </a>
+        <!-- Cart Button (Desktop & Tablet) -->
+        <button type="button" class="btn-primary-poke nav-cart-btn d-none d-sm-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#globalCartModal" aria-label="View Shopping Cart">
+          <i class="bi bi-cart3 fs-6"></i>
+          <span>Add To Cart</span>
+          <span class="badge nav-cart-badge bg-white text-emerald-700 rounded-pill px-2 py-0.5 fw-bold">0</span>
+        </button>
+
+        <!-- Cart Icon Button (Mobile) -->
+        <button type="button" class="btn-icon-round nav-cart-btn position-relative d-inline-flex d-sm-none" data-bs-toggle="modal" data-bs-target="#globalCartModal" aria-label="View Shopping Cart">
+          <i class="bi bi-cart3"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger nav-cart-badge fs-9">0</span>
+        </button>
 
         <button class="poke-hamburger" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
           <span></span>
@@ -142,13 +150,6 @@
       <li class="nav-item"><a href="blog.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-journal-richtext me-2"></i> Fresh Journal & Blog</a></li>
       <li class="nav-item"><a href="contact.html" class="nav-link mobile-nav-link fw-bold"><i class="bi bi-envelope me-2"></i> Contact & Enquiry</a></li>
     </ul>
-
-    <div class="mt-auto pt-3 border-top">
-      <a href="home-2.html#bowl-builder" class="btn-primary-poke w-100 justify-content-center">
-        <i class="bi bi-plus-circle-fill"></i>
-        <span>Build Your Bowl</span>
-      </a>
-    </div>
   </aside>
 
   <!-- ========================================================================
@@ -489,8 +490,8 @@
             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on YouTube">
               <i class="bi bi-youtube"></i>
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on TikTok">
-              <i class="bi bi-tiktok"></i>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Follow us on Twitter / X">
+              <i class="bi bi-twitter-x"></i>
             </a>
           </div>
         </div>
@@ -564,12 +565,83 @@
     <i class="bi bi-chevron-up"></i>
   </button>
 
+  <!-- ========================================================================
+       Global Shopping Cart Modal (Persistent Multi-Item Cart)
+       ======================================================================== -->
+  <div class="modal fade" id="globalCartModal" tabindex="-1" aria-labelledby="globalCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content rounded-4 border border-border-color shadow-lg bg-card">
+        <div class="modal-header border-bottom border-border-color pb-3">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-emerald-500/10 text-emerald-600 p-2 d-flex">
+              <i class="bi bi-cart3 fs-5"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0" id="globalCartModalLabel">Your Shopping Cart</h5>
+              <small class="text-muted">Fresh Poké &amp; Fusion Specialties</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3.5">
+          <!-- Empty State -->
+          <div id="globalCartEmpty" class="text-center py-5 d-none">
+            <div class="rounded-circle bg-secondary/40 d-inline-flex p-3 mb-3 text-muted">
+              <i class="bi bi-cart-x fs-2"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Your cart is currently empty</h6>
+            <p class="text-muted fs-8 mb-3">Explore our fresh poke bowls and hand-crafted bowls to add items.</p>
+            <a href="menu.html" class="btn btn-sm btn-outline-primary rounded-pill px-3" data-bs-dismiss="modal">
+              Browse Menu
+            </a>
+          </div>
+
+          <!-- Filled State -->
+          <div id="globalCartFilled">
+            <div id="globalCartItemsList" class="mb-3">
+              <!-- Cart rows injected dynamically by cart.js -->
+            </div>
+
+            <!-- Subtotal & Checkout -->
+            <div class="p-3 rounded-3 bg-secondary/40 border border-border-color mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="text-muted fs-8">Subtotal</span>
+                <span class="fw-bold fs-7 font-heading" id="globalCartSubtotal">$0.00</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted fs-8">Estimated Prep Time</span>
+                <span class="badge badge-poke badge-green fs-9">12 - 15 mins</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+              <a id="globalCartProceedBtn" href="contact.html?source=cart#order-enquiry-section" class="btn-primary-poke w-100 justify-content-center py-2.5">
+                <i class="bi bi-bag-check-fill"></i>
+                <span>Proceed to Order / Checkout</span>
+              </a>
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-sm text-danger p-0 fs-8" onclick="window.PokeCart.clearCart()">
+                  <i class="bi bi-trash3 me-1"></i> Clear Cart
+                </button>
+                <button type="button" class="btn btn-sm text-muted p-0 fs-8" data-bs-dismiss="modal">
+                  Continue Browsing
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/direction.js"></script>
   <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/form-validation.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
